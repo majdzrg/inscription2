@@ -1,0 +1,89 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      Home
+    </ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only>
+        <ion-icon name="notifications"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="presentPopover($event)">
+        <ion-icon name="more"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <!--
+  <ion-row class="cell-1">
+    <button class="cell-1">
+      <ion-col>
+        <ion-icon name="md-arrow-dropright-circle"></ion-icon>
+      </ion-col>
+      <ion-col>
+        Projets
+      </ion-col>
+    </button>
+  </ion-row>
+  <ion-row class="cell-2">
+    <button class="cell-2">
+      <ion-col>
+        <ion-icon name="md-arrow-dropright-circle"></ion-icon>
+        Réclamations
+      </ion-col>
+    </button>
+  </ion-row>
+  <ion-row class="cell-3">
+    <button class="cell-3">
+      <ion-col>
+        <ion-icon name="md-arrow-dropright-circle" ion></ion-icon>
+        Réclamations
+      </ion-col>
+    </button>
+  </ion-row>
+  <ion-row class="cell-4">
+    <button class="cell-4">
+      <ion-col>
+        <ion-icon name="md-arrow-dropright-circle"></ion-icon>
+        Réclamations
+      </ion-col>
+    </button>
+  </ion-row>
+-->
+  <ion-grid no-padding>
+    <ion-row flex-wrap: nowrap class="cell-1" align-items-center (click)="items[0].project = !items[0].project">
+      <ion-col align-self-stretch>
+        <button ion-button block clear>projects</button>
+        <div class="wrapper" [ngClass]="{'close': items[0].project==false}">
+        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Culpa suscipit alias nemo ex repellat ullam, nesciunt dolorum provident esse praesentium reprehenderit cum aspernatur vero vel harum eius labore libero velit!</p>
+        </div>
+      </ion-col>
+    </ion-row>
+    <ion-row flex-wrap: nowrap class="cell-2" (click)="items[1].cytoi = !items[1].cytoi">
+      <ion-col align-self-stretch>
+          <button ion-button block clear>projects</button>
+          <div class="wrapper" [ngClass]="{'close': items[1].cytoi==false}">
+          <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Culpa suscipit alias nemo ex repellat ullam, nesciunt dolorum provident esse praesentium reprehenderit cum aspernatur vero vel harum eius labore libero velit!</p>
+          </div>
+      </ion-col>
+    </ion-row>
+    <ion-row flex-wrap: nowrap class="cell-3" (click)="items[2].contact = !items[2].contact">
+      <ion-col align-self-stretch>
+          <button ion-button block clear>projects</button>
+          <div class="wrapper" [ngClass]="{'close': items[2].contact==false}">
+          <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Culpa suscipit alias nemo ex repellat ullam, nesciunt dolorum provident esse praesentium reprehenderit cum aspernatur vero vel harum eius labore libero velit!</p>
+          </div>
+      </ion-col>
+    </ion-row>
+    <ion-row flex-wrap: nowrap class="cell-4" (click)="items[3].about = !items[3].about">
+      <ion-col align-self-stretch>
+          <button ion-button block clear>projects</button>
+          <div class="wrapper" [ngClass]="{'close': items[3].about==false}">
+          <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Culpa suscipit alias nemo ex repellat ullam, nesciunt dolorum provident esse praesentium reprehenderit cum aspernatur vero vel harum eius labore libero velit!</p>
+          </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

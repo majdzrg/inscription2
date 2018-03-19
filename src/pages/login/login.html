@@ -1,0 +1,34 @@
+
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Login</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <form (ngSubmit)="loginForm()" margin-bottom>
+        <ion-item>
+          <ion-label floating><ion-icon name="contact" item-start></ion-icon>Username</ion-label>
+          <ion-input type="email" [(ngModel)]="user.email" name="email"  required></ion-input>
+        </ion-item>
+        <ion-item margin-bottom>
+          <ion-label floating><ion-icon name="lock" item-start></ion-icon>Password</ion-label>
+          <ion-input type="password" [(ngModel)]="user.pass" name="pass"  required></ion-input>
+        </ion-item>
+        <!--<button ion-button color="primary" block type="submit">Sign In</button>-->
+        <button ion-button icon-left outline type="submit"color="dark" block>
+            <ion-icon name="add"></ion-icon>
+             sign in
+          </button>
+  </form>
+  <div text-center margin-bottom>
+      if you don't have an account , you can create one by clicking on the button below
+    </div>
+<div>
+    <button ion-button full clear [navPush]="addperson">Register Now</button>
+</div>
+
+</ion-content>

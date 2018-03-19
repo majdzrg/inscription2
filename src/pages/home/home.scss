@@ -1,0 +1,45 @@
+page-home {}
+ion-grid {
+  height: 100%;
+
+  ion-row {
+      flex:auto;
+      transition: all 0.5s;
+  }
+}
+.wrapper{
+    height: auto;
+    overflow: auto;
+    transition: all 0.5s;
+}
+.close{
+  height: 0 !important;
+  transition: all 0.5s;
+}
+
+.cell-1 {
+  background-color: #a5ade5;
+}
+.cell-2 {
+  background-color: #8b60c8;
+}
+.cell-3 {
+  background-color: #593290;
+}
+.cell-4 {
+  background-color: #321c51;
+}
+.cell-5 {
+  background-color: #7b1e66;
+}
+.cell-6 {
+  background-color: #290a22;
+}
+
+button{
+	width:100%;
+}
+
+ion-item{
+  height: 10%;
+}

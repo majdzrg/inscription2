@@ -53,36 +53,76 @@
   </ion-row>
 -->
   <ion-grid no-padding>
-    <ion-row flex-wrap: nowrap class="cell-1" align-items-center (click)="items[0].project = !items[0].project">
-      <ion-col align-self-stretch>
-        <button ion-button block clear>projects</button>
-        <div class="wrapper" [ngClass]="{'close': items[0].project==false}">
-        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Culpa suscipit alias nemo ex repellat ullam, nesciunt dolorum provident esse praesentium reprehenderit cum aspernatur vero vel harum eius labore libero velit!</p>
+    <ion-row flex-wrap: nowrap class="bg-commune" align-items-center (click)="chnageItem('0')">
+      <ion-col align-self-stretch class="cell-1">
+        <!-- <button ion-button block color="light" clear >commune</button> -->
+        <h5 ion-text color="light" text-capitalize><ion-icon name="briefcase" margin-right="4px"></ion-icon> commune</h5>
+        <p class="brief" text-nowrap *ngIf="items[0]==false">small description about section </p>
+        <div class="wrapper" [ngClass]="{'close': items[0]==false}">
+          <button ion-button color="light" clear icon-left>
+            <ion-icon name="construct"></ion-icon>
+            Projets
+          </button>
+          <br>
+          <button ion-button color="light" clear icon-left>
+            <ion-icon name="stats" margin-right></ion-icon>
+              sondage
+          </button>
         </div>
       </ion-col>
     </ion-row>
-    <ion-row flex-wrap: nowrap class="cell-2" (click)="items[1].cytoi = !items[1].cytoi">
-      <ion-col align-self-stretch>
-          <button ion-button block clear>projects</button>
-          <div class="wrapper" [ngClass]="{'close': items[1].cytoi==false}">
-          <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Culpa suscipit alias nemo ex repellat ullam, nesciunt dolorum provident esse praesentium reprehenderit cum aspernatur vero vel harum eius labore libero velit!</p>
-          </div>
+    <ion-row flex-wrap: nowrap class="bg-cytoi" (click)="chnageItem('1')">
+      <ion-col align-self-stretch class="cell-2">
+        <!-- <button ion-button block clear>citoyen</button> -->
+        <h5 ion-text color="light" text-capitalize><ion-icon name="people" margin-right="4px"></ion-icon> citoyen</h5>
+        <p class="brief" text-nowrap *ngIf="items[1]==false">small description about section </p>
+        <div class="wrapper" [ngClass]="{'close': items[1]==false}">
+          <button ion-button color="light" clear icon-left>
+            <ion-icon name="construct"></ion-icon>
+            Projets
+          </button>
+          <br>
+          <button ion-button color="light" clear icon-left>
+            <ion-icon name="stats" margin-right></ion-icon>
+              sondage
+          </button>
+        </div>
       </ion-col>
     </ion-row>
-    <ion-row flex-wrap: nowrap class="cell-3" (click)="items[2].contact = !items[2].contact">
-      <ion-col align-self-stretch>
-          <button ion-button block clear>projects</button>
-          <div class="wrapper" [ngClass]="{'close': items[2].contact==false}">
-          <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Culpa suscipit alias nemo ex repellat ullam, nesciunt dolorum provident esse praesentium reprehenderit cum aspernatur vero vel harum eius labore libero velit!</p>
-          </div>
+    <ion-row flex-wrap: nowrap class="bg-contact" (click)="chnageItem('2')">
+      <ion-col align-self-stretch class="cell-3">
+        <!-- <button ion-button block clear>contact</button> -->
+        <h5 ion-text color="light" text-capitalize><ion-icon name="mail" margin-right="4px"></ion-icon> contact</h5>
+        <p class="brief" text-nowrap *ngIf="items[2]==false">small description about section </p>
+        <div class="wrapper" [ngClass]="{'close': items[2]==false}">
+          <button ion-button color="light" clear icon-left>
+            <ion-icon name="construct"></ion-icon>
+            Projets
+          </button>
+          <br>
+          <button ion-button color="light" clear icon-left>
+            <ion-icon name="stats" margin-right></ion-icon>
+              sondage
+          </button>
+        </div>
       </ion-col>
     </ion-row>
-    <ion-row flex-wrap: nowrap class="cell-4" (click)="items[3].about = !items[3].about">
-      <ion-col align-self-stretch>
-          <button ion-button block clear>projects</button>
-          <div class="wrapper" [ngClass]="{'close': items[3].about==false}">
-          <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Culpa suscipit alias nemo ex repellat ullam, nesciunt dolorum provident esse praesentium reprehenderit cum aspernatur vero vel harum eius labore libero velit!</p>
-          </div>
+    <ion-row flex-wrap: nowrap class="bg-about" (click)="chnageItem('3')">
+      <ion-col align-self-stretch class="cell-4">
+        <!-- <button ion-button block clear>a propos</button> -->
+        <h5 ion-text color="light" text-capitalize><ion-icon name="information-circle" margin-right="4px"></ion-icon> a propos</h5>
+        <p class="brief" text-nowrap *ngIf="items[3]==false">small description about section </p>
+        <div class="wrapper" [ngClass]="{'close': items[3]==false}">
+          <button ion-button color="light" clear icon-left>
+            <ion-icon name="construct"></ion-icon>
+            Projets
+          </button>
+          <br>
+          <button ion-button color="light" clear icon-left>
+            <ion-icon name="stats" margin-right></ion-icon>
+              sondage
+          </button>
+        </div>
       </ion-col>
     </ion-row>
   </ion-grid>

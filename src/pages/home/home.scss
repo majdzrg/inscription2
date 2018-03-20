@@ -1,45 +1,83 @@
 page-home {}
+
 ion-grid {
   height: 100%;
 
   ion-row {
-      flex:auto;
-      transition: all 0.5s;
+    // flex: auto;
+    flex-shrink: 0;
+    flex-basis: 1;
+    flex-grow: 1;
+    transition: all 0.5s;
   }
 }
-.wrapper{
-    height: auto;
-    overflow: auto;
-    transition: all 0.5s;
+
+.wrapper {
+  height: auto;
+  overflow: auto;
+  transition: all 0.5s;
 }
-.close{
+
+.close {
   height: 0 !important;
   transition: all 0.5s;
 }
 
 .cell-1 {
-  background-color: #a5ade5;
+  //background-color: rgba(#a5ade6, 0.90);
+  background: rgba(#525252,0.90);
+  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to bottom, rgba(#3d72b4,0.90), rgba(#525252,0.90));
+  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to bottom, rgba(#3d72b4,0.90), rgba(#525252,0.90));
+  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  padding: 16px !important;
 }
+
 .cell-2 {
-  background-color: #8b60c8;
+  //background-color: rgba(#663399, 0.90);
+  background: rgba(#536976,0.90);  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to bottom, rgba(#292E49,0.90), rgba(#536976,0.90));  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to bottom, rgba(#292E49,0.90), rgba(#536976,0.90)); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  padding: 16px !important;
 }
+
 .cell-3 {
-  background-color: #593290;
+  //background-color: rgba(#593290, 0.90);
+  background: rgba(#606c88,0.90);  /* fallback for old browsers */
+background: -webkit-linear-gradient(to bottom, rgba(#3f4c6b,0.90), rgba(#606c88,0.90));  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to bottom, rgba(#3f4c6b,0.90), rgba(#606c88,0.90)); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+padding: 16px !important;
 }
+
 .cell-4 {
-  background-color: #321c51;
-}
-.cell-5 {
-  background-color: #7b1e66;
-}
-.cell-6 {
-  background-color: #290a22;
+  // background-color: rgba(#321c51, 0.90);
+  background: rgba(#BBD2C5,0.90);  /* fallback for old browsers */
+background: -webkit-linear-gradient(to bottom, rgba(#292E49,0.90), rgba(#536976,0.90), rgba(#BBD2C5,0.90));  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to bottom, rgba(#292E49,0.90), rgba(#536976,0.90), rgba(#BBD2C5,0.90)); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+padding: 16px !important;
 }
 
-button{
-	width:100%;
+.bg-commune {
+  background: url("/assets/imgs/in-app/commune.jpg") no-repeat;
+  background-size: cover;
 }
 
-ion-item{
-  height: 10%;
+.bg-cytoi {
+  background: url("/assets/imgs/in-app/cytoi.jpg") no-repeat;
+  background-size: cover;
+}
+
+.bg-about {
+  background: url("/assets/imgs/in-app/about.jpg") no-repeat;
+  background-size: cover;
+}
+
+.bg-contact {
+  background: url("/assets/imgs/in-app/contact.jpg") no-repeat;
+  background-size: cover;
+}
+.brief{
+  padding-right: 16px !important;
+  color: rgba(255, 255, 255, 0.75) !important;
 }

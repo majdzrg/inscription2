@@ -59,7 +59,7 @@
         <h5 ion-text color="light" text-capitalize><ion-icon name="briefcase" margin-right="4px"></ion-icon> commune</h5>
         <p class="brief" text-nowrap *ngIf="items[0]==false">small description about section </p>
         <div class="wrapper" [ngClass]="{'close': items[0]==false}">
-          <button ion-button color="light" clear icon-left>
+          <button  ion-button color="light" clear icon-left (click)="redirect()">
             <ion-icon name="construct"></ion-icon>
             Projets
           </button>
@@ -79,12 +79,12 @@
         <div class="wrapper" [ngClass]="{'close': items[1]==false}">
           <button ion-button color="light" clear icon-left>
             <ion-icon name="construct"></ion-icon>
-            Projets
+            Reclamation
           </button>
           <br>
           <button ion-button color="light" clear icon-left>
             <ion-icon name="stats" margin-right></ion-icon>
-              sondage
+              Question
           </button>
         </div>
       </ion-col>
@@ -104,6 +104,10 @@
             <ion-icon name="stats" margin-right></ion-icon>
               sondage
           </button>
+          <button ion-button color="light" clear icon-left>
+            <ion-icon name="stats" margin-right></ion-icon>
+              sondage
+          </button>
         </div>
       </ion-col>
     </ion-row>
@@ -116,6 +120,11 @@
           <button ion-button color="light" clear icon-left>
             <ion-icon name="construct"></ion-icon>
             Projets
+          </button>
+          <br>
+          <button ion-button color="light" clear icon-left>
+            <ion-icon name="stats" margin-right></ion-icon>
+              sondage
           </button>
           <br>
           <button ion-button color="light" clear icon-left>

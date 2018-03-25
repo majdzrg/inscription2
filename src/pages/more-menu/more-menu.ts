@@ -27,10 +27,11 @@ export class MoreMenuPage {
     this.viewCtrl.dismiss();
   }
   logout(){
-    this.viewCtrl.dismiss();
+    //this.viewCtrl.dismiss();
     // clear session
     // rooting
-    this.navCtrl.setRoot(LoginPage);
+    //this.navCtrl.setRoot(LoginPage);
+    this.navCtrl.push(LoginPage)
   }
 
 }

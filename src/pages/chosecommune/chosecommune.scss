@@ -1,0 +1,29 @@
+page-chosecommune {
+
+}
+ion-grid {
+  height: 100%;
+
+  .ion-row-top {
+    // flex: auto;
+    flex-shrink: 0;
+    flex-basis: 1;
+    flex-grow: 1;
+    transition: all 0.5s;
+  }
+  // hethi lel lotania lazemha akber mel fo9ania
+  // nzido akther
+  //el lotania n5aloha bitha 
+  .ion-row-bottom {
+    // flex: auto;
+    flex-shrink: 0;
+    flex-basis: 3;
+    flex-grow: 3;
+    transition: all 0.5s;
+  }
+}
+.wrapper {
+  height: auto;
+  overflow: auto;
+  transition: all 0.5s;
+}

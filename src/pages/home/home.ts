@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { PopoverController } from 'ionic-angular';
 import { MoreMenuPage } from '../more-menu/more-menu';
+import { ChosecommunePage } from '../chosecommune/chosecommune'
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
@@ -33,6 +34,12 @@ export class HomePage {
       }
       this.items[currentitem] = true;
     }
+    }
+  redirect(){
+    console.log('start check');
+    // test if he have localstorage variable with commu id
+    // else
+    this.navCtrl.setRoot(ChosecommunePage);
   }
 
 }

@@ -12,8 +12,8 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { LoginPage } from '../pages/login/login';
 import { AddpersonPage } from '../pages/addperson/addperson';
-
 import { MoreMenuPage } from "../pages/more-menu/more-menu";
+import {ChosecommunePage} from "../pages/chosecommune/chosecommune"
 @NgModule({
   declarations: [
     MyApp,
@@ -23,7 +23,8 @@ import { MoreMenuPage } from "../pages/more-menu/more-menu";
     TabsPage,
     LoginPage,
     AddpersonPage,
-    MoreMenuPage
+    MoreMenuPage,
+    ChosecommunePage
   ],
   imports: [
     BrowserModule,
@@ -38,7 +39,8 @@ import { MoreMenuPage } from "../pages/more-menu/more-menu";
     TabsPage,
     LoginPage,
     AddpersonPage,
-    MoreMenuPage
+    MoreMenuPage,
+    ChosecommunePage
   ],
   providers: [
     StatusBar,

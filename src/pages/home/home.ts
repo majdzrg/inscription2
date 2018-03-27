@@ -2,7 +2,8 @@ import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { PopoverController } from 'ionic-angular';
 import { MoreMenuPage } from '../more-menu/more-menu';
-import { ChosecommunePage } from '../chosecommune/chosecommune'
+import { ChosecommunePage } from '../chosecommune/chosecommune';
+import {ListeprojectPage} from '../listeproject/listeproject';
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'

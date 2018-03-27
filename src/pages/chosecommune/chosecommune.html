@@ -16,11 +16,9 @@
       <ion-col align-self-stretch class="cell-1" align-items-center>
         <!-- <button ion-button block color="light" clear >commune</button> -->
         <h3 ion-text color="light" text-capitalize>chose  commune</h3>
-        <p text-wrap>Choisissez votre Commune S'il vous plait . pour avoire acceder aux autres foncctinalité de l'application </p>
-
+        <p text-wrap >Choisissez votre Commune S'il vous plait . pour avoire acceder aux autres foncctinalité de l'application </p>
       </ion-col>
     </ion-row>
-
     <ion-row flex-wrap: nowrap class="ion-row-bottom" align-items-center>
       <ion-col align-self-center>
         <ion-list>
@@ -30,9 +28,8 @@
           <ion-item>
             <ion-label>Gouvernorat</ion-label>
             <ion-select [(ngModel)]="user_gov">
-              <!-- hethom yetgado bel ngfor ya stak -->
+              <!--  -->
               <ion-option *ngFor="let gov of gov_list" [value]="gov.id">{{gov.name}}</ion-option>
-
             </ion-select>
           </ion-item>
           <div padding>
@@ -40,23 +37,16 @@
           </div>
           <ion-item>
             <ion-label>Commune</ion-label>
-            <ion-select [(ngModel)]="Commune" disabled="{{user_gov == 0}}">
-              <ion-option value="Tunis">Tunis</ion-option>
-              <ion-option value="Tunis">Tunis</ion-option>
-              <ion-option value="Tunis">Tunis</ion-option>
-              <ion-option value="Tunis">Tunis</ion-option>
-              <ion-option value="Tunis">Tunis</ion-option>
-              <ion-option value="Tunis">Tunis</ion-option>
+            <ion-select [(ngModel)]="user_commune" disabled="{{user_gov==0}}">
+              <!--  -->
+              <ion-option *ngFor="let commune of commune_list" [value]="commune.id">{{commune.name}}</ion-option>
             </ion-select>
           </ion-item>
-
         </ion-list>
         <div padding>
-          <button ion-button block outline [navPush]="chosecommune">Valider</button>
+          <button ion-button block outline (click)="goLink()" [disabled]="user_gov==0 || user_commune==0">Valider</button>
         </div>
       </ion-col>
     </ion-row>
   </ion-grid>
-
-
 </ion-content>

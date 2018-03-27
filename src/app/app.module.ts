@@ -14,6 +14,8 @@ import { LoginPage } from '../pages/login/login';
 import { AddpersonPage } from '../pages/addperson/addperson';
 import { MoreMenuPage } from "../pages/more-menu/more-menu";
 import {ChosecommunePage} from "../pages/chosecommune/chosecommune"
+import {ListeprojectPage} from "../pages/listeproject/listeproject"
+import {ProjectPage} from "../pages/project/project"
 @NgModule({
   declarations: [
     MyApp,
@@ -24,7 +26,9 @@ import {ChosecommunePage} from "../pages/chosecommune/chosecommune"
     LoginPage,
     AddpersonPage,
     MoreMenuPage,
-    ChosecommunePage
+    ChosecommunePage,
+    ListeprojectPage,
+    ProjectPage
   ],
   imports: [
     BrowserModule,
@@ -40,7 +44,9 @@ import {ChosecommunePage} from "../pages/chosecommune/chosecommune"
     LoginPage,
     AddpersonPage,
     MoreMenuPage,
-    ChosecommunePage
+    ChosecommunePage,
+    ListeprojectPage,
+    ProjectPage
   ],
   providers: [
     StatusBar,

@@ -1,3 +1,14 @@
 page-project {
-
+  .project-info{
+    background: white;
+  }
+  .reaction-page{
+    background: white;
+  }
+}
+ion-slide {
+    .slide-zoom {
+        height: calc(100vh - 143px);
+        overflow-y: auto;
+    }
 }

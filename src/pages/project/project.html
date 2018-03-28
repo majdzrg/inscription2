@@ -5,14 +5,63 @@
   Ionic pages and navigation.
 -->
 <ion-header>
-
   <ion-navbar>
     <ion-title>project</ion-title>
   </ion-navbar>
-
 </ion-header>
+<ion-content>
+  <ion-slides pager>
+    <ion-slide class="project-info">
+      <ion-card>
+        <ion-item>
+          <h2>{{project_info.title}}</h2>
+          <p>{{project_info.date}}</p>
+        </ion-item>
+        <img src="{{project_info.img}}">
+        <ion-card-content>
+          <p>{{project_info.dscrp}}</p>
+        </ion-card-content>
+        <ion-row>
+          <ion-col>
+            <button ion-button icon-left clear small>
+        <ion-icon name="thumbs-up"></ion-icon>
+        <div>12 Likes</div>
+      </button>
+          </ion-col>
+          <ion-col>
+            <button ion-button icon-left clear small>
+        <ion-icon name="text"></ion-icon>
+        <div>4 Comments</div>
+      </button>
+          </ion-col>
+          <ion-col center text-center>
+            <ion-note>
+              {{project_info.date_post}}
+            </ion-note>
+          </ion-col>
+        </ion-row>
+      </ion-card>
+    </ion-slide>
+    <ion-slide class="reaction-page">
+      <ion-list>
+        <!-- <ion-item>
+          <ion-label color="primary" stacked>comment</ion-label>
+          <ion-textarea type="text" autocorrect="true"></ion-textarea>
+          <button ion-button icon-only>
+            <ion-icon name="send"></ion-icon>
+          </button>
+        </ion-item> -->
+        <ion-item *ngFor="let rec of project_recation" text-wrap>
+          <!-- <ion-avatar item-start>
+            <img src="img/avatar-cher.png">
+          </ion-avatar> -->
+          <h2>user name</h2>
+          <p>{{rec.comment}}</p>
+          <ion-icon *ngIf="rec.reaction.length != 0" [name]="rec.reaction == 1 ? 'thumbs-up' : 'thumbs-down'"></ion-icon>
+        </ion-item>
+        <button ion-button block color="primary" (click)="showComment()">Comment</button>
+      </ion-list>
+    </ion-slide>
 
-
-<ion-content padding>
- some thing to show here 
+  </ion-slides>
 </ion-content>

@@ -2,7 +2,7 @@ import { NgModule, ErrorHandler } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
-
+import { Dialogs } from '@ionic-native/dialogs'
 import { AboutPage } from '../pages/about/about';
 import { ContactPage } from '../pages/contact/contact';
 import { HomePage } from '../pages/home/home';
@@ -13,9 +13,9 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { LoginPage } from '../pages/login/login';
 import { AddpersonPage } from '../pages/addperson/addperson';
 import { MoreMenuPage } from "../pages/more-menu/more-menu";
-import {ChosecommunePage} from "../pages/chosecommune/chosecommune"
-import {ListeprojectPage} from "../pages/listeproject/listeproject"
-import {ProjectPage} from "../pages/project/project"
+import {ChosecommunePage} from "../pages/chosecommune/chosecommune";
+import {ListeprojectPage} from "../pages/listeproject/listeproject";
+import {ProjectPage} from "../pages/project/project";
 @NgModule({
   declarations: [
     MyApp,
@@ -51,6 +51,7 @@ import {ProjectPage} from "../pages/project/project"
   providers: [
     StatusBar,
     SplashScreen,
+    Dialogs,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

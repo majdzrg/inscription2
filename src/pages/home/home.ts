@@ -4,6 +4,7 @@ import { PopoverController } from 'ionic-angular';
 import { MoreMenuPage } from '../more-menu/more-menu';
 import { ChosecommunePage } from '../chosecommune/chosecommune';
 import {ListeprojectPage} from '../listeproject/listeproject';
+import {SondagePage} from '../sondage/sondage';
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
@@ -42,5 +43,6 @@ export class HomePage {
     // else
     this.navCtrl.setRoot(ChosecommunePage);
   }
+
 
 }

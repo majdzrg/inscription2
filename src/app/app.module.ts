@@ -2,7 +2,7 @@ import { NgModule, ErrorHandler } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
-import { Dialogs } from '@ionic-native/dialogs'
+import { Dialogs } from '@ionic-native/dialogs';
 import { AboutPage } from '../pages/about/about';
 import { ContactPage } from '../pages/contact/contact';
 import { HomePage } from '../pages/home/home';
@@ -16,6 +16,7 @@ import { MoreMenuPage } from "../pages/more-menu/more-menu";
 import {ChosecommunePage} from "../pages/chosecommune/chosecommune";
 import {ListeprojectPage} from "../pages/listeproject/listeproject";
 import {ProjectPage} from "../pages/project/project";
+import {SondagePage} from "../pages/sondage/sondage";
 @NgModule({
   declarations: [
     MyApp,
@@ -28,7 +29,8 @@ import {ProjectPage} from "../pages/project/project";
     MoreMenuPage,
     ChosecommunePage,
     ListeprojectPage,
-    ProjectPage
+    ProjectPage,
+    SondagePage
   ],
   imports: [
     BrowserModule,
@@ -46,7 +48,8 @@ import {ProjectPage} from "../pages/project/project";
     MoreMenuPage,
     ChosecommunePage,
     ListeprojectPage,
-    ProjectPage
+    ProjectPage,
+    SondagePage
   ],
   providers: [
     StatusBar,

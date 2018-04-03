@@ -56,7 +56,7 @@
     <ion-row flex-wrap: nowrap class="bg-commune" align-items-center (click)="chnageItem('0')">
       <ion-col align-self-stretch class="cell-1">
         <!-- <button ion-button block color="light" clear >commune</button> -->
-        <h5 ion-text color="light" text-capitalize><ion-icon name="briefcase" margin-right="4px"></ion-icon> commune</h5>
+        <h5 ion-text color="light" text-capitalize><ion-icon name="briefcase" margin-right="4px"></ion-icon> Commune</h5>
         <p class="brief" text-nowrap *ngIf="items[0]==false">small description about section </p>
         <div class="wrapper" [ngClass]="{'close': items[0]==false}">
           <button  ion-button color="light" clear icon-left (click)="redirect()">
@@ -64,7 +64,7 @@
             Projets
           </button>
           <br>
-          <button ion-button color="light" clear icon-left>
+          <button ion-button color="light" clear icon-left (click)="redirect()"  >
             <ion-icon name="stats" margin-right></ion-icon>
               sondage
           </button>
@@ -97,17 +97,15 @@
         <div class="wrapper" [ngClass]="{'close': items[2]==false}">
           <button ion-button color="light" clear icon-left>
             <ion-icon name="construct"></ion-icon>
-            Projets
+            Contacter commune
+
           </button>
           <br>
           <button ion-button color="light" clear icon-left>
             <ion-icon name="stats" margin-right></ion-icon>
-              sondage
+        Contacter l'administrateur
           </button>
-          <button ion-button color="light" clear icon-left>
-            <ion-icon name="stats" margin-right></ion-icon>
-              sondage
-          </button>
+
         </div>
       </ion-col>
     </ion-row>
@@ -119,18 +117,9 @@
         <div class="wrapper" [ngClass]="{'close': items[3]==false}">
           <button ion-button color="light" clear icon-left>
             <ion-icon name="construct"></ion-icon>
-            Projets
+              Information
           </button>
-          <br>
-          <button ion-button color="light" clear icon-left>
-            <ion-icon name="stats" margin-right></ion-icon>
-              sondage
-          </button>
-          <br>
-          <button ion-button color="light" clear icon-left>
-            <ion-icon name="stats" margin-right></ion-icon>
-              sondage
-          </button>
+
         </div>
       </ion-col>
     </ion-row>

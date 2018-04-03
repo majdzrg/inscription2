@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { ListeprojectPage} from '../listeproject/listeproject';
+import { SondagePage } from '../sondage/sondage';
 /**
  * Generated class for the ChosecommunePage page.
  *
@@ -16,7 +17,7 @@ import { ListeprojectPage} from '../listeproject/listeproject';
   templateUrl: 'chosecommune.html',
 })
 export class ChosecommunePage {
-  gov_list: any; // hetha fih liste des gov
+  gov_list: any; //              liste des gov
   commune_list: any; //
   user_gov = 0;
   user_commune = 0;
@@ -131,5 +132,8 @@ export class ChosecommunePage {
   }
   goLink(){
     this.navCtrl.push(ListeprojectPage)
+  }
+  goLink(){
+    this.navCtrl.push(SondagePage)
   }
 }

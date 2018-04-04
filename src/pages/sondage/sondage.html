@@ -6,18 +6,41 @@
 -->
 <ion-header>
   <ion-toolbar>
-  <ion-buttons end>
-    <button ion-button icon-only (click)="presentPopover($event)">
-      <ion-icon name="more"></ion-icon>
-    </button>
-  </ion-buttons>
-  <ion-navbar>
-    <ion-title>sondage</ion-title>
-  </ion-navbar>
-</ion-toolbar>
+    <ion-title>
+      Sondage
+    </ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="presentPopover($event)">
+        <ion-icon name="more"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-toolbar>
 </ion-header>
-
-
 <ion-content padding>
-
+<div>
+  <ion-segment [(ngModel)]="sondage">
+    <ion-segment-button value="active">
+      Sondage active
+    </ion-segment-button>
+    <ion-segment-button value="archive">
+      Sondage archevé
+    </ion-segment-button>
+  </ion-segment>
+</div>
+<div [ngSwitch]="sondage">
+  <ion-list *ngSwitchCase="'active'">
+    <ion-item *ngFor="let item of sondageActive" (click)="openSondage('item.id')">
+      <h2>{{item.title}}</h2>
+      <p>{{item.dscrp}}</p>
+      <small>{{item.start_date}}</small>
+    </ion-item>
+  </ion-list>
+  <ion-list *ngSwitchCase="'archive'">
+    <ion-item *ngFor="let item of sondageArchive" (click)="openSondage('item.id')">
+      <h2>{{item.title}}</h2>
+      <p>{{item.dscrp}}</p>
+      <small>{{item.end_date}}</small>
+    </ion-item>
+  </ion-list>
+</div>
 </ion-content>

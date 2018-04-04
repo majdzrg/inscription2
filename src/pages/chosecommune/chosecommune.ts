@@ -130,10 +130,10 @@ export class ChosecommunePage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad ChosecommunePage');
   }
-  goLink(){
+  goListProject(){
     this.navCtrl.push(ListeprojectPage)
   }
-  goLink(){
+  goSondage(){
     this.navCtrl.push(SondagePage)
   }
 }

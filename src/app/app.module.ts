@@ -17,6 +17,7 @@ import {ChosecommunePage} from "../pages/chosecommune/chosecommune";
 import {ListeprojectPage} from "../pages/listeproject/listeproject";
 import {ProjectPage} from "../pages/project/project";
 import {SondagePage} from "../pages/sondage/sondage";
+import { SondageOpenPage } from "../pages/sondage-open/sondage-open";
 @NgModule({
   declarations: [
     MyApp,
@@ -30,7 +31,8 @@ import {SondagePage} from "../pages/sondage/sondage";
     ChosecommunePage,
     ListeprojectPage,
     ProjectPage,
-    SondagePage
+    SondagePage,
+    SondageOpenPage
   ],
   imports: [
     BrowserModule,
@@ -49,7 +51,8 @@ import {SondagePage} from "../pages/sondage/sondage";
     ChosecommunePage,
     ListeprojectPage,
     ProjectPage,
-    SondagePage
+    SondagePage,
+    SondageOpenPage
   ],
   providers: [
     StatusBar,

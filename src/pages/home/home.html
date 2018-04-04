@@ -59,12 +59,12 @@
         <h5 ion-text color="light" text-capitalize><ion-icon name="briefcase" margin-right="4px"></ion-icon> Commune</h5>
         <p class="brief" text-nowrap *ngIf="items[0]==false">small description about section </p>
         <div class="wrapper" [ngClass]="{'close': items[0]==false}">
-          <button  ion-button color="light" clear icon-left (click)="redirect()">
+          <button  ion-button color="light" clear icon-left (click)="redirect('projets')">
             <ion-icon name="construct"></ion-icon>
             Projets
           </button>
           <br>
-          <button ion-button color="light" clear icon-left (click)="redirect()"  >
+          <button ion-button color="light" clear icon-left (click)="redirect('sondage')"  >
             <ion-icon name="stats" margin-right></ion-icon>
               sondage
           </button>

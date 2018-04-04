@@ -3,8 +3,8 @@ import { NavController } from 'ionic-angular';
 import { PopoverController } from 'ionic-angular';
 import { MoreMenuPage } from '../more-menu/more-menu';
 import { ChosecommunePage } from '../chosecommune/chosecommune';
-import {ListeprojectPage} from '../listeproject/listeproject';
-import {SondagePage} from '../sondage/sondage';
+import { ListeprojectPage} from '../listeproject/listeproject';
+import { SondagePage} from '../sondage/sondage';
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
@@ -37,11 +37,20 @@ export class HomePage {
       this.items[currentitem] = true;
     }
     }
-  redirect(){
+  redirect(pageto){
     console.log('start check');
     // test if he have localstorage variable with commu id
     // else
-    this.navCtrl.setRoot(ChosecommunePage);
+    switch (pageto) {
+      case 'projets':
+        this.navCtrl.push(ListeprojectPage);
+        break;
+      case 'sondage':
+        this.navCtrl.push(SondagePage);
+        break;
+      default:
+        break;
+    }
   }
 
 

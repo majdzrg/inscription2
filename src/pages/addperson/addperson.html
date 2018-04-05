@@ -11,27 +11,26 @@
 </ion-header>
 <ion-content padding>
   <ion-list>
-    <form (ngSubmit)="RegisterForm()">
+    <form (ngSubmit)="RegisterForm($event)">
       <ion-item>
         <ion-label floating>First name</ion-label>
-        <ion-input type="text" name="name"></ion-input>
+        <ion-input type="text" name="name" [(ngModel)]="user.name" required></ion-input>
       </ion-item>
       <ion-item>
         <ion-label floating>Last name</ion-label>
-        <ion-input type="text" name="last_name"></ion-input>
+        <ion-input [(ngModel)]="user.last_name" type="text" name="last_name" required></ion-input>
       </ion-item>
       <ion-item>
         <ion-label floating>Email</ion-label>
-        <ion-input type="email" name="email"></ion-input>
+        <ion-input type="email" name="email" [(ngModel)]="user.email" required></ion-input>
       </ion-item>
-
       <ion-item>
         <ion-label floating>Password</ion-label>
-        <ion-input type="password" name="password"></ion-input>
+        <ion-input type="password" name="password" [(ngModel)]="user.password" required></ion-input>
       </ion-item>
       <ion-item margin-bottom>
         <ion-label floating> confirme Password</ion-label>
-        <ion-input type="password" name="conf_password"></ion-input>
+        <ion-input type="password" name="conf_password" [(ngModel)]="user.conf_password" required></ion-input>
       </ion-item>
       <button ion-button block type="submit" outline color="success"> Register now </button>
     </form>

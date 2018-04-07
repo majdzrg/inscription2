@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { AuthentificationProvider } from '../../providers/authentification/authentification';
+import { Dialogs } from '@ionic-native/dialogs';
 
 /**
  * Generated class for the AddpersonPage page.
@@ -25,7 +26,7 @@ export class AddpersonPage {
     password:'',
     conf_password:''
   }
-  constructor(public navCtrl: NavController, public navParams: NavParams , private _auth : AuthentificationProvider) {
+  constructor(public navCtrl: NavController, public navParams: NavParams , private _auth : AuthentificationProvider ,private _dialog : Dialogs ) {
   }
 
   ionViewDidLoad() {
@@ -38,18 +39,29 @@ export class AddpersonPage {
         .subscribe(data => {
           if (data['ok']== true) {
             console.log("registred");
+            this._dialog.alert('User added , you can log in now')
+              .then(() => console.log('Dialog dismissed'))
+              .catch(e => console.log('Error displaying dialog', e));
           } else {
-            console.log(data['msg']);
+            this._dialog.alert(data['msg'])
+              .then(() => console.log('Dialog dismissed'))
+              .catch(e => console.log('Error displaying dialog', e));
           }
         },err =>{
           console.log(err);
+          this._dialog.alert('no internet connection or problem with our servers , try later')
+            .then(() => console.log('Dialog dismissed'))
+            .catch(e => console.log('Error displaying dialog', e));
         });
       } else {
-        console.log("params not valid");
+        this._dialog.alert('all the field are required')
+          .then(() => console.log('Dialog dismissed'))
+          .catch(e => console.log('Error displaying dialog', e));
       }
     } else {
-      console.log("password not match");
+      this._dialog.alert('bad password confirmation')
+        .then(() => console.log('Dialog dismissed'))
+        .catch(e => console.log('Error displaying dialog', e));
     }
-    console.log("register form");
   }
 }

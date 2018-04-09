@@ -2,6 +2,9 @@ import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import {ProjectPage} from '../project/project';
 import { ModalController } from 'ionic-angular';
+import { UserServiceProvider } from '../../providers/user-service/user-service';
+import { ChosecommunePage } from '../chosecommune/chosecommune';
+import { Storage } from '@ionic/storage';
 
 /**
  * Generated class for the ListeprojectPage page.
@@ -31,7 +34,7 @@ export class ListeprojectPage {
       img:'https://picsum.photos/600/400?random'
     }
   ]
-  constructor(public navCtrl: NavController, public navParams: NavParams,public modalCtrl: ModalController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams,public modalCtrl: ModalController,private _userService:UserServiceProvider,private _storage:Storage) {
   }
   ionViewDidLoad() {
     console.log('ionViewDidLoad ListeprojectPage');
@@ -39,5 +42,16 @@ export class ListeprojectPage {
   openProj(proj_id){
     let projModal = this.modalCtrl.create(ProjectPage, { projId: proj_id });
     projModal.present();
+  }
+
+  ionViewWillEnter(){
+    this._storage.get('id_commune').then((val)=>{
+      console.log(val);
+      if(val == null){
+        this.navCtrl.push(ChosecommunePage);
+      }
+    },(err)=>{
+      this.navCtrl.push(ChosecommunePage);
+    });
   }
 }

@@ -19,6 +19,8 @@ import {ProjectPage} from "../pages/project/project";
 import {SondagePage} from "../pages/sondage/sondage";
 import { SondageOpenPage } from "../pages/sondage-open/sondage-open";
 import { AuthentificationProvider } from '../providers/authentification/authentification';
+import { IonicStorageModule } from '@ionic/storage';
+import { UserServiceProvider } from '../providers/user-service/user-service';
 @NgModule({
   declarations: [
     MyApp,
@@ -38,7 +40,8 @@ import { AuthentificationProvider } from '../providers/authentification/authenti
   imports: [
     BrowserModule,
     HttpClientModule,
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(MyApp),
+    IonicStorageModule.forRoot()
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -61,7 +64,8 @@ import { AuthentificationProvider } from '../providers/authentification/authenti
     SplashScreen,
     Dialogs,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    AuthentificationProvider
+    AuthentificationProvider,
+    UserServiceProvider
   ]
 })
 export class AppModule {}

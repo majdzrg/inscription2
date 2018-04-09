@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { ListeprojectPage} from '../listeproject/listeproject';
 import { SondagePage } from '../sondage/sondage';
+import { UserServiceProvider } from '../../providers/user-service/user-service';
 /**
  * Generated class for the ChosecommunePage page.
  *
@@ -21,7 +22,7 @@ export class ChosecommunePage {
   commune_list: any; //
   user_gov = 0;
   user_commune = 0;
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams,private _userService:UserServiceProvider) {
     this.gov_list =
       [
         {
@@ -135,5 +136,10 @@ export class ChosecommunePage {
   }
   goSondage(){
     this.navCtrl.push(SondagePage)
+  }
+  saveCommune(){
+    this._userService.setCommune(this.user_commune.toString());
+    // else pop
+    this.navCtrl.pop();
   }
 }

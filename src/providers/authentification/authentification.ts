@@ -1,3 +1,5 @@
+import {catchError} from 'rxjs/operators';
+import {retry} from 'rxjs/operator/retry';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
@@ -9,22 +11,15 @@ import { Injectable } from '@angular/core';
 */
 @Injectable()
 export class AuthentificationProvider {
-  private registerAPI: string = "http://localhost:8000/api/register";
-  private loginAPI: string = "http://localhost:8000/api/login_check";
+  private registerAPI: string = "http://192.168.1.93:8000/api/register";
+  private loginAPI: string = "http://192.168.1.93:8000/api/login_check";
   private _headers : HttpHeaders;
   constructor(public http: HttpClient) {
     console.log('Hello AuthentificationProvider Provider');
     this._headers = new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded');
     this._headers.set('Accept-Charset','utf-8');
   }
-
   public registerUser(nom: string , prenom: string ,email: string , password :string){
-    let params = {
-      'nom':nom,
-      'prenom':prenom,
-      'email':email,
-      'password':password
-    }
     const body = new HttpParams()
       .set('nom', nom)
       .set('prenom', prenom)

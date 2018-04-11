@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { ViewController } from 'ionic-angular';
-import { LoginPage } from "../login/login";
+import { IonicPage,  NavController,  NavParams, ViewController } from 'ionic-angular';
+import { LoginPage } from '../login/login';
+import { AuthentificationProvider } from '../../providers/authentification/authentification';
+import { HomePage } from '../home/home';
+import { AddpersonPage } from '../addperson/addperson';
 /**
  * Generated class for the MoreMenuPage page.
  *
@@ -16,7 +18,7 @@ import { LoginPage } from "../login/login";
 })
 export class MoreMenuPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController, private _auth: AuthentificationProvider) {
   }
 
   ionViewDidLoad() {
@@ -30,8 +32,13 @@ export class MoreMenuPage {
     //this.viewCtrl.dismiss();
     // clear session
     // rooting
-    //this.navCtrl.setRoot(LoginPage);
-    this.navCtrl.push(LoginPage)
+    this._auth.logout();
+    //this.viewCtrl.dismiss();
   }
+  login(){
+    this.navCtrl.setRoot(LoginPage);
+  }
+
+
 
 }

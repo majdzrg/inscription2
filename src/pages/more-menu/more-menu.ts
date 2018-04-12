@@ -33,10 +33,11 @@ export class MoreMenuPage {
     // clear session
     // rooting
     this._auth.logout();
-    //this.viewCtrl.dismiss();
+    this.viewCtrl.dismiss();
+    this.navCtrl.push(HomePage);
   }
   login(){
-    this.navCtrl.setRoot(LoginPage);
+    this.navCtrl.push(LoginPage);
   }
 
 

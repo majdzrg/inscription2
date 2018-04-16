@@ -7,6 +7,7 @@ import { Dialogs } from '@ionic-native/dialogs';
 import { AboutPage } from '../pages/about/about';
 import { ContactPage } from '../pages/contact/contact';
 import { HomePage } from '../pages/home/home';
+import {InformationPage} from '../pages/information/information';
 import { TabsPage } from '../pages/tabs/tabs';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -21,6 +22,7 @@ import { SondageOpenPage } from "../pages/sondage-open/sondage-open";
 import { AuthentificationProvider } from '../providers/authentification/authentification';
 import { IonicStorageModule } from '@ionic/storage';
 import { UserServiceProvider } from '../providers/user-service/user-service';
+import { ProjectsProvider } from '../providers/projects/projects';
 @NgModule({
   declarations: [
     MyApp,
@@ -35,7 +37,8 @@ import { UserServiceProvider } from '../providers/user-service/user-service';
     ListeprojectPage,
     ProjectPage,
     SondagePage,
-    SondageOpenPage
+    SondageOpenPage,
+    InformationPage
   ],
   imports: [
     BrowserModule,
@@ -57,7 +60,8 @@ import { UserServiceProvider } from '../providers/user-service/user-service';
     ListeprojectPage,
     ProjectPage,
     SondagePage,
-    SondageOpenPage
+    SondageOpenPage,
+    InformationPage
   ],
   providers: [
     StatusBar,
@@ -65,7 +69,8 @@ import { UserServiceProvider } from '../providers/user-service/user-service';
     Dialogs,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     AuthentificationProvider,
-    UserServiceProvider
+    UserServiceProvider,
+    ProjectsProvider
   ]
 })
 export class AppModule {}

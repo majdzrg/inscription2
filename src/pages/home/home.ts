@@ -5,6 +5,7 @@ import { MoreMenuPage } from '../more-menu/more-menu';
 import { ChosecommunePage } from '../chosecommune/chosecommune';
 import { ListeprojectPage} from '../listeproject/listeproject';
 import { SondagePage} from '../sondage/sondage';
+import {InformationPage} from '../pages/information/information';
 import { UserServiceProvider } from '../../providers/user-service/user-service';
 @Component({
   selector: 'page-home',
@@ -55,6 +56,8 @@ export class HomePage {
         break;
     }
   }
-
+direct(){
+  this.navCtrl.push(InformationPage);
+}
 
 }

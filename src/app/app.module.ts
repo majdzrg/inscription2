@@ -38,7 +38,7 @@ import { ProjectsProvider } from '../providers/projects/projects';
     ProjectPage,
     SondagePage,
     SondageOpenPage,
-    InformationPage
+
   ],
   imports: [
     BrowserModule,
@@ -61,7 +61,7 @@ import { ProjectsProvider } from '../providers/projects/projects';
     ProjectPage,
     SondagePage,
     SondageOpenPage,
-    InformationPage
+
   ],
   providers: [
     StatusBar,

@@ -6,7 +6,8 @@
 -->
 <ion-list>
     <ion-list-header>Menu</ion-list-header>
-    <button ion-item (click)="login()">Log-in</button>
+    <button *ngIf="isConnected == false" ion-item (click)="login()">Log-in</button>
+    <button *ngIf="isConnected == true" ion-item (click)="null">Profile</button>
     <button ion-item (click)="logout()">Log-out</button>
     <button ion-item (click)="close()">Fermer</button>
 </ion-list>

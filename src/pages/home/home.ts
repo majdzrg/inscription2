@@ -5,7 +5,7 @@ import { MoreMenuPage } from '../more-menu/more-menu';
 import { ChosecommunePage } from '../chosecommune/chosecommune';
 import { ListeprojectPage} from '../listeproject/listeproject';
 import { SondagePage} from '../sondage/sondage';
-import {InformationPage} from '../pages/information/information';
+
 import { UserServiceProvider } from '../../providers/user-service/user-service';
 @Component({
   selector: 'page-home',
@@ -15,11 +15,12 @@ export class HomePage {
   items: any
   itemsNames = ['commune', 'cytoi', 'contact', 'about']
   isCommuneexiste:boolean;
+
   constructor(public navCtrl: NavController, private popoverCtrl: PopoverController,private _userService:UserServiceProvider) {
     //this.items = {'project':false , 'cytoi':false, 'contact':false , 'about':false};
     this.items = [false,false,false,false]
     // this.isCommuneexiste = this._userService.isCommuneSeted();
-    // optimise commune chode access
+    // optimise commune chose access
   }
   // show up the top menu
   presentPopover(myEvent) {
@@ -56,8 +57,6 @@ export class HomePage {
         break;
     }
   }
-direct(){
-  this.navCtrl.push(InformationPage);
-}
+
 
 }

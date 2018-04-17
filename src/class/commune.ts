@@ -13,11 +13,11 @@
     // get Id_commune() : string {
 
       //   return this.id_commune;
-     }
+  //   }
     // set Id_commune(value : string) {
 
     //     this.id_commune = value;
-     }
+    // }
 //
      //get Nom() : string {
 //

@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { ListeprojectPage} from '../listeproject/listeproject';
 import { SondagePage } from '../sondage/sondage';
 import { UserServiceProvider } from '../../providers/user-service/user-service';
+import { HomePage } from '../home/home';
 /**
  * Generated class for the ChosecommunePage page.
  *
@@ -126,7 +127,16 @@ export class ChosecommunePage {
       [{
           id: 1,
           name: 'bardo'
-        }]
+
+        },
+        {
+            id: 3,
+            name: 'dandan'
+
+          },
+
+      ]
+
   }
   ionViewDidLoad() {
     console.log('ionViewDidLoad ChosecommunePage');
@@ -140,6 +150,6 @@ export class ChosecommunePage {
   saveCommune(){
     this._userService.setCommune(this.user_commune.toString());
     // else pop
-    this.navCtrl.pop();
+    this.navCtrl.setRoot(HomePage);
   }
 }

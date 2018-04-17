@@ -1,15 +1,15 @@
-class User {
+  //class User {
 
-private  id_user: string;
-private nom: string;
+  //private  id_user: string;
+/*private nom: string;
 private prenom: string;
 private email: string;
 
 
-    // Constructor
+  */  // Constructor
 
 
-    constructor(id_user: string,nom: string,prenom: string,email: string) {
+  /*  constructor(id_user: string,nom: string,prenom: string,email: string) {
 
            this.id_user =id_user;
            this.nom =nom;
@@ -54,4 +54,4 @@ private email: string;
 
 
 
-}
+}*/

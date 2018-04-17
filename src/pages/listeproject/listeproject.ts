@@ -3,6 +3,7 @@ import { NavController, NavParams } from 'ionic-angular';
 import {ProjectPage} from '../project/project';
 import { ModalController } from 'ionic-angular';
 import { UserServiceProvider } from '../../providers/user-service/user-service';
+import {ProjectsProvider} from '../../providers/projects/projects';
 import { ChosecommunePage } from '../chosecommune/chosecommune';
 import { Storage } from '@ionic/storage';
 
@@ -34,8 +35,10 @@ export class ListeprojectPage {
       img:'https://picsum.photos/600/400?random'
     }
   ]
-  constructor(public navCtrl: NavController, public navParams: NavParams,public modalCtrl: ModalController,private _userService:UserServiceProvider,private _storage:Storage) {
+  constructor(public navCtrl: NavController, public navParams: NavParams,public modalCtrl: ModalController,private _userService:UserServiceProvider,private _storage:Storage,private _projectService:ProjectsProvider) {
+        this.getprojectsList();
   }
+
   ionViewDidLoad() {
     console.log('ionViewDidLoad ListeprojectPage');
   }
@@ -50,6 +53,37 @@ export class ListeprojectPage {
       if(val == null){
         this.navCtrl.push(ChosecommunePage);
       }
+    },(err)=>{
+      this.navCtrl.push(ChosecommunePage);
+    });
+  }
+  getprojectsList(){
+    this._storage.get('id_commune').then((val)=>{
+      //run serves request
+      this._projectService.ProjectListe(val)
+      .subscribe(data=>{
+        console.log(data);
+        console.log(data["status "]);
+        if(data["status "]==true){
+          let tmp=data["data "]
+          console.log(tmp);
+          for(let i=0;i<tmp.length;i++){
+            this.project_list.push(  {
+                id:tmp[i].id,
+                title:tmp[i].sujet,
+                add_date:tmp[i]["Date de debut"],
+                descrp:tmp[i].contenu,
+                img:'https://picsum.photos/600/400?random'
+              })
+          }
+        }
+        else{}
+
+
+
+      },err=>{
+        console.log(err)
+      });
     },(err)=>{
       this.navCtrl.push(ChosecommunePage);
     });

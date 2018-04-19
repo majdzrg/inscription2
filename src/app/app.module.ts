@@ -22,11 +22,8 @@ import { SondageOpenPage } from "../pages/sondage-open/sondage-open";
 import { AuthentificationProvider } from '../providers/authentification/authentification';
 import { IonicStorageModule } from '@ionic/storage';
 import { UserServiceProvider } from '../providers/user-service/user-service';
-<<<<<<< HEAD
 import { GouvernoratProvider } from '../providers/gouvernorat/gouvernorat';
-=======
 import { ProjectsProvider } from '../providers/projects/projects';
->>>>>>> 48c0ac3d3bddbead231fce8010b3c40a8e23f670
 @NgModule({
   declarations: [
     MyApp,
@@ -74,11 +71,8 @@ import { ProjectsProvider } from '../providers/projects/projects';
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     AuthentificationProvider,
     UserServiceProvider,
-<<<<<<< HEAD
-    GouvernoratProvider
-=======
+    GouvernoratProvider,
     ProjectsProvider
->>>>>>> 48c0ac3d3bddbead231fce8010b3c40a8e23f670
   ]
 })
 export class AppModule {}

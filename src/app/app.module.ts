@@ -24,6 +24,7 @@ import { IonicStorageModule } from '@ionic/storage';
 import { UserServiceProvider } from '../providers/user-service/user-service';
 import { GouvernoratProvider } from '../providers/gouvernorat/gouvernorat';
 import { ProjectsProvider } from '../providers/projects/projects';
+import { CommuneProvider } from '../providers/commune/commune';
 @NgModule({
   declarations: [
     MyApp,
@@ -72,7 +73,8 @@ import { ProjectsProvider } from '../providers/projects/projects';
     AuthentificationProvider,
     UserServiceProvider,
     GouvernoratProvider,
-    ProjectsProvider
+    ProjectsProvider,
+    CommuneProvider
   ]
 })
 export class AppModule {}

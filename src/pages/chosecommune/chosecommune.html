@@ -15,8 +15,8 @@
     <ion-row flex-wrap: wrap class="bg-commune" align-items-center>
       <ion-col align-self-stretch class="cell-1" align-items-center>
         <!-- <button ion-button block color="light" clear >commune</button> -->
-        <h3 ion-text color="light" text-capitalize>chose  commune</h3>
-        <p text-wrap >Choisissez votre Commune S'il vous plait . pour avoire acceder aux autres foncctinalité de l'application </p>
+        <h3 ion-text color="light" text-capitalize>chose commune</h3>
+        <p text-wrap>Choisissez votre Commune S'il vous plait . pour avoire acceder aux autres foncctinalité de l'application </p>
       </ion-col>
     </ion-row>
     <ion-row flex-wrap: nowrap class="ion-row-bottom" align-items-center>
@@ -27,7 +27,7 @@
           </div>
           <ion-item>
             <ion-label>Gouvernorat</ion-label>
-            <ion-select [(ngModel)]="user_gov">
+            <ion-select [(ngModel)]="user_gov" (ngModelChange)="get_commune($event)">
               <!--  -->
               <ion-option *ngFor="let gov of gov_list" [value]="gov.id">{{gov.name}}</ion-option>
             </ion-select>
@@ -44,7 +44,7 @@
           </ion-item>
         </ion-list>
         <div padding>
-<button ion-button block outline (click)="saveCommune()" [disabled]="user_gov==0 || user_commune==0">Valider</button>
+          <button ion-button block outline (click)="saveCommune()" [disabled]="user_gov==0 || user_commune==0">Valider</button>
         </div>
       </ion-col>
     </ion-row>

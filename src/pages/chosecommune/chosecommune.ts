@@ -5,6 +5,7 @@ import { SondagePage } from '../sondage/sondage';
 import { UserServiceProvider } from '../../providers/user-service/user-service';
 import { GouvernoratProvider } from '../../providers/gouvernorat/gouvernorat';
 import { HomePage } from '../home/home';
+import { CommuneProvider } from '../../providers/commune/commune';
 
 /**
  * Generated class for the ChosecommunePage page.
@@ -25,7 +26,7 @@ export class ChosecommunePage {
   commune_list: any; //
   user_gov = 0;
   user_commune = 0;
-  constructor(public navCtrl: NavController, public navParams: NavParams, private _userService: UserServiceProvider, private _govService:GouvernoratProvider) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private _userService: UserServiceProvider, private _govService:GouvernoratProvider, private _comService:CommuneProvider) {
     this.gov_list =
       [
         // {
@@ -126,10 +127,12 @@ export class ChosecommunePage {
         // },
       ]
     this.commune_list =
-      [{
-        id: 1,
-        name: 'bardo'
-      }];
+      [
+      //   {
+      //   id: 1,
+      //   name: 'bardo'
+      // }
+    ];
       this._govService.getGovList()
       .subscribe(data=>{
         if (data['status'] === true){
@@ -149,6 +152,29 @@ export class ChosecommunePage {
         console.log(err);
       });
 
+  }
+  get_commune(obj){
+    this._comService.getCommuneList()
+    .subscribe(data=>{
+      if(data['status']===true){
+        let tmp = data["data"];
+        for (let index = 0; index < tmp.length; index++) {
+          const element = tmp[index];
+          this.commune_list.push({
+            id: element.id,
+            name: element.name
+          })
+        }
+      }
+      else
+      {
+        console.log("no data");
+        
+      }
+    },err=>{
+      console.log(err);
+      
+    });
   }
   ionViewDidLoad() {
     console.log('ionViewDidLoad ChosecommunePage');

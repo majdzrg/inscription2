@@ -95,13 +95,8 @@
         <h5 ion-text color="light" text-capitalize><ion-icon name="mail" margin-right="4px"></ion-icon> contact</h5>
         <p class="brief" text-nowrap *ngIf="items[2]==false">small description about section </p>
         <div class="wrapper" [ngClass]="{'close': items[2]==false}">
-          <button ion-button color="light" clear icon-left>
-            <ion-icon name="construct"></ion-icon>
-            Contacter commune
-
-          </button>
           <br>
-          <button ion-button color="light" clear icon-left>
+          <button ion-button color="light" clear icon-left >
             <ion-icon name="stats" margin-right></ion-icon>
         Contacter l'administrateur
           </button>
@@ -115,9 +110,9 @@
         <h5 ion-text color="light" text-capitalize><ion-icon name="information-circle" margin-right="4px"></ion-icon> a propos</h5>
         <p class="brief" text-nowrap *ngIf="items[3]==false">small description about section </p>
         <div class="wrapper" [ngClass]="{'close': items[3]==false}">
-          <button ion-button color="light" clear icon-left>
+          <button ion-button color="light" clear icon-left (click)="direct('information')">
             <ion-icon name="construct"></ion-icon>
-              Information
+              Information sur l'application
           </button>
 
         </div>

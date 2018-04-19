@@ -7,6 +7,7 @@ import { Dialogs } from '@ionic-native/dialogs';
 import { AboutPage } from '../pages/about/about';
 import { ContactPage } from '../pages/contact/contact';
 import { HomePage } from '../pages/home/home';
+import {InformationPage} from '../pages/information/information';
 import { TabsPage } from '../pages/tabs/tabs';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -21,7 +22,11 @@ import { SondageOpenPage } from "../pages/sondage-open/sondage-open";
 import { AuthentificationProvider } from '../providers/authentification/authentification';
 import { IonicStorageModule } from '@ionic/storage';
 import { UserServiceProvider } from '../providers/user-service/user-service';
+<<<<<<< HEAD
 import { GouvernoratProvider } from '../providers/gouvernorat/gouvernorat';
+=======
+import { ProjectsProvider } from '../providers/projects/projects';
+>>>>>>> 48c0ac3d3bddbead231fce8010b3c40a8e23f670
 @NgModule({
   declarations: [
     MyApp,
@@ -36,7 +41,8 @@ import { GouvernoratProvider } from '../providers/gouvernorat/gouvernorat';
     ListeprojectPage,
     ProjectPage,
     SondagePage,
-    SondageOpenPage
+    SondageOpenPage,
+
   ],
   imports: [
     BrowserModule,
@@ -58,7 +64,8 @@ import { GouvernoratProvider } from '../providers/gouvernorat/gouvernorat';
     ListeprojectPage,
     ProjectPage,
     SondagePage,
-    SondageOpenPage
+    SondageOpenPage,
+
   ],
   providers: [
     StatusBar,
@@ -67,7 +74,11 @@ import { GouvernoratProvider } from '../providers/gouvernorat/gouvernorat';
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     AuthentificationProvider,
     UserServiceProvider,
+<<<<<<< HEAD
     GouvernoratProvider
+=======
+    ProjectsProvider
+>>>>>>> 48c0ac3d3bddbead231fce8010b3c40a8e23f670
   ]
 })
 export class AppModule {}

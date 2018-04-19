@@ -4,7 +4,10 @@
   </ion-navbar>
 </ion-header>
 <ion-content padding>
-  <form (ngSubmit)="loginForm()" margin-bottom>
+  <ion-row>
+    <img src="//logo.clearbit.com/spotify.com">
+  </ion-row>
+  <form #loginform="ngForm" (ngSubmit)="loginForm()" margin-bottom>
         <ion-item>
           <ion-label floating><ion-icon name="contact" item-start></ion-icon>Username</ion-label>
           <ion-input type="email" [(ngModel)]="user.email" name="email"  required></ion-input>
@@ -14,7 +17,7 @@
           <ion-input type="password" [(ngModel)]="user.pass" name="pass"  required></ion-input>
         </ion-item>
         <!--<button ion-button color="primary" block type="submit">Sign In</button>-->
-        <button ion-button icon-left outline type="submit"color="dark" block>
+        <button ion-button icon-left outline type="submit"color="dark" [disabled]="!loginform.dirty" block  >
             <ion-icon name="add"></ion-icon>
              sign in
           </button>

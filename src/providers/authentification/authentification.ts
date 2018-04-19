@@ -1,7 +1,7 @@
 import { catchError } from 'rxjs/operators';
 import { retry } from 'rxjs/operator/retry';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, EventEmitter } from '@angular/core';
 import { Storage } from '@ionic/storage';
 import { NavController } from 'ionic-angular';
 import { HomePage } from '../../pages/home/home';
@@ -13,13 +13,17 @@ import { HomePage } from '../../pages/home/home';
 */
 @Injectable()
 export class AuthentificationProvider {
-  private registerAPI: string = "http://192.168.1.40:8000/api/register";
-  private loginAPI: string = "http://192.168.1.40:8000/api/login_check";
+  private registerAPI: string = "http://192.168.1.90:8000/api/register";
+  private loginAPI: string = "http://192.168.1.90:8000/api/login";
   private _headers: HttpHeaders;
+  public isConnected = false;
+  userAuthUpdated:EventEmitter<boolean> = new EventEmitter();
   constructor(public http: HttpClient, private _storage: Storage) {
     console.log('Hello AuthentificationProvider Provider');
     this._headers = new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded');
     this._headers.set('Accept-Charset', 'utf-8');
+    // call on construct run
+    this.isAuthenticated();
   }
   public registerUser(nom: string, prenom: string, email: string, password: string) {
     const body = new HttpParams()
@@ -41,15 +45,9 @@ export class AuthentificationProvider {
    * @param authResult
    */
 
-  public setSession(authResult) {
+  public setSession(token) {
     // set session by add token key and value in local storage
-    this._storage.set('token', authResult.token).then(val => {
-      // done job
-      console.log(val);
-    }, err => {
-      // err here
-      console.log(err);
-    });
+    return this._storage.set('token', token);
   }
   /**
    * logout
@@ -64,11 +62,17 @@ export class AuthentificationProvider {
 
   public isAuthenticated() {
     // check if there is token in local storage or not
-    let flag = false;
-    this._storage.get('token').then((val) => {
-      return true;
-    }, (err) => {
-      return false
+    this._storage.get('token').then((val)=>{
+      if(val != null){
+        this.userAuthUpdated.emit(true);
+      }
+      else
+      {
+        this.userAuthUpdated.emit(false);
+      }
+    },(err)=>{
+      this.userAuthUpdated.emit(false);
+      console.log(err);
     });
   }
 }

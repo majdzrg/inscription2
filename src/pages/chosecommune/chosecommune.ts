@@ -3,7 +3,11 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { ListeprojectPage } from '../listeproject/listeproject';
 import { SondagePage } from '../sondage/sondage';
 import { UserServiceProvider } from '../../providers/user-service/user-service';
+<<<<<<< HEAD
 import { GouvernoratProvider } from '../../providers/gouvernorat/gouvernorat';
+=======
+import { HomePage } from '../home/home';
+>>>>>>> 48c0ac3d3bddbead231fce8010b3c40a8e23f670
 /**
  * Generated class for the ChosecommunePage page.
  *
@@ -125,6 +129,7 @@ export class ChosecommunePage {
       ]
     this.commune_list =
       [{
+<<<<<<< HEAD
         id: 1,
         name: 'bardo'
       }];
@@ -146,6 +151,19 @@ export class ChosecommunePage {
       },err=>{
         console.log(err);
       });
+=======
+          id: 1,
+          name: 'bardo'
+
+        },
+        {
+            id: 3,
+            name: 'dandan'
+
+          },
+
+      ]
+>>>>>>> 48c0ac3d3bddbead231fce8010b3c40a8e23f670
 
   }
   ionViewDidLoad() {
@@ -160,6 +178,6 @@ export class ChosecommunePage {
   saveCommune() {
     this._userService.setCommune(this.user_commune.toString());
     // else pop
-    this.navCtrl.pop();
+    this.navCtrl.setRoot(HomePage);
   }
 }

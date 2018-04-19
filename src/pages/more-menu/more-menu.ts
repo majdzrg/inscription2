@@ -17,8 +17,10 @@ import { AddpersonPage } from '../addperson/addperson';
   templateUrl: 'more-menu.html',
 })
 export class MoreMenuPage {
-
+  private isConnected:boolean = false;
   constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController, private _auth: AuthentificationProvider) {
+    console.log("more menu on");
+    this._auth.isAuthenticated();
   }
 
   ionViewDidLoad() {
@@ -29,9 +31,6 @@ export class MoreMenuPage {
     this.viewCtrl.dismiss();
   }
   logout(){
-    //this.viewCtrl.dismiss();
-    // clear session
-    // rooting
     this._auth.logout();
     this.viewCtrl.dismiss();
     this.navCtrl.push(HomePage);
@@ -39,7 +38,15 @@ export class MoreMenuPage {
   login(){
     this.navCtrl.push(LoginPage);
   }
-
+  ngOnInit(): void {
+    //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
+    //Add 'implements OnInit' to the class.
+    this._auth.userAuthUpdated.subscribe((iscon)=>{
+      this.isConnected = iscon;
+    },(err)=>{
+      console.log(err);
+    });
+  }
 
 
 }

@@ -21,6 +21,7 @@ import { SondageOpenPage } from "../pages/sondage-open/sondage-open";
 import { AuthentificationProvider } from '../providers/authentification/authentification';
 import { IonicStorageModule } from '@ionic/storage';
 import { UserServiceProvider } from '../providers/user-service/user-service';
+import { GouvernoratProvider } from '../providers/gouvernorat/gouvernorat';
 @NgModule({
   declarations: [
     MyApp,
@@ -65,7 +66,8 @@ import { UserServiceProvider } from '../providers/user-service/user-service';
     Dialogs,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     AuthentificationProvider,
-    UserServiceProvider
+    UserServiceProvider,
+    GouvernoratProvider
   ]
 })
 export class AppModule {}

@@ -6,12 +6,18 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content>
-  <ion-list>
-    <ion-list-header>Follow us on Twitter</ion-list-header>
-    <ion-item>
-      <ion-icon name="ionic" item-start></ion-icon>
-      @ionicframework
-    </ion-item>
-  </ion-list>
-</ion-content>
+<ion-content padding>
+  <form #form1="ngForm" >
+    <ion-list>
+
+  <ion-item>
+    <ion-label>Sujet</ion-label>
+    <ion-input type="text"  name="Sujet" required></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label floating>Reclamez-IcI </ion-label>
+    <ion-textarea placeholer="text" rows="5"  name="reclamation" required></ion-textarea>
+  </ion-item>
+</ion-list>
+<button ion-button block [disabled]="!form1.form.valid" type="submit">Envoyer</button>
+</form>

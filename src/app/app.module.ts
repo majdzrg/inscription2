@@ -5,7 +5,6 @@ import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
 import { Dialogs } from '@ionic-native/dialogs';
 import { AboutPage } from '../pages/about/about';
-import { ContactPage } from '../pages/contact/contact';
 import { HomePage } from '../pages/home/home';
 import {InformationPage} from '../pages/information/information';
 import { TabsPage } from '../pages/tabs/tabs';
@@ -25,11 +24,14 @@ import { UserServiceProvider } from '../providers/user-service/user-service';
 import { GouvernoratProvider } from '../providers/gouvernorat/gouvernorat';
 import { ProjectsProvider } from '../providers/projects/projects';
 import { CommuneProvider } from '../providers/commune/commune';
+import { SondageProvider } from '../providers/sondage/sondage';
+import { ReclamationPage } from '../pages/reclamation/reclamation';
+import {Camera} from '@ionic-native/camera';
+import {ContactPage} from '../pages/contact/contact';
 @NgModule({
   declarations: [
     MyApp,
     AboutPage,
-    ContactPage,
     HomePage,
     TabsPage,
     LoginPage,
@@ -40,6 +42,9 @@ import { CommuneProvider } from '../providers/commune/commune';
     ProjectPage,
     SondagePage,
     SondageOpenPage,
+    ReclamationPage,
+    ContactPage,
+    InformationPage
 
   ],
   imports: [
@@ -52,7 +57,6 @@ import { CommuneProvider } from '../providers/commune/commune';
   entryComponents: [
     MyApp,
     AboutPage,
-    ContactPage,
     HomePage,
     TabsPage,
     LoginPage,
@@ -63,6 +67,9 @@ import { CommuneProvider } from '../providers/commune/commune';
     ProjectPage,
     SondagePage,
     SondageOpenPage,
+    ReclamationPage,
+    ContactPage,
+    InformationPage
 
   ],
   providers: [
@@ -74,7 +81,9 @@ import { CommuneProvider } from '../providers/commune/commune';
     UserServiceProvider,
     GouvernoratProvider,
     ProjectsProvider,
-    CommuneProvider
+    CommuneProvider,
+    SondageProvider,
+    Camera
   ]
 })
 export class AppModule {}

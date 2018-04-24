@@ -1,0 +1,28 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <ion-title>reclamation</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+<img *ngIf="image" [src]="image" alt="">
+</ion-content>
+
+<ion-footer>
+  <ion-grid>
+<ion-row>
+<ion-col col-6>
+  <button ion-button icon-only (click)="pictureFromCamera()">
+    <ion-icon name="camera"></ion-icon>
+  </button>
+</ion-col>
+<ion-col col-6>
+  <button ion-button icon-only (click)="pictureFromGallery()">
+    <ion-icon name="image"></ion-icon>
+  </button>
+</ion-col>
+</ion-row>
+  </ion-grid>
+</ion-footer>

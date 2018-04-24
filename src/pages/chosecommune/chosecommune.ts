@@ -154,7 +154,7 @@ export class ChosecommunePage {
 
   }
   get_commune(obj){
-    this._comService.getCommuneList()
+    this._comService.getCommuneList(obj)
     .subscribe(data=>{
       if(data['status']===true){
         let tmp = data["data"];
@@ -162,18 +162,18 @@ export class ChosecommunePage {
           const element = tmp[index];
           this.commune_list.push({
             id: element.id,
-            name: element.name
+            name: element.nom
           })
         }
       }
       else
       {
         console.log("no data");
-        
+
       }
     },err=>{
       console.log(err);
-      
+
     });
   }
   ionViewDidLoad() {

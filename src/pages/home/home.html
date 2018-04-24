@@ -77,7 +77,7 @@
         <h5 ion-text color="light" text-capitalize><ion-icon name="people" margin-right="4px"></ion-icon> citoyen</h5>
         <p class="brief" text-nowrap *ngIf="items[1]==false">small description about section </p>
         <div class="wrapper" [ngClass]="{'close': items[1]==false}">
-          <button ion-button color="light" clear icon-left>
+          <button ion-button color="light" clear icon-left (click)="redirect('reclamation')">
             <ion-icon name="construct"></ion-icon>
             Reclamation
           </button>
@@ -96,7 +96,7 @@
         <p class="brief" text-nowrap *ngIf="items[2]==false">small description about section </p>
         <div class="wrapper" [ngClass]="{'close': items[2]==false}">
           <br>
-          <button ion-button color="light" clear icon-left >
+          <button ion-button color="light" clear icon-left (click)="redirect('contact')" >
             <ion-icon name="stats" margin-right></ion-icon>
         Contacter l'administrateur
           </button>
@@ -110,7 +110,7 @@
         <h5 ion-text color="light" text-capitalize><ion-icon name="information-circle" margin-right="4px"></ion-icon> a propos</h5>
         <p class="brief" text-nowrap *ngIf="items[3]==false">small description about section </p>
         <div class="wrapper" [ngClass]="{'close': items[3]==false}">
-          <button ion-button color="light" clear icon-left (click)="direct('information')">
+          <button ion-button color="light" clear icon-left (click)="redirect('information')">
             <ion-icon name="construct"></ion-icon>
               Information sur l'application
           </button>

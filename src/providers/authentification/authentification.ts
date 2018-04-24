@@ -13,8 +13,8 @@ import { HomePage } from '../../pages/home/home';
 */
 @Injectable()
 export class AuthentificationProvider {
-  private registerAPI: string = "http://192.168.1.90:8000/api/register";
-  private loginAPI: string = "http://192.168.1.90:8000/api/login";
+  private registerAPI: string = "http://192.168.1.89:8000/api/register";
+  private loginAPI: string = "http://192.168.1.89:8000/api/login";
   private _headers: HttpHeaders;
   public isConnected = false;
   userAuthUpdated:EventEmitter<boolean> = new EventEmitter();

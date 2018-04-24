@@ -9,7 +9,7 @@ import { Injectable } from '@angular/core';
 */
 @Injectable()
 export class GouvernoratProvider {
-  govApi = "http://localhost:8000/api/gouvernorat/";
+  govApi = "http://192.168.1.89:8000/api/gouvernorat/";
   private _headers: HttpHeaders;
   constructor(public http: HttpClient) {
     console.log('Hello GouvernoratProvider Provider');

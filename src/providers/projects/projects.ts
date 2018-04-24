@@ -15,7 +15,9 @@ import { HomePage } from '../../pages/home/home';
 */
 @Injectable()
 export class ProjectsProvider {
-  public communeAPI = "http://192.168.1.90:8000/api/commune/";
+  public communeAPI = "http://192.168.1.89:8000/api/commune/";
+  public commentaireAPI ="http://192.168.1.89:8000/api/commune/projets/";
+    public voteAPI ="http://192.168.1.89:8000/api/commune/projets/";
   private _headers: HttpHeaders;
   constructor(public http: HttpClient, private _storage: Storage) {
     console.log('Hello ProjectsProvider Provider');
@@ -27,6 +29,16 @@ export class ProjectsProvider {
     console.log(listUrl)
     return this.http.get(listUrl);
   }
+    public ProjectCommentaire(id_commune: string,id_projet: string) {
+        const listUrl= this.commentaireAPI+id_commune+id_projet+"/commentaires/";
+        return this.http.get(this.commentaireAPI, { headers: this._headers });
+
+
+    }
+    public ProjectVote(id_commune: string,id_projet: string) {
+        const listUrl= this.voteAPI+id_commune+id_projet+"/votes/";
+       return this.http.get(this.voteAPI, { headers: this._headers });
+    }
 
 
 }

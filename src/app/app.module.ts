@@ -28,6 +28,8 @@ import { SondageProvider } from '../providers/sondage/sondage';
 import { ReclamationPage } from '../pages/reclamation/reclamation';
 import {Camera} from '@ionic-native/camera';
 import {ContactPage} from '../pages/contact/contact';
+import { ProfilePage } from '../pages/profile/profile';
+import { EditProfilePage } from '../pages/edit-profile/edit-profile';
 @NgModule({
   declarations: [
     MyApp,
@@ -44,7 +46,9 @@ import {ContactPage} from '../pages/contact/contact';
     SondageOpenPage,
     ReclamationPage,
     ContactPage,
-    InformationPage
+    InformationPage,
+    ProfilePage,
+    EditProfilePage
 
   ],
   imports: [
@@ -69,7 +73,9 @@ import {ContactPage} from '../pages/contact/contact';
     SondageOpenPage,
     ReclamationPage,
     ContactPage,
-    InformationPage
+    InformationPage,
+    ProfilePage,
+    EditProfilePage
 
   ],
   providers: [

@@ -40,5 +40,57 @@ export class UserServiceProvider {
   public getCommune(){
 
   }
+  public getUser(){
+    // 7atech ltawa mzelna majbnech mel base mzelna nchofo 3ando data msajlin ou nn
+    // this will return user data from server and save theme on localstorage 
+    // check if existe data in local storage 
+
+    /**
+     * puisque le server down bech na3mel fake data lel interface w service 
+     * 
+     */
+    return new Promise(function(resolve,reject){
+      let user = {
+        name: 'Madj',
+        last_name: 'Zrighui baw',
+        username: 'Zrighui_baw',
+        email: 'majd@email.com',
+        commune: {
+          c1: '2',
+          c2: '1',
+          c3: '',
+        },
+      };
+      this._storage.set('user',JSON.stringify(user)).then((val)=>{
+        console.log(val);
+      },err=>{
+        console.log(err);
+      })
+      .catch(err=>{
+        console.log(err);
+      });
+
+      
+      this._storage.get('user').then((val) => {
+        if (val != null && val.length != 0) {
+          // yes user is in storage
+          resolve(JSON.parse(val)) // hethi traja3 el valeur mel storage dans une promise bech el prog yab9a yestana fel resultat
+        }
+        else {
+          // user not in storage
+          reject("no user"); // kifkif ama hethi traja3 reject w moch resultat 
+        }
+      }, err => {
+        console.log(err);
+      })
+        .catch((e) => {
+          console.log(e);
+
+        });
+    });
+     
+
+    
+  }
   
 }

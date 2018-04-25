@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage,  NavController,  NavParams, ViewController } from 'ionic-angular';
 import { LoginPage } from '../login/login';
+import { ProfilePage } from '../profile/profile';
 import { AuthentificationProvider } from '../../providers/authentification/authentification';
 import { HomePage } from '../home/home';
 import { AddpersonPage } from '../addperson/addperson';
@@ -46,6 +47,9 @@ export class MoreMenuPage {
     },(err)=>{
       console.log(err);
     });
+  }
+  Toprofile():void{
+    this.navCtrl.push(ProfilePage);
   }
 
 

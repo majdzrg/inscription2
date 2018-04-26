@@ -15,43 +15,43 @@
       Public information
       <ion-icon item-end name="cog"></ion-icon>
     </ion-list-header>
-    <form (ngSubmit)="update_info()">
+    <form (ngSubmit)="save_User($event)">
       <ion-item>
         <ion-label>
           <ion-icon name="contact"></ion-icon> Name</ion-label>
-        <ion-input name="name" type="text" [(ngModel)]="user.name_u"></ion-input>
+        <ion-input name="name" type="text" required [(ngModel)]="user.name_u"></ion-input>
       </ion-item>
       <ion-item>
         <ion-label>
           <ion-icon name="contact"></ion-icon>Last name</ion-label>
-        <ion-input name="last_name" type="text" [(ngModel)]="user.last_name"></ion-input>
+        <ion-input name="last_name" type="text" required [(ngModel)]="user.last_name"></ion-input>
       </ion-item>
       <ion-item>
         <ion-label>
           <ion-icon name="mail"></ion-icon> Email</ion-label>
-        <ion-input name="email" type="email" [(ngModel)]="user.email"></ion-input>
+        <ion-input name="email" type="email" required [(ngModel)]="user.email"></ion-input>
       </ion-item>
       <ion-item>
-        <button item-end type="submit" ion-button small color="primary" outline>update</button>
+        <button item-end type="submit" ion-button small color="primary" outline>update profile</button>
       </ion-item>
     </form>
     <ion-list-header>
       Security information
       <ion-icon item-end name="lock"></ion-icon>
     </ion-list-header>
-    <form (ngSubmit)="update_info()">
+    <form (ngSubmit)="save_Password($event)">
       <ion-item>
         <ion-label>
           <ion-icon name="contact"></ion-icon> Old password</ion-label>
-        <ion-input name="o_password" type="password" [(ngModel)]="o_password"></ion-input>
+        <ion-input name="o_password" required type="password" [(ngModel)]="password.old"></ion-input>
       </ion-item>
       <ion-item>
         <ion-label>
           <ion-icon name="contact"></ion-icon>new password</ion-label>
-        <ion-input name="n_password" type="password" [(ngModel)]="n_password"></ion-input>
+        <ion-input name="n_password" required type="password" [(ngModel)]="password.new"></ion-input>
       </ion-item>
       <ion-item>
-        <button item-end type="submit" ion-button small color="primary" outline>save</button>
+        <button item-end type="submit" ion-button small color="primary" outline>chnage password</button>
       </ion-item>
     </form>
     <ion-list-header>
@@ -83,7 +83,7 @@
       </ion-select>
     </ion-item>
     <ion-item>
-      <button item-end (click)="add_save_commune(commune)" ion-button small color="primary" outline>save commune</button>
+      <button item-end (click)="add_commune()" [disabled]="!commune" ion-button small color="primary" outline>save commune</button>
     </ion-item>
   </ion-list>
 </ion-content>

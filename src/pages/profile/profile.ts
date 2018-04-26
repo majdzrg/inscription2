@@ -4,6 +4,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, PopoverController, ModalController, LoadingController } from 'ionic-angular';
 import { EditProfilePage } from "../edit-profile/edit-profile";
 import { AuthentificationProvider } from '../../providers/authentification/authentification';
+import { EmptyExpr } from '@angular/compiler';
 /**
  * Generated class for the ProfilePage page.
  *
@@ -32,7 +33,8 @@ export class ProfilePage {
     loading.present();
     this._auth.getToken().then(val=>{
       this._userService.getUser(val).subscribe((val) => {
-        loading.dismiss();   
+        loading.dismiss();
+        console.log(val);
         if(val["status"] == true ){
           val = val['data'];
           this.user.email = val['email'];
@@ -40,8 +42,16 @@ export class ProfilePage {
           this.user.last_name = val['nom'];
           this.pic_url = "https://ui-avatars.com/api/?name=" + this.user.name_u + " " + this.user.last_name + "&rounded=true&size=128";
           if (val['communes'] != "Aucune commune")
-            this.user.commune = val['communes'];
-          this.user.commune = [];
+          {
+            let tmpc = val['communes'];
+            tmpc.forEach(element => {
+              this.user.commune.push({id:element.id,name:element.nom});
+            });
+          }
+          else
+          {
+            this.user.commune = [];
+          }
         }
         else{
           console.log("empty data");

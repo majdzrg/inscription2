@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Storage } from '@ionic/storage';
 import { AuthentificationProvider } from '../authentification/authentification';
@@ -48,6 +48,36 @@ export class UserServiceProvider {
     let url = "http://localhost:8000/api/profil?token="+token;
     console.log(url);
     return this.http.get(url, { headers: this._headers })
+  }
+  public updateUser(user:Object,token:string){
+    // check if all required fields are there 
+    let url = "http://localhost:8000/api/profil/update";
+    const body = new HttpParams()
+      .set('nom', user['name_u'])
+      .set('prenom', user['last_name'])
+      .set('email', user['email'])
+      .set('token', token)
+    return this.http.post(url,body.toString(),{headers:this._headers});
+  }
+  public updateSecurity(passwords,token){
+    let url = "http://localhost:8000/api/profil/password/update";
+    const body = new HttpParams()
+      .set('token', token)
+      .set('old', passwords['old'])
+      .set('new', passwords['new'])
+    return this.http.post(url,body.toString(),{headers:this._headers});
+  }
+  public Abon_commune(id_commune,token){
+    let url = "http://localhost:8000/api/commune/ajout"
+    const body = new HttpParams()
+      .set('token', token)
+      .set('commune', id_commune)
+    return this.http.post(url,body.toString(),{headers:this._headers});
+  }
+  public Desabon_commune(id_commune,token){
+    let url = "http://localhost:8000/api/profil/delete/"+id_commune;
+    //api / profil / delete /{commune} param token f headers
+    //method delete
   }
 
 }

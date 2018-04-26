@@ -49,7 +49,7 @@
             <div item-end class="fix-item">
               <h2>Commune</h2>
               <ion-chip *ngFor="let item of user.commune">
-                <ion-label color="secondary">{{item}}</ion-label>
+                <ion-label color="secondary">{{item.name}}</ion-label>
               </ion-chip>
               <p *ngIf="user.commune.length == 0">No commune yet pick one</p>
             </div>

@@ -1,6 +1,8 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Storage } from '@ionic/storage';
+import { AuthentificationProvider } from '../authentification/authentification';
+import { Observable } from 'rxjs/Observable';
 /*
   Generated class for the UserServiceProvider provider.
 
@@ -9,88 +11,43 @@ import { Storage } from '@ionic/storage';
 */
 @Injectable()
 export class UserServiceProvider {
-
-  constructor(public http: HttpClient,private _storage:Storage) {
+  _headers: HttpHeaders;
+  constructor(public http: HttpClient, private _storage: Storage, private _auth: AuthentificationProvider) {
     console.log('Hello UserServiceProvider Provider');
+    this._headers = new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded');
+    this._headers.set('Accept-Charset', 'utf-8');
   }
-  public setCommune(id:string){
-    this._storage.set('id_commune',id).then((val)=>{
+  public setCommune(id: string) {
+    this._storage.set('id_commune', id).then((val) => {
       console.log(val);
-    },(err)=>{
+    }, (err) => {
       console.log(err);
     });
   }
-  public isCommuneSeted():any{
+  public isCommuneSeted(): any {
     console.log("call commune id checker");
-    this._storage.get('id_commune').then((val)=>{
+    this._storage.get('id_commune').then((val) => {
       console.log(val);
-      if(val != null){
+      if (val != null) {
         console.log("yes commune is there");
         return true;
       }
-      else{
+      else {
         console.log("no commune");
         return false;
       }
-    },(err)=>{
+    }, (err) => {
       console.log("no commune");
       return false;
     });
   }
-  public getCommune(){
+  public getCommune() {
 
   }
-  public getUser(){
-    // 7atech ltawa mzelna majbnech mel base mzelna nchofo 3ando data msajlin ou nn
-    // this will return user data from server and save theme on localstorage 
-    // check if existe data in local storage 
-
-    /**
-     * puisque le server down bech na3mel fake data lel interface w service 
-     * 
-     */
-    return new Promise(function(resolve,reject){
-      let user = {
-        name: 'Madj',
-        last_name: 'Zrighui baw',
-        username: 'Zrighui_baw',
-        email: 'majd@email.com',
-        commune: {
-          c1: '2',
-          c2: '1',
-          c3: '',
-        },
-      };
-      this._storage.set('user',JSON.stringify(user)).then((val)=>{
-        console.log(val);
-      },err=>{
-        console.log(err);
-      })
-      .catch(err=>{
-        console.log(err);
-      });
-
-      
-      this._storage.get('user').then((val) => {
-        if (val != null && val.length != 0) {
-          // yes user is in storage
-          resolve(JSON.parse(val)) // hethi traja3 el valeur mel storage dans une promise bech el prog yab9a yestana fel resultat
-        }
-        else {
-          // user not in storage
-          reject("no user"); // kifkif ama hethi traja3 reject w moch resultat 
-        }
-      }, err => {
-        console.log(err);
-      })
-        .catch((e) => {
-          console.log(e);
-
-        });
-    });
-     
-
-    
+  public getUser(token: String) {
+    let url = "http://localhost:8000/api/profil?token="+token;
+    console.log(url);
+    return this.http.get(url, { headers: this._headers })
   }
-  
+
 }

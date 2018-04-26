@@ -51,6 +51,7 @@
               <ion-chip *ngFor="let item of user.commune">
                 <ion-label color="secondary">{{item}}</ion-label>
               </ion-chip>
+              <p *ngIf="user.commune.length == 0">No commune yet pick one</p>
             </div>
           </ion-item>
         </ion-list>

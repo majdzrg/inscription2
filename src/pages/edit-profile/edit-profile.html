@@ -63,7 +63,7 @@
       <div item-end class="fix-item">
         <h2>Commune</h2>
         <ion-chip *ngFor="let item of user.commune; let i = index">
-          <ion-label color="primary">{{item}}</ion-label>
+          <ion-label color="primary">{{item.name}}</ion-label>
           <button ion-button clear color="dark" (click)="delete(i)">
             <ion-icon name="close-circle"></ion-icon>
           </button>
@@ -72,16 +72,14 @@
     </ion-item>
     <ion-item>
       <ion-label>Gouvernorat</ion-label>
-      <ion-select [(ngModel)]="gov">
-        <ion-option value="f">Female</ion-option>
-        <ion-option value="m">Male</ion-option>
+      <ion-select [(ngModel)]="gov" (ngModelChange)="get_commune($event)">
+        <ion-option *ngFor="let item of gov_list" value="{{item.id}}">{{item.name}}</ion-option>
       </ion-select>
     </ion-item>
     <ion-item>
       <ion-label>Commune</ion-label>
-      <ion-select [(ngModel)]="commune">
-        <ion-option value="1554">Female</ion-option>
-        <ion-option value="544">Male</ion-option>
+      <ion-select [(ngModel)]="commune" [disabled]="gov == -1">
+        <ion-option *ngFor="let item of commune_list" value="{{item.id}}">{{item.name}}</ion-option>
       </ion-select>
     </ion-item>
     <ion-item>

@@ -75,4 +75,9 @@ export class AuthentificationProvider {
       console.log(err);
     });
   }
+  // bech nbadlo 7ajat fama mochekla binet el observable w el promise
+  // mala 4alttaa xD
+  public getToken(){
+    return this._storage.get('token')
+  }
 }

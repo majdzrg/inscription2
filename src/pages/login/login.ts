@@ -47,22 +47,26 @@ export class LoginPage {
         console.log(data);
         if (data['status'] === true) {
           console.log("authentifier");
+          this._auth.setSession(data["data"]).then((val) => {
+            this.navCtrl.setRoot(HomePage);
+          }, (err) => {
+            this._dialog.alert('The app is crushing , plz restart it', 'error', 'ok').then(() => {
+              console.log("oh shit");
+              return false;
+            })
+              .catch((e) => {
+                console.log("we keep crashing");
+              })
+          });
           this._dialog.alert('you are succesfully authentified','success', 'ok')
             .then(() => {
               console.log('Dialog dismissed');
               // save session
-              this._auth.setSession(data["data"]).then((val)=>{
-                this.navCtrl.setRoot(HomePage);
-              },(err)=>{
-                this._dialog.alert('The app is crushing , plz restart it','error','ok').then(()=>{
-                  console.log("oh shit");
-                })
-                .catch((e)=>{
-                  console.log("we keep crashing");
-                })
-              });
             })
-            .catch(e => console.log('Error displaying dialog', e));
+            .catch(e => {
+              console.log('Error displaying dialog', e);
+              this.navCtrl.setRoot(HomePage);
+            });
         } else {
           console.log(data['msg']);
           this._dialog.alert(data['msg'])

@@ -1,8 +1,9 @@
 import {HomePage} from '../home/home';
 import {UserServiceProvider} from '../../providers/user-service/user-service';
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, PopoverController, ModalController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, PopoverController, ModalController, LoadingController } from 'ionic-angular';
 import { EditProfilePage } from "../edit-profile/edit-profile";
+import { AuthentificationProvider } from '../../providers/authentification/authentification';
 /**
  * Generated class for the ProfilePage page.
  *
@@ -17,36 +18,47 @@ import { EditProfilePage } from "../edit-profile/edit-profile";
 })
 export class ProfilePage {
   private user={
-    name_u:'Majd',
-    last_name:'Zrigui',
-    username:'@ZriguiMajd',
-    email:'Majd@email.com',
-    commune:['Bardo','Zahrouni'],
+    name_u:'',
+    last_name:'',
+    username:'',
+    email:'',
+    commune:[],
   };
   pic_url ;
-  constructor(public navCtrl: NavController, public navParams: NavParams, private _userService: UserServiceProvider, private modalCtrl: ModalController) {
-    // fel construct njibo les info mel service 
-    // this._userService.getUser().then((val)=>{
-    //   if(val != null){
-    //     console.log("we got dat");
-    //     this.u = val ;
-    //     // bind the data to user 
-    //     /*this.user.name_u = val['name'];
-    //     this.user.last_name = val['last_name'];
-    //     this.user.email = val['email'];
-    //     this.user.username = val['username'];
-    //     this.user.commune = val['commune'];*/
-    //   }
-    //   else{
-    //     // error not hundlaed -> error mahoch metwa9a3 
-    //     console.log("nuuulll");     
-    //   }
-    // },(err)=>{
-    //   // error metwa9a3
-    //   console.log(err);
-    //   this.navCtrl.setRoot(HomePage); //-> nraj3oh lel home
-    // });
-    this.pic_url = "https://ui-avatars.com/api/?name=" + this.user.name_u + " " + this.user.last_name +"&rounded=true&size=128";
+  constructor(public navCtrl: NavController, public loadingCtrl: LoadingController, public navParams: NavParams, private _userService: UserServiceProvider, private modalCtrl: ModalController, private _auth:AuthentificationProvider) {  
+    let loading = this.loadingCtrl.create({
+      content: 'Please wait...'
+    });
+    loading.present();
+    this._auth.getToken().then(val=>{
+      this._userService.getUser(val).subscribe((val) => {
+        loading.dismiss();   
+        if(val["status"] == true ){
+          val = val['data'];
+          this.user.email = val['email'];
+          this.user.name_u = val['prenom'];
+          this.user.last_name = val['nom'];
+          this.pic_url = "https://ui-avatars.com/api/?name=" + this.user.name_u + " " + this.user.last_name + "&rounded=true&size=128";
+          if (val['communes'] != "Aucune commune")
+            this.user.commune = val['communes'];
+          this.user.commune = [];
+        }
+        else{
+          console.log("empty data");
+          this.navCtrl.setRoot(HomePage);
+        }
+        
+      }, err => {
+        console.log(err);
+        this.navCtrl.setRoot(HomePage);
+      })
+    })
+    .catch(err=>{
+      console.log(err);
+      this.navCtrl.setRoot(HomePage);
+    });
+    
+    // el promise moch kima el observable  
   }
 
   ionViewDidLoad() {
@@ -59,4 +71,5 @@ export class ProfilePage {
     });
   }
 // tawa bech n3adiw el param lel modal
+// narj3o l rabtan el api tawa 
 }

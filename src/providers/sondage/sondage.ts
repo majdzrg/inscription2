@@ -15,8 +15,8 @@ import { HomePage } from '../../pages/home/home';
 */
 @Injectable()
 export class SondageProvider {
-    public sondageAPI = "http://192.168.1.89:8000/api/commune/";
-    public participationAPI = "http://192.168.1.89:8000/api/commune/participation";
+    public sondageAPI = "http://192.168.1.12:8000/api/commune/";
+    public participationAPI = "http://192.168.1.12:8000/api/commune/participation";
   private _headers: HttpHeaders;
   constructor(public http: HttpClient, private _storage: Storage) {
     console.log('Hello SondageProvider Provider');
@@ -36,7 +36,7 @@ export class SondageProvider {
       console.log("shit bad things happen");
     });
     this._headers.set('token',token);
-    
+
   }
   // list des sondages
 public Sondage(id_commune: string,id_sondage: string) {

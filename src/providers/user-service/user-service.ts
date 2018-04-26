@@ -45,7 +45,7 @@ export class UserServiceProvider {
 
   }
   public getUser(token: String) {
-    let url = "http://localhost:8000/api/profil?token="+token;
+    let url = "http://192.168.1.12:8000/api/profil?token="+token;
     console.log(url);
     return this.http.get(url, { headers: this._headers })
   }

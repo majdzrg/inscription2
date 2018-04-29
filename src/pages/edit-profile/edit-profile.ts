@@ -65,9 +65,36 @@ export class EditProfilePage {
   }
   delete(i: number) {
     let new_array: Array<any>;
-    new_array = this.user.commune;
-    new_array.splice(i, 1);
-    this.user.commune = new_array;
+    let id_commune = this.user.commune[i].id;
+    this._userService.Desabon_commune(id_commune,this.token).subscribe((val)=>{
+      if(val['status']=== true){
+        new_array = this.user.commune;
+        new_array.splice(i, 1);
+        this.user.commune = new_array;
+        console.log("commune updated");
+        this._dialog.alert("Commune Deleted", "Done", "Good").then(() => {
+          console.log("done");
+        }).catch((err) => {
+          console.log(err);
+        });
+      }
+      else{
+        console.log("cant");
+        this._dialog.alert("Shh, we can't take this commune down", "No god plz", "oki").then(() => {
+          console.log("done");
+        }).catch((err) => {
+          console.log(err);
+        });
+      }
+    },err=>{
+      console.log(err);
+      this._dialog.alert("Dude check your internet connexion", "Connexion trouble", "try again").then(() => {
+        console.log("done");
+      }).catch((err) => {
+        console.log(err);
+      });
+    });
+    
   }
   add_commune() {
     console.log("start commune add proce");

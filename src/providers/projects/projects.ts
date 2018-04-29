@@ -15,9 +15,15 @@ import { HomePage } from '../../pages/home/home';
 */
 @Injectable()
 export class ProjectsProvider {
+<<<<<<< HEAD
   public communeAPI = "http://192.168.1.12:8000/api/commune/";
   public commentaireAPI ="http://192.168.1.12:8000/api/commune/projets/";
     public voteAPI ="http://192.168.1.12:8000/api/commune/projets/";
+=======
+  public communeAPI = "http://localhost:8000/api/commune/";
+  public commentaireAPI ="http://localhost:8000/api/commune/projets/";
+  public voteAPI ="http://localhost:8000/api/commune/projets/";
+>>>>>>> 601c40d39429f4409e2fe8c1c46ad083ceeb3924
   private _headers: HttpHeaders;
   constructor(public http: HttpClient, private _storage: Storage) {
     console.log('Hello ProjectsProvider Provider');

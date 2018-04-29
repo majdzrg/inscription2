@@ -80,4 +80,12 @@ export class AuthentificationProvider {
   public getToken(){
     return this._storage.get('token')
   }
+  public saveUserSession(user:object){
+    this._storage.set("profile",JSON.stringify(user)).then((data)=>{
+      console.log("saved in storage");
+    })
+    .catch((err)=>{
+      console.log("we cant save");
+    })
+  }
 }

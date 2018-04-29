@@ -1,6 +1,6 @@
 import { Note } from 'ionic-angular/es2015';
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angular';
 import { Dialogs } from '@ionic-native/dialogs';
 import { GouvernoratProvider } from '../../providers/gouvernorat/gouvernorat';
 import { CommuneProvider } from '../../providers/commune/commune';
@@ -15,7 +15,7 @@ import { HomePage } from '../home/home';
  * Ionic pages and navigation.
  */
 
-@IonicPage()
+
 @Component({
   selector: 'page-edit-profile',
   templateUrl: 'edit-profile.html',
@@ -31,7 +31,7 @@ export class EditProfilePage {
     new:"",
     old:""
   }
-  constructor(public navCtrl: NavController, public navParams: NavParams, private _dialog: Dialogs, private _govService: GouvernoratProvider, private _comService: CommuneProvider, private _userService:UserServiceProvider, private _auth:AuthentificationProvider) {
+  constructor(public viewCtrl:ViewController, public navCtrl: NavController, public navParams: NavParams, private _dialog: Dialogs, private _govService: GouvernoratProvider, private _comService: CommuneProvider, private _userService:UserServiceProvider, private _auth:AuthentificationProvider) {
     this.user = navParams.get('user');
     this.gov_list = [];
     this.commune_list = [];
@@ -94,16 +94,16 @@ export class EditProfilePage {
         console.log(err);
       });
     });
-    
+
   }
   add_commune() {
     console.log("start commune add proce");
-    
+
     if (this.user.commune.length < 3)
     {
       console.log("good space ");
-      
-      // check if commune existe already in user prefs 
+
+      // check if commune existe already in user prefs
       if(this.user.commune.length > 0){
         this.user.commune.forEach(element => {
           if (element.id === this.commune) {
@@ -161,7 +161,7 @@ export class EditProfilePage {
       else{
         // drect add
         /**
-         * this is bad code i have to chnage it it look like noob code or girl 
+         * this is bad code i have to chnage it it look like noob code or girl
          */
         this.commune_list.forEach(element => {
           if (element.id == this.commune) {
@@ -236,7 +236,7 @@ export class EditProfilePage {
 
       });
   }
-  save_User(){ 
+  save_User(){
     if(!(this.user['name_u'].length > 2 && this.user['last_name'].length > 2 && this.user['email'].length > 5)){
       console.log('empty fields');
       this._dialog.alert("Some field are empty","Watch out","ok").then(()=>{
@@ -265,7 +265,7 @@ export class EditProfilePage {
           console.log(err);
         });
       }
-    },err=>{
+    },(err)=>{
       this._dialog.alert("We got trouble to reach our serve", "Ok", "Fail").then(() => {
         console.log("done");
       }).catch((err) => {
@@ -277,7 +277,7 @@ export class EditProfilePage {
     this._userService.updateSecurity(this.password,this.token).subscribe((data)=>{
       if(data['status']=== true){
         // done
-        console.log("chnaged password");       
+        console.log("chnaged password");
         this._dialog.alert("Your password Succesfully chnaged", "Done", "Good").then(() => {
           console.log("done");
         }).catch((err) => {

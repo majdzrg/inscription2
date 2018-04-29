@@ -10,7 +10,7 @@
   </ion-navbar>
 </ion-header>
 <ion-content>
-  <ion-card *ngFor="let proj of project_list" (click)="openProj('proj.id')">
+  <ion-card *ngFor="let proj of project_list" (click)="openProj(proj.id,proj.idCommune)">
     <img src="{{proj.img}}" />
     <ion-card-content>
       <ion-card-title>

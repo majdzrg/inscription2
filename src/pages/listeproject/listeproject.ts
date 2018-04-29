@@ -31,8 +31,8 @@ export class ListeprojectPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad ListeprojectPage');
   }
-  openProj(proj_id) {
-    let projModal = this.modalCtrl.create(ProjectPage, { projId: proj_id });
+  openProj(proj_id,commune_id) {
+    let projModal = this.modalCtrl.create(ProjectPage, { projId: proj_id,communeId:commune_id});
     projModal.present();
   }
 
@@ -118,7 +118,8 @@ export class ListeprojectPage {
               title: tmp[i].sujet,
               add_date: tmp[i]["datedebut"],
               descrp: tmp[i].contenu,
-              img: 'https://picsum.photos/600/400?random'
+              img: 'https://picsum.photos/600/400?random',
+              idCommune:id
             })
           }
         }

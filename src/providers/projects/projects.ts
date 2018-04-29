@@ -30,13 +30,13 @@ export class ProjectsProvider {
     return this.http.get(listUrl);
   }
     public ProjectCommentaire(id_commune: string,id_projet: string) {
-        const listUrl= this.commentaireAPI+id_commune+id_projet+"/commentaires/";
+        const listUrl= this.commentaireAPI+id_commune+"/projets/"+id_projet+"/commentaires/";
         return this.http.get(this.commentaireAPI, { headers: this._headers });
 
 
     }
     public ProjectVote(id_commune: string,id_projet: string) {
-        const listUrl= this.voteAPI+id_commune+id_projet+"/votes/";
+        const listUrl= this.voteAPI+id_commune+"/projets/"+id_projet+"/votes/";
        return this.http.get(this.voteAPI, { headers: this._headers });
     }
 

@@ -50,8 +50,8 @@ export class UserServiceProvider {
     return this.http.get(url, { headers: this._headers })
   }
   public updateUser(user:Object,token:string){
-    // check if all required fields are there 
-    let url = "http://localhost:8000/api/profil/update";
+    // check if all required fields are there
+    let url = "http://192.168.1.12:800/api/profil/update";
     const body = new HttpParams()
       .set('nom', user['name_u'])
       .set('prenom', user['last_name'])
@@ -60,7 +60,7 @@ export class UserServiceProvider {
     return this.http.post(url,body.toString(),{headers:this._headers});
   }
   public updateSecurity(passwords,token){
-    let url = "http://localhost:8000/api/profil/password/update";
+    let url = "http://192.168.1.12:800/api/profil/password/update";
     const body = new HttpParams()
       .set('token', token)
       .set('old', passwords['old'])
@@ -68,14 +68,14 @@ export class UserServiceProvider {
     return this.http.post(url,body.toString(),{headers:this._headers});
   }
   public Abon_commune(id_commune,token){
-    let url = "http://localhost:8000/api/commune/ajout"
+    let url = "http://192.168.1.12:800/api/commune/ajout"
     const body = new HttpParams()
       .set('token', token)
       .set('commune', id_commune)
     return this.http.post(url,body.toString(),{headers:this._headers});
   }
   public Desabon_commune(id_commune,token){
-    let url = "http://localhost:8000/api/profil/delete/"+id_commune;
+    let url = "http://192.168.1.12:800/api/profil/delete/"+id_commune;
     //api / profil / delete /{commune} param token f headers
     //method delete
   }

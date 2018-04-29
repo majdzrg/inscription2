@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import {Camera, CameraOptions  } from '@ionic-native/camera';
+import { Geolocation } from '@ionic-native/geolocation';
+
 
 /**
  * Generated class for the ReclamationPage page.
@@ -15,7 +17,7 @@ import {Camera, CameraOptions  } from '@ionic-native/camera';
 export class ReclamationPage {
     image: string;
 
-  constructor(private camera:Camera) {
+  constructor(private camera:Camera, private geolocation: Geolocation) {
 
   }
   async pictureFromCamera() {
@@ -28,8 +30,9 @@ export class ReclamationPage {
     }
       //take a photo
      this.takePhoto(options);
-    
+
  }
+
 pictureFromGallery() {
   const options:CameraOptions = {
     quality:100,
@@ -55,7 +58,27 @@ pictureFromGallery() {
        console.error(e);
      }
   }
+  const subscription = this.geolocation.watchPosition()
+                              .filter((p) => p.coords !== undefined) //Filter Out Errors
+                              .subscribe(position => {
+  console.log(position.coords.longitude + ' ' + position.coords.latitude);
+});
 
+// To stop notifications
+subscription.unsubscribe();
+  this.geolocation.getCurrentPosition().then((resp) => {
+   // resp.coords.latitude
+   // resp.coords.longitude
+  }).catch((error) => {
+    console.log('Error getting location', error);
+  });
+
+  let watch = this.geolocation.watchPosition();
+  watch.subscribe((data) => {
+   // data can be a set of coordinates, or an error (if an error occurred).
+   // data.coords.latitude
+   // data.coords.longitude
+  });
  // show up the top menu
 
 

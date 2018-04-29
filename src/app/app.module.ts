@@ -27,6 +27,7 @@ import { CommuneProvider } from '../providers/commune/commune';
 import { SondageProvider } from '../providers/sondage/sondage';
 import { ReclamationPage } from '../pages/reclamation/reclamation';
 import {Camera} from '@ionic-native/camera';
+import { Geolocation } from '@ionic-native/geolocation';
 import {ContactPage} from '../pages/contact/contact';
 import { ProfilePage } from '../pages/profile/profile';
 import { EditProfilePage } from '../pages/edit-profile/edit-profile';
@@ -89,7 +90,8 @@ import { EditProfilePage } from '../pages/edit-profile/edit-profile';
     ProjectsProvider,
     CommuneProvider,
     SondageProvider,
-    Camera
+    Camera,
+    Geolocation
   ]
 })
 export class AppModule {}

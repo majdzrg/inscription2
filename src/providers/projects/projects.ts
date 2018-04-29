@@ -15,9 +15,9 @@ import { HomePage } from '../../pages/home/home';
 */
 @Injectable()
 export class ProjectsProvider {
-  public communeAPI = "http://192.168.1.89:8000/api/commune/";
-  public commentaireAPI ="http://192.168.1.89:8000/api/commune/projets/";
-    public voteAPI ="http://192.168.1.89:8000/api/commune/projets/";
+  public communeAPI = "http://localhost:8000/api/commune/";
+  public commentaireAPI ="http://localhost:8000/api/commune/projets/";
+  public voteAPI ="http://localhost:8000/api/commune/projets/";
   private _headers: HttpHeaders;
   constructor(public http: HttpClient, private _storage: Storage) {
     console.log('Hello ProjectsProvider Provider');

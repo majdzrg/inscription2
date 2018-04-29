@@ -52,6 +52,8 @@ export class ProfilePage {
           {
             this.user.commune = [];
           }
+          // save to storage 
+          this._auth.saveUserSession(this.user);
         }
         else{
           console.log("empty data");
@@ -76,9 +78,13 @@ export class ProfilePage {
   }
   EditProfile(myEvent){
     let modal = this.modalCtrl.create(EditProfilePage,{user:this.user});
+    modal.onDidDismiss(data => {
+      this._auth.saveUserSession(this.user);
+    });
     modal.present({
       ev: myEvent
     });
+    
   }
 // tawa bech n3adiw el param lel modal
 // narj3o l rabtan el api tawa 

@@ -75,9 +75,19 @@ export class UserServiceProvider {
     return this.http.post(url,body.toString(),{headers:this._headers});
   }
   public Desabon_commune(id_commune,token){
-    let url = "http://localhost:8000/api/profil/delete/"+id_commune;
+    let url = "http://localhost:8000/api/commune/delete/"+id_commune;
+    //this._headers.set("token",token);
+    this._headers = this._headers.append('token', token);
+    let headerAbc = new HttpHeaders({ 'token': token });
+    return this.http.delete(url, { headers: headerAbc});
     //api / profil / delete /{commune} param token f headers
     //method delete
+  }
+  /**
+   * getProfile
+   */
+  public getProfile() {
+    return this._storage.get("profile");
   }
 
 }

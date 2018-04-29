@@ -16,14 +16,13 @@ import { HomePage } from '../../pages/home/home';
 @Injectable()
 export class SondageProvider {
     public sondageAPI = "http://192.168.1.89:8000/api/commune/";
-    public participationAPI = "http://192.168.1.89:8000/api/commune/participation";
+    public participationAPI = "http://192.168.1.89:8000/api/commune/";
   private _headers: HttpHeaders;
   constructor(public http: HttpClient, private _storage: Storage) {
     console.log('Hello SondageProvider Provider');
     this._headers = new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded');
     this._headers.set('Accept-Charset', 'utf-8');
     // token adding to header should be in Httpinterceptor -> 1*
-
     let token = "";
     this._storage.get("token").then((data)=>{
       if(data.length != 0){
@@ -39,12 +38,12 @@ export class SondageProvider {
     
   }
   // list des sondages
-public Sondage(id_commune: string,id_sondage: string) {
+public getSondageList(id_commune: string,id_sondage: string) {
       const listUrl= this.sondageAPI+id_commune+"/sondages/";
       return this.http.get(this.sondageAPI, { headers: this._headers });
 }
-public SondageParticipation(token: string,participation: boolean) {
-    const listUrl= this.participationAPI+token+participation+"/new/";
-   return this.http.get(this.participationAPI, { headers: this._headers });
+public SondageParticipation(token: string,participation: boolean,commune: string,id_sondage:string) {
+  const listUrl = this.participationAPI+commune+"/sondages/" + id_sondage + "participation/new";
+   return this.http.post(this.participationAPI, { headers: this._headers });
 }
 }

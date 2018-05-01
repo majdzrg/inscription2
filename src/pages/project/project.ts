@@ -17,14 +17,7 @@ import { HomePage } from '../home/home';
   templateUrl: 'project.html',
 })
 export class ProjectPage {
-  project_info = {
-    id: 1,
-    title: 'some project from the community',
-    dscrp: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut.',
-    date: "November 12 , 2018",
-    img: 'https://picsum.photos/600/400?random',
-    date_post: '28/03/2018'
-  }
+  project_info;
   project_recation = [{
     reaction_id: 1,
     user_id: 1,
@@ -57,6 +50,7 @@ export class ProjectPage {
   projId: string;
   communeId: string;
   token: string;
+  projet;
   constructor(public viewCtrl: ViewController, public navCtrl: NavController, public navParams: NavParams, private dialogs: Dialogs, private _projectService: ProjectsProvider, private _auth: AuthentificationProvider) {
     this._auth.getToken().then((val) => {
       if (val.length > 0) {
@@ -70,6 +64,8 @@ export class ProjectPage {
     });
     this.projId = navParams.get("projId");
     this.communeId = navParams.get('communeId');
+    this.projet = navParams.get("projData");
+    this.project_info = this.projet;
     this.getCommentList();
 
 
@@ -79,7 +75,7 @@ export class ProjectPage {
     console.log('ionViewDidLoad ProjectPage');
   }
   showComment() {
-    this.dialogs.prompt("svp donne votre commentaire", 'commnet', ["send", 'cancel'], 'comment_text')
+    this.dialogs.prompt("svp donne votre commentaire", 'commnet', ["send", 'cancel'], '')
       .then((res) => {
         if (res.buttonIndex == 1) {
           let comm_user = res.input1;
@@ -88,7 +84,6 @@ export class ProjectPage {
               if (data["status"] === true) {
                 this.dialogs.alert("Your comment have been sended", "message seended", "ok").then(() => {
                   console.log("ok");
-
                 })
                   .catch((er) => {
                     console.log(er);
@@ -98,23 +93,18 @@ export class ProjectPage {
 
                 this.dialogs.alert(data['msg'], "message not seended", "ok").then(() => {
                   console.log("ok");
-
                 })
                   .catch((er) => {
                     console.log(er);
-
                   })
               }
-
             }, err => {
               console.log(err);
               this.dialogs.alert("We canr reach the server right now try later", "message not seended", "ok").then(() => {
                 console.log("ok");
-
               })
                 .catch((er) => {
                   console.log(er);
-
                 })
             });
           }
@@ -129,11 +119,62 @@ export class ProjectPage {
       })
       .catch(e => console.log('Error displaying dialog', e));
   }
+  /*  showVote(){
+      this.dialogs.prompt("svp voter")
+      .then((res) => {
+        if (res.buttonIndex == 1) {
+          let comm_user = res.input2;
+          else {
+            this.dialogs.alert("vote cant be empty", "error", "ok").then((result) => {
+              console.log(result);
+            }).catch((err) => {
+              console.log(err);
+            });
+          }
+    } */
+    vote(){
+      this._projectService.voteProject(this.token,this.projId,this.communeId).subscribe((data)=>{
+        if(data['status']=== true){
+          this.dialogs.alert("Your like is registred","Done like","Done").then((val)=>{
+            console.log("done");
+          })
+          .catch((err)=>{
+            console.log(err);
+          })
+        }
+        else{
+          console.log(data);
+          this.dialogs.alert(data['msg'],"Fail to like","try later").then((val)=>{
+            console.log("done");
+          })
+          .catch((err)=>{
+            console.log(err);
+          })
+        }
+      },(err)=>{
+        console.log(err);
+        this.dialogs.alert("we cant reach our server"+JSON.stringify(err),"fail to like","try later").then((val)=>{
+          console.log("done");
+        })
+        .catch((err)=>{
+          console.log(err);
+        })
+      });
+    }
   onPrompt(results) {
     console.log("You selected button number " + results.buttonIndex + " and entered " + results.input1);
   }
   getCommentList() {
     this._projectService.ProjectCommentaire(this.communeId, this.projId).subscribe((data) => {
+      console.log(data);
+
+    }, err => {
+      console.log(err);
+
+    });
+  }
+  getVoteList() {
+    this._projectService.ProjectVote(this.communeId, this.projId).subscribe((data) => {
       console.log(data);
 
     }, err => {

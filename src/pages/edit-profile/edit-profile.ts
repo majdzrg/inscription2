@@ -98,11 +98,9 @@ export class EditProfilePage {
   }
   add_commune() {
     console.log("start commune add proce");
-
     if (this.user.commune.length < 3)
     {
       console.log("good space ");
-
       // check if commune existe already in user prefs
       if(this.user.commune.length > 0){
         this.user.commune.forEach(element => {
@@ -121,6 +119,9 @@ export class EditProfilePage {
             this.commune_list.forEach(element => {
               if (element.id == this.commune) {
                 this._userService.Abon_commune(this.commune, this.token).subscribe((val) => {
+                  console.log("hello watch now");
+                  console.log(this.commune);
+                  console.log(this.token);
                   if (val['status'] === true) {
                     console.log("done add");
                     this.user.commune.push(element);
@@ -166,6 +167,9 @@ export class EditProfilePage {
         this.commune_list.forEach(element => {
           if (element.id == this.commune) {
             this._userService.Abon_commune(this.commune, this.token).subscribe((val) => {
+              console.log("watch this boiiii");
+              console.log(this.commune);
+              console.log(this.token);
               if (val['status'] === true) {
                 console.log("done add");
                 this.user.commune.push(element);

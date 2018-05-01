@@ -6,6 +6,7 @@ import { Dialogs } from '@ionic-native/dialogs';
 import { HomePage } from '../home/home';
 import { TabsPage } from '../tabs/tabs';
 import { LoadingController } from 'ionic-angular';
+import { UserServiceProvider } from '../../providers/user-service/user-service';
 /**
  * Generated class for the LoginPage page.
  *
@@ -26,10 +27,17 @@ export class LoginPage {
     email: "",
     pass: ""
   };
+  private user_save={
+    name_u:'',
+    last_name:'',
+    username:'',
+    email:'',
+    commune:[],
+  };
 
   addperson = AddpersonPage;
   private loader;
-  constructor(public navCtrl: NavController, public navParams: NavParams, private _auth: AuthentificationProvider, private _dialog: Dialogs, public loadingCtrl: LoadingController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private _auth: AuthentificationProvider, private _dialog: Dialogs, public loadingCtrl: LoadingController, private _userService:UserServiceProvider) {
   }
 
   ionViewDidLoad() {
@@ -48,7 +56,38 @@ export class LoginPage {
         if (data['status'] === true) {
           console.log("authentifier");
           this._auth.setSession(data["data"]).then((val) => {
-            this.navCtrl.setRoot(HomePage);
+            // save also profile whene login
+            this._userService.getUser(data["data"]).subscribe((val) => {
+              if(val["status"] == true ){
+                val = val['data'];
+                this.user_save.email = val['email'];
+                this.user_save.name_u = val['prenom'];
+                this.user_save.last_name = val['nom'];
+                if (val['communes'] != "Aucune commune")
+                {
+                  let tmpc = val['communes'];
+                  tmpc.forEach(element => {
+                    this.user_save.commune.push({id:element.id,name:element.nom});
+                  });
+                }
+                else
+                {
+                  this.user_save.commune = [];
+                }
+                // save to storage
+                this._auth.saveUserSession(this.user_save);
+                this.navCtrl.setRoot(HomePage);
+              }
+              else{
+                console.log("empty data");
+                this.navCtrl.setRoot(HomePage);
+              }
+
+            }, err => {
+              console.log(err);
+              this.navCtrl.setRoot(HomePage);
+            })
+            // keep in logic and go
           }, (err) => {
             this._dialog.alert('The app is crushing , plz restart it', 'error', 'ok').then(() => {
               console.log("oh shit");

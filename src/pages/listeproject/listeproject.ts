@@ -31,17 +31,24 @@ export class ListeprojectPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad ListeprojectPage');
   }
-  openProj(proj_id,commune_id) {
-    let projModal = this.modalCtrl.create(ProjectPage, { projId: proj_id,communeId:commune_id});
+  openProj(proj_id,commune_id,proj) {
+    let projModal = this.modalCtrl.create(ProjectPage, { projId: proj_id,communeId:commune_id,projData:proj});
     projModal.present();
   }
 
   ionViewWillEnter() {
-    this._userService.getProfile().then((val) => {
-      if (val.length > 0 && val != "Aucune commune") {
+    this._userService.getProfile().then((vali) => {
+      console.log(vali);
+      let val = JSON.parse(vali);
+      console.log("next is val");
+      console.log(val);
+      if (val != null  && val.commune.length != 0) {
         console.log("it's ok we have user with things");
       }
-      else {
+      else if(val != null && val['commune'].length === 0){
+        this.navCtrl.push(ProfilePage);
+      }
+      else if(val === null) {
         console.log("not ok dude");
         this._storage.get('id_commune').then((val) => {
           console.log(val);
@@ -51,9 +58,9 @@ export class ListeprojectPage {
         }, (err) => {
           this.navCtrl.push(ChosecommunePage);
         });
-
       }
     }).catch((err) => {
+      console.log(err);
       this.navCtrl.push(ChosecommunePage);
     });
   }
@@ -87,6 +94,7 @@ export class ListeprojectPage {
         //run serves request
         this.addInList(val);
       }, (err) => {
+        console.log("fired up for error");
         this.navCtrl.push(ChosecommunePage);
       });
     }
@@ -117,9 +125,12 @@ export class ListeprojectPage {
               id: tmp[i].id,
               title: tmp[i].sujet,
               add_date: tmp[i]["datedebut"],
+              timerange:tmp[i]["duree"],
               descrp: tmp[i].contenu,
               img: 'https://picsum.photos/600/400?random',
-              idCommune:id
+              idCommune:id,
+              comments:tmp[i].commentaires,
+              likes:tmp[i].votes
             })
           }
         }

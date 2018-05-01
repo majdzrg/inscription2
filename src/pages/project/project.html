@@ -20,28 +20,28 @@
       <ion-card>
         <ion-item>
           <h2>{{project_info.title}}</h2>
-          <p>{{project_info.date}}</p>
+          <p>{{project_info.add_date.timestamp*1000 | date: 'yyyy-MM-dd' }}</p>
         </ion-item>
         <img src="{{project_info.img}}">
         <ion-card-content>
-          <p>{{project_info.dscrp}}</p>
+          <p text-left text-wrap>{{project_info.descrp}}</p>
         </ion-card-content>
         <ion-row>
           <ion-col>
             <button ion-button icon-left clear small>
         <ion-icon name="thumbs-up"></ion-icon>
-        <div>12 Likes</div>
+        <div (click)="vote()"> {{project_info.likes}} Likes</div>
       </button>
           </ion-col>
           <ion-col>
             <button ion-button icon-left clear small>
         <ion-icon name="text"></ion-icon>
-        <div>4 Comments</div>
+        <div (click)="showComment()"> {{project_info.comments}} Comments</div>
       </button>
           </ion-col>
           <ion-col center text-center>
             <ion-note>
-              {{project_info.date_post}}
+              {{project_info.timerange}}
             </ion-note>
           </ion-col>
         </ion-row>
@@ -64,8 +64,6 @@
           <p>{{rec.comment}}</p>
           <ion-icon *ngIf="rec.reaction.length != 0" [name]="rec.reaction == 1 ? 'thumbs-up' : 'thumbs-down'"></ion-icon>
         </ion-item>
-        <button ion-button block color="primary" (click)="showComment()">Comment</button>
-        <button ion-button block color="primary" (click)="showComment()">Voter</button>
       </ion-list>
     </ion-slide>
 

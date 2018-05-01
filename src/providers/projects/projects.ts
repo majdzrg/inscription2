@@ -18,7 +18,7 @@ export class ProjectsProvider {
  HEAD
   public communeAPI = "http://192.168.1.95:8000/api/commune/";
   public commentaireAPI ="http://192.168.1.95:8000/api/commune/";
-  public voteAPI ="http://192.168.1.95:8000/api/commune/projets/";
+  public voteAPI ="http://192.168.1.95:8000/api/commune/";
   private _headers: HttpHeaders;
   constructor(public http: HttpClient, private _storage: Storage) {
     console.log('Hello ProjectsProvider Provider');
@@ -39,8 +39,9 @@ export class ProjectsProvider {
 
     }
     public ProjectVote(id_commune: string,id_projet: string) {
+      console.log(id_commune+"   "+id_projet);
         const listUrl= this.voteAPI+id_commune+"/projets/"+id_projet+"/votes/";
-       return this.http.get(this.voteAPI, { headers: this._headers });
+       return this.http.get(listUrl, { headers: this._headers });
     }
 
     /**
@@ -52,6 +53,17 @@ export class ProjectsProvider {
       .set("contenu",commentaire);
       let send_url = this.commentaireAPI+id_commune+"/projets/"+id_proj+"/commentaires/new";
       return this.http.post(send_url,body,{headers:this._headers});
+    }
+
+    /**
+     * voteProject
+     */
+
+    public voteProject(token:string,id_project:string,id_commune:string) {
+      let urlToLike = this.voteAPI+id_commune+"/projets/"+id_project+"/votes/new";
+      let body = new HttpParams()
+      .set("token",token);
+      return this.http.post(urlToLike,body,{headers:this._headers});
     }
 
 

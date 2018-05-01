@@ -68,7 +68,7 @@ export class UserServiceProvider {
     return this.http.post(url,body.toString(),{headers:this._headers});
   }
   public Abon_commune(id_commune,token){
-    let url = "http://192.168.1.95:8000/api/commune/ajout"
+    let url = "http://192.168.1.95:8000/api/commune/ajout";
     const body = new HttpParams()
       .set('token', token)
       .set('commune', id_commune)

@@ -2,6 +2,8 @@ import {MoreMenuPage} from '../more-menu/more-menu';
 import { Component } from '@angular/core';
 import {PopoverController, NavController,  NavParams, ModalController} from 'ionic-angular';
 import { SondageOpenPage } from "../sondage-open/sondage-open";
+import { Dialogs } from '@ionic-native/dialogs';
+import { AuthentificationProvider } from '../../providers/authentification/authentification';
 /**
  * Generated class for the SondagePage page.
  *
@@ -14,10 +16,14 @@ import { SondageOpenPage } from "../sondage-open/sondage-open";
   templateUrl: 'sondage.html',
 })
 export class SondagePage {
+  private isConnected: boolean = false;
+  getSondageList(): any {
+    throw new Error("Method not implemented.");
+  }
   private sondage:string = "active"
   private sondageActive:Array<any> = [];
-  private sondageArchive: Array<any> = [];  
-  constructor(public navCtrl: NavController, public navParams: NavParams, private popoverCtrl: PopoverController, public modalCtrl: ModalController) {
+  private sondageArchive: Array<any> = [];
+  constructor(public navCtrl: NavController, public navParams: NavParams, private popoverCtrl: PopoverController, public modalCtrl: ModalController,private dialogs: Dialogs, private _auth: AuthentificationProvider) {
     this.sondageActive = [{
       id:1,
       title:'Journée Espaces verts',
@@ -57,6 +63,16 @@ export class SondagePage {
   openSondage(id){
     let projModal = this.modalCtrl.create(SondageOpenPage, { sondagejId: id });
     projModal.present();
+  }
+  ngOnInit(): void {
+    //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
+    //Add 'implements OnInit' to the class.
+    this._auth.userAuthUpdated.subscribe((iscon) => {
+      this.isConnected = iscon;
+      this.getSondageList();
+    }, (err) => {
+      console.log(err);
+    });
   }
 
 }

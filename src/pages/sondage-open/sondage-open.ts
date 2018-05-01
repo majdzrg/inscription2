@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ToastController,ViewController } from 'ionic-angular';
+
 
 /**
  * Generated class for the SondageOpenPage page.
@@ -8,7 +9,7 @@ import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angu
  * Ionic pages and navigation.
  */
 
-@IonicPage()
+
 @Component({
   selector: 'page-sondage-open',
   templateUrl: 'sondage-open.html',
@@ -25,9 +26,9 @@ export class SondageOpenPage {
     negative:'Participe pas', // negative button name
     positiveStat:25, // total positive vote
     negativeStat:3, // total negative vote
-    isVoted:false // if the user voted show result , else show button to vote if active 
-  } 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public toastCtrl: ToastController) {
+    isVoted:false // if the user voted show result , else show button to vote if active
+  }
+  constructor(public viewCtrl: ViewController,public navCtrl: NavController, public navParams: NavParams, public toastCtrl: ToastController) {
   }
 
   ionViewDidLoad() {
@@ -41,9 +42,9 @@ export class SondageOpenPage {
       });
       toast.present();
     } else {
-      // send vote 
-      // change is voted to true 
-      // call the api again to get recent result 
+      // send vote
+      // change is voted to true
+      // call the api again to get recent result
       this.sondage.isVoted = true;
     }
   }

@@ -15,30 +15,30 @@
   </ion-navbar>
 </ion-header>
 <ion-content padding>
-<div>
-  <ion-segment [(ngModel)]="sondage">
-    <ion-segment-button value="active">
-      Sondage active
-    </ion-segment-button>
-    <ion-segment-button value="archive">
-      Sondage archevé
-    </ion-segment-button>
-  </ion-segment>
-</div>
-<div [ngSwitch]="sondage">
-  <ion-list *ngSwitchCase="'active'">
-    <ion-item *ngFor="let item of sondageActive" (click)="openSondage('item.id')">
-      <h2>{{item.title}}</h2>
-      <p>{{item.dscrp}}</p>
-      <small>{{item.start_date}}</small>
-    </ion-item>
-  </ion-list>
-  <ion-list *ngSwitchCase="'archive'">
-    <ion-item *ngFor="let item of sondageArchive" (click)="openSondage('item.id')">
-      <h2>{{item.title}}</h2>
-      <p>{{item.dscrp}}</p>
-      <small>{{item.end_date}}</small>
-    </ion-item>
-  </ion-list>
-</div>
+  <div>
+    <ion-segment [(ngModel)]="sondage">
+      <ion-segment-button value="active">
+        Sondage active
+      </ion-segment-button>
+      <ion-segment-button value="archive">
+        Sondage archevé
+      </ion-segment-button>
+    </ion-segment>
+  </div>
+  <div [ngSwitch]="sondage">
+    <ion-list *ngSwitchCase="'active'">
+      <ion-item *ngFor="let item of sondageActive" (click)="openSondage(item.id,item.id_commune,true)">
+        <h2>Sondage #{{item.id}}</h2>
+        <p>{{item.description}}</p>
+        <small>Fin : {{item.fin.timestamp*1000 | date:shortDate }}</small>
+      </ion-item>
+    </ion-list>
+    <ion-list *ngSwitchCase="'archive'">
+      <ion-item *ngFor="let item of sondageArchive" (click)="openSondage(item.id,item.id_commune,false)">
+        <h2>Sondage #{{item.id}}</h2>
+        <p>{{item.description}}</p>
+        <small>Fin : {{item.fin.timestamp*1000 | date:shortDate }}</small>
+      </ion-item>
+    </ion-list>
+  </div>
 </ion-content>

@@ -22,8 +22,9 @@
   <ion-grid no-padding>
     <ion-row flex-wrap: wrap align-items-center class="topSondage" padding>
       <ion-col align-self-stretch align-items-center>
-        <h3 ion-text color="light" text-capitalize>{{sondage.title}}</h3>
+        <h3 ion-text color="light" text-capitalize>Sondage #{{sondage.id}}</h3>
         <p text-wrap>{{sondage.dscrp}}</p>
+        <small>{{ sondage.date | date:shortDate }}</small>
       </ion-col>
     </ion-row>
     <ion-row flex-wrap: wrap class="ion-row-bottom" align-items-center>

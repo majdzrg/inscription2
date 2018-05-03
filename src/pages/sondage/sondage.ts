@@ -1,9 +1,15 @@
-import {MoreMenuPage} from '../more-menu/more-menu';
+import { MoreMenuPage } from '../more-menu/more-menu';
 import { Component } from '@angular/core';
-import {PopoverController, NavController,  NavParams, ModalController} from 'ionic-angular';
+import { PopoverController, NavController, NavParams, ModalController } from 'ionic-angular';
 import { SondageOpenPage } from "../sondage-open/sondage-open";
 import { Dialogs } from '@ionic-native/dialogs';
 import { AuthentificationProvider } from '../../providers/authentification/authentification';
+import { SondageProvider } from '../../providers/sondage/sondage';
+import { UserServiceProvider } from '../../providers/user-service/user-service';
+import { ProfilePage } from '../profile/profile';
+import { Storage } from '@ionic/storage';
+import { ChosecommunePage } from '../chosecommune/chosecommune';
+import { HomePage } from '../home/home';
 /**
  * Generated class for the SondagePage page.
  *
@@ -17,39 +23,50 @@ import { AuthentificationProvider } from '../../providers/authentification/authe
 })
 export class SondagePage {
   private isConnected: boolean = false;
-  getSondageList(): any {
-    throw new Error("Method not implemented.");
-  }
-  private sondage:string = "active"
-  private sondageActive:Array<any> = [];
+  private sondage: string = "active"
+  private sondageActive: Array<any> = [];
   private sondageArchive: Array<any> = [];
-  constructor(public navCtrl: NavController, public navParams: NavParams, private popoverCtrl: PopoverController, public modalCtrl: ModalController,private dialogs: Dialogs, private _auth: AuthentificationProvider) {
-    this.sondageActive = [{
-      id:1,
-      title:'Journée Espaces verts',
-      dscrp:'planification d\'un jour pour netoyer les espaces verts de centre urbain , avec la participation des ecoles , lycées etc ...',
-      start_date:'2018/06/04'
-    },
-      {
-        id: 2,
-        title: 'Coret sert nor',
-        dscrp: 'lorem ipsum lar car sar dar far je w mché w 4dwa 3id l7asel chway ktiba 3al 3in ',
-        start_date: '2018/16/04'
-      },
-  ]
-    this.sondageArchive = [{
-      id: 3,
-      title: 'Journée Espaces verts',
-      dscrp: 'planification d\'un jour pour netoyer les espaces verts de centre urbain , avec la participation des ecoles , lycées etc ...',
-      end_date: '2018/06/04'
-    },
-    {
-      id: 4,
-      title: 'Coret sert nor',
-      dscrp: 'lorem ipsum lar car sar dar far je w mché w 4dwa 3id l7asel chway ktiba 3al 3in ',
-      end_date: '2018/16/04'
-    },
-    ]
+  private communesId: Array<number> = [];
+  constructor(public navCtrl: NavController, public navParams: NavParams, private popoverCtrl: PopoverController, public modalCtrl: ModalController, private dialogs: Dialogs, private _auth: AuthentificationProvider, private _sondageService: SondageProvider, private _userService: UserServiceProvider, private _storage: Storage) {
+    this.sondageActive = []
+    this.sondageArchive = []
+
+    // fill the communesId -> if connected get all his communes id else get default commune id else back to chose commune
+    this._userService.getProfile().then((vali) => {
+      const val = JSON.parse(vali);
+      if (val != null && val != undefined) {
+        // we have profile so get all communes if there is else send to profile 
+        if (val.commune.length === 0) {
+          console.log("no commune for user");
+          this.navCtrl.push(ProfilePage);
+        }
+        else {
+          this.communesId = val.commune;
+          this.getSondageListes();
+        }
+      }
+      else {
+        // we don't have profile so get the default id_Commune
+        this._storage.get('id_commune').then((val) => {
+          if (val != null && val.length > 0) {
+            this.communesId.push(Number.parseInt(val));
+            this.getSondageListes();
+          }
+          else {
+            console.log("no default also");
+            this.navCtrl.push(ChosecommunePage);
+          }
+        })
+          .catch((err) => {
+            console.log(err);
+            this.navCtrl.push(ChosecommunePage);
+          });
+      }
+    }).catch((err) => {
+      // got err show msg and send back to home 
+      console.log(err);
+      this.navCtrl.setRoot(HomePage);
+    });
   }
   ionViewDidLoad() {
     console.log('ionViewDidLoad SondagePage');
@@ -60,19 +77,47 @@ export class SondagePage {
       ev: myEvent
     });
   }
-  openSondage(id){
-    let projModal = this.modalCtrl.create(SondageOpenPage, { sondagejId: id });
+  openSondage(id,id_commune,stat) {
+    let projModal = this.modalCtrl.create(SondageOpenPage, { sondageId: id, communeId: id_commune, stat: stat });
     projModal.present();
   }
-  ngOnInit(): void {
-    //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
-    //Add 'implements OnInit' to the class.
-    this._auth.userAuthUpdated.subscribe((iscon) => {
-      this.isConnected = iscon;
-      this.getSondageList();
-    }, (err) => {
-      console.log(err);
-    });
+  // get all sondages depand on his communes {connected or no }
+  getSondageListes() {
+    if (this.communesId.length > 0) {
+      this.communesId.forEach(element => {
+        console.log("get for commune -> " + element);
+        this._sondageService.getSondageList(element['id']).subscribe((data) => {
+          console.log(data);
+          if (data['status'] === true) {
+            // here w go
+            let idcom = element['id'];
+            let tmp_arch = data['data'].arch;
+            let tmp_nonarch = data['data'].nonarch;
+            if (tmp_arch != null) {
+              tmp_arch.forEach(element => {
+                element.id_commune = idcom;
+                this.sondageArchive.push(element);
+              });
+            }
+            if (tmp_nonarch != null) {
+              tmp_nonarch.forEach(element => {
+                element.id_commune = idcom;
+                this.sondageActive.push(element);
+              });
+            }
+          }
+          else {
+            console.log(data['msg']);
+          }
+        }, (err) => {
+          console.log(err);
+        });
+      });
+    }
+    else {
+      console.log("failer no communes");
+      this.navCtrl.push(HomePage);
+    }
   }
 
 }

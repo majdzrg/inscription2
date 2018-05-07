@@ -39,8 +39,13 @@ export class ReclamationFormPage {
     correctOrientation: true,
     saveToPhotoAlbum: true
   }
+  Geooptions = {
+  enableHighAccuracy: true,
+  timeout: 5000,
+  maximumAge: 0
+};
   constructor(public navCtrl: NavController, public navParams: NavParams, private _dialog: Dialogs, private camera: Camera, private geolocation: Geolocation, private _userService:UserServiceProvider, private _reclamatioService: ReclamationProvider ) {
-    this.geolocation.getCurrentPosition().then((resp) => {
+    this.geolocation.getCurrentPosition(this.Geooptions).then((resp) => {
       this.reclamation.lat =   resp.coords.latitude.toString()
       this.reclamation.long =  resp.coords.longitude.toString()
     }).catch((error) => {

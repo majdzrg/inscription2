@@ -52,7 +52,7 @@ export class LoginPage {
     this._auth.loginUser(this.user.email, this.user.pass)
       .subscribe(data => {
         this.loader.dismiss();
-        console.log(data);
+        console.log(JSON.stringify(data));
         if (data['status'] === true) {
           console.log("authentifier");
           this._auth.setSession(data["data"]).then((val) => {

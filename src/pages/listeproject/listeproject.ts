@@ -115,19 +115,22 @@ export class ListeprojectPage {
   public addInList(id) {
     this._projectService.ProjectListe(id)
       .subscribe(data => {
-        console.log(data);
-        console.log(data["status"]);
         if (data["status"] == true) {
           let tmp = data["data"]
           console.log(tmp);
           for (let i = 0; i < tmp.length; i++) {
+            let ispic = './assets/imgs/in-app/default_proj.jpg';
+            if (tmp[i].image != null && tmp[i].image.length > 0 && !tmp[i].image.endsWith("imageProjet/"))
+            {
+              ispic = tmp[i].image;
+            }
             this.project_list.push({
               id: tmp[i].id,
               title: tmp[i].sujet,
               add_date: tmp[i]["datedebut"],
               timerange:tmp[i]["duree"],
               descrp: tmp[i].contenu,
-              img: 'https://picsum.photos/600/400?random',
+              img: ispic,
               idCommune:id,
               comments:tmp[i].commentaires,
               likes:tmp[i].votes

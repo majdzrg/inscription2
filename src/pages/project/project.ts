@@ -67,8 +67,6 @@ export class ProjectPage {
     this.projet = navParams.get("projData");
     this.project_info = this.projet;
     this.getCommentList();
-
-
   }
 
   ionViewDidLoad() {
@@ -167,7 +165,6 @@ export class ProjectPage {
   getCommentList() {
     this._projectService.ProjectCommentaire(this.communeId, this.projId).subscribe((data) => {
       console.log(data);
-
     }, err => {
       console.log(err);
 

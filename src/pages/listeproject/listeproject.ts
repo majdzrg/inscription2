@@ -8,6 +8,7 @@ import { ChosecommunePage } from '../chosecommune/chosecommune';
 import { Storage } from '@ionic/storage';
 import { AuthentificationProvider } from '../../providers/authentification/authentification';
 import { ProfilePage } from '../profile/profile';
+import { DomSanitizer } from '@angular/platform-browser';
 
 /**
  * Generated class for the ListeprojectPage page.
@@ -21,6 +22,7 @@ import { ProfilePage } from '../profile/profile';
   templateUrl: 'listeproject.html',
 })
 export class ListeprojectPage {
+  sanitizer: DomSanitizer;
   private isConnected: boolean = false;
   project_list :Array<any>=[];
   constructor(public navCtrl: NavController, public navParams: NavParams, public modalCtrl: ModalController, private _userService: UserServiceProvider, private _storage: Storage, private _projectService: ProjectsProvider, private _auth: AuthentificationProvider) {
@@ -130,7 +132,7 @@ export class ListeprojectPage {
               add_date: tmp[i]["datedebut"],
               timerange:tmp[i]["duree"],
               descrp: tmp[i].contenu,
-              img: ispic,
+              img: this.sanitizer.bypassSecurityTrustResourceUrl(ispic),
               idCommune:id,
               comments:tmp[i].commentaires,
               likes:tmp[i].votes

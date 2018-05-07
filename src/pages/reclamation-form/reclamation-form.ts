@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angular';
 import { Dialogs } from '@ionic-native/dialogs';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import { Geolocation } from '@ionic-native/geolocation';
@@ -44,20 +44,27 @@ export class ReclamationFormPage {
   timeout: 5000,
   maximumAge: 0
 };
-  constructor(public navCtrl: NavController, public navParams: NavParams, private _dialog: Dialogs, private camera: Camera, private geolocation: Geolocation, private _userService:UserServiceProvider, private _reclamatioService: ReclamationProvider ) {
+  constructor(public viewCtrl:ViewController,public navCtrl: NavController, public navParams: NavParams, private _dialog: Dialogs, private camera: Camera, private geolocation: Geolocation, private _userService:UserServiceProvider, private _reclamatioService: ReclamationProvider ) {
     this.geolocation.getCurrentPosition(this.Geooptions).then((resp) => {
-      this.reclamation.lat =   resp.coords.latitude.toString()
-      this.reclamation.long =  resp.coords.longitude.toString()
+      console.log(JSON.stringify(resp));
+      if(resp.coords){
+        this.reclamation.lat =   resp.coords.latitude.toString()
+        this.reclamation.long =  resp.coords.longitude.toString()
+      }
     }).catch((error) => {
       console.log('Error getting location', JSON.stringify(error));
     });
-    let watch = this.geolocation.watchPosition();
+    let watch = this.geolocation.watchPosition(this.Geooptions);
     watch.subscribe((data) => {
       // data can be a set of coordinates, or an error (if an error occurred).
       // data.coords.latitude
       // data.coords.longitude
+      console.log(JSON.stringify(data));
+      if(data.coords){
+
       this.reclamation.lat = data.coords.latitude.toString()
       this.reclamation.long = data.coords.longitude.toString()
+      }
     });
     this._userService.getProfile().then((val)=>{
       let parsed = JSON.parse(val);
@@ -73,20 +80,41 @@ export class ReclamationFormPage {
     console.log('ionViewDidLoad ReclamationFormPage');
   }
   sendRec() {
-    if (this.reclamation.contenu.length > 50 && this.reclamation.sujet.length > 20 && this.reclamation.image.length > 0 && this.reclamation.commune != 0) {
+    if (this.reclamation.contenu.length > 20 && this.reclamation.sujet.length > 20 && this.reclamation.image.length > 0 && this.reclamation.commune != 0) {
       // send to api
       this._reclamatioService.sendReclamation(this.reclamation).subscribe((data_back)=>{
-        console.log(data_back);
-        if (data_back['status']=== true) {
-          // show done 
+        console.log(JSON.stringify(data_back));
+        if (data_back['status'] === true) {
+          // show done
+          this._dialog.alert('Your reclamation has been sended to your commune , we will replay as soon as possible','Reclamation sended','nice')
+          .then((val)=>{
+            console.log(val);
+          })
+          .catch((err)=>{
+            console.log(err);
+          })
           console.log("it's added");
-          
+          this.viewCtrl.dismiss();
         } else {
           console.log("some thing happen");
+          this._dialog.alert('Some thing went wrong'+data_back['msg'],'Reclamation failed','try later')
+          .then((val)=>{
+            console.log(val);
+          })
+          .catch((err)=>{
+            console.log(err);
+          })
         }
       },err=>{
-        console.log(err);
+        console.log(JSON.stringify(err));
         // show error
+        this._dialog.alert('We cant reach our server , check your internet connexion','Server not visible','ok')
+        .then((val)=>{
+          console.log(val);
+        })
+        .catch((err)=>{
+          console.log(err);
+        })
       })
     } else {
       this._dialog.alert('there is a missing required field check again please', 'missing argument', 'try again')

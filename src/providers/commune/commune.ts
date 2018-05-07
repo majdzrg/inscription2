@@ -10,7 +10,7 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class CommuneProvider {
 
-  communeApi = "http://localhost:8000/api/commune/";
+  communeApi = "http://192.168.1.90:8000/api/commune/";
   private _headers: HttpHeaders;
   constructor(public http: HttpClient) {
     console.log('Hello CommuneProvider Provider');

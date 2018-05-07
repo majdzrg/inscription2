@@ -11,7 +11,7 @@
 </ion-header>
 <ion-content>
   <ion-card *ngFor="let proj of project_list" (click)="openProj(proj.id,proj.idCommune,proj)">
-    <img src="{{proj.img}}" />
+    <img [src]="proj.img" />
     <ion-card-content>
       <ion-card-title>
         {{proj.title}}

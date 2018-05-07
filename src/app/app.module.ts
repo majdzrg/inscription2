@@ -34,6 +34,10 @@ import { EditProfilePage } from '../pages/edit-profile/edit-profile';
 import { ReclamationInfoPage } from "../pages/reclamation-info/reclamation-info";
 import { ReclamationFormPage } from "../pages/reclamation-form/reclamation-form";
 import { ReclamationProvider } from '../providers/reclamation/reclamation';
+import {QuestionPage} from '../pages/question/question';
+import {QuestionFormPage} from '../pages/question-form/question-form';
+import { QuestionProvider } from '../providers/question/question';
+
 @NgModule({
   declarations: [
     MyApp,
@@ -54,7 +58,9 @@ import { ReclamationProvider } from '../providers/reclamation/reclamation';
     ProfilePage,
     EditProfilePage,
     ReclamationFormPage,
-    ReclamationInfoPage
+    ReclamationInfoPage,
+    QuestionPage,
+    QuestionFormPage
   ],
   imports: [
     BrowserModule,
@@ -82,7 +88,9 @@ import { ReclamationProvider } from '../providers/reclamation/reclamation';
     ProfilePage,
     EditProfilePage,
     ReclamationFormPage,
-    ReclamationInfoPage
+    ReclamationInfoPage,
+    QuestionPage,
+    QuestionFormPage
 
   ],
   providers: [
@@ -98,7 +106,8 @@ import { ReclamationProvider } from '../providers/reclamation/reclamation';
     SondageProvider,
     Camera,
     Geolocation,
-    ReclamationProvider
+    ReclamationProvider,
+    QuestionProvider
   ]
 })
 export class AppModule { }

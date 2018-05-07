@@ -9,6 +9,7 @@ import { ReclamationPage} from '../reclamation/reclamation';
 import { UserServiceProvider } from '../../providers/user-service/user-service';
 import {ContactPage} from '../contact/contact';
 import {InformationPage} from '../information/information';
+import {QuestionPage} from '../question/question';
 
 @Component({
   selector: 'page-home',
@@ -65,6 +66,9 @@ export class HomePage {
       case 'information':
           this.navCtrl.push(InformationPage);
           break;
+      case 'question':
+              this.navCtrl.push(QuestionPage);
+              break;
       default:
         break;
     }

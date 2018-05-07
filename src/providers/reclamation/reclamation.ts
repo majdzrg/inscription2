@@ -13,8 +13,10 @@ export class ReclamationProvider {
   _headers: HttpHeaders;
   token;
   constructor(public http: HttpClient, private _authService:AuthentificationProvider) {
+    this._headers = new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded');
+    this._headers.set('Accept-Charset', 'utf-8');
     this._authService.getToken().then((val)=>{
-      this.token = val ; 
+      this.token = val ;
     }).catch((err)=>{
       console.log(err);
     })
@@ -22,14 +24,14 @@ export class ReclamationProvider {
   }
 
   getReclamationList(token: String){
-    let url = "http://localhost:8000/api/reclamation/?token=" + token;
+    let url = "http://192.168.1.90:8000/api/reclamation/?token=" + token;
     console.log(url);
     return this.http.get(url, { headers: this._headers })
 
   }
 
   getReclamationInfo(id: string, token: String){
-    let url = "http://localhost:8000/api/reclamation/id?token=" + token;
+    let url = "http://192.168.1.90:8000/api/reclamation/id?token=" + token;
     console.log(url);
     return this.http.get(url, { headers: this._headers })
 
@@ -43,24 +45,23 @@ export class ReclamationProvider {
     let date = reclamation.date;
     let lat = reclamation.lat;
     let long = reclamation.long;
-    let url = "http://localhost:8000/api/reclamation/new";
+    let url = "http://192.168.1.90:8000/api/reclamation/new";
     const body = new HttpParams()
       .set('token', this.token)
       .set('contenu', contenu)
       .set('image', image)
       .set('lat', lat)
-      .set('long', long)
+      .set('lng', long)
       .set('commune',reclamation.commune)
-
     return this.http.post(url, body.toString(), { headers: this._headers });
   }
   public Delete_Reclamation(token) {
-    let url = "http://localhost:8000/api/reclamation/id/";
+    let url = "http://192.168.1.12:8000/api/reclamation/id/";
     //this._headers.set("token",token);
     this._headers = this._headers.append('token', token);
     let headerAbc = new HttpHeaders({ 'token': token });
     return this.http.delete(url, { headers: headerAbc });
-   
+
     //method delete
   }
 

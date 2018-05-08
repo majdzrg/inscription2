@@ -22,10 +22,9 @@ import { DomSanitizer } from '@angular/platform-browser';
   templateUrl: 'listeproject.html',
 })
 export class ListeprojectPage {
-  sanitizer: DomSanitizer;
   private isConnected: boolean = false;
   project_list :Array<any>=[];
-  constructor(public navCtrl: NavController, public navParams: NavParams, public modalCtrl: ModalController, private _userService: UserServiceProvider, private _storage: Storage, private _projectService: ProjectsProvider, private _auth: AuthentificationProvider) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public modalCtrl: ModalController, private _userService: UserServiceProvider, private _storage: Storage, private _projectService: ProjectsProvider, private _auth: AuthentificationProvider, protected sanitizer: DomSanitizer) {
     this._auth.isAuthenticated();
     //this.getprojectsList();
   }

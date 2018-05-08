@@ -16,22 +16,25 @@ export class ReclamationProvider {
     this._headers = new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded');
     this._headers.set('Accept-Charset', 'utf-8');
     this._authService.getToken().then((val)=>{
+      console.log(val);
       this.token = val ;
     }).catch((err)=>{
       console.log(err);
     })
     console.log('Hello ReclamationProvider Provider');
+    // need boostup the token getter to ovied undefined value ..... FIX-NEXT
+    // token bech n5arjoh mena 5ater sa3at yab9a chwaya bech yarja3 el value w akeka twali ysir el appl bel value = undefined
   }
 
-  getReclamationList(token: String){
-    let url = "http://192.168.1.90:8000/api/reclamation/?token=" + token;
+  getReclamationList(token:string){
+    let url = "http://192.168.1.12:8000/api/reclamation/?token=" + token;
     console.log(url);
     return this.http.get(url, { headers: this._headers })
 
   }
 
   getReclamationInfo(id: string, token: String){
-    let url = "http://192.168.1.90:8000/api/reclamation/id?token=" + token;
+    let url = "http://192.168.1.12:8000/api/reclamation/id?token=" + token;
     console.log(url);
     return this.http.get(url, { headers: this._headers })
 
@@ -45,7 +48,7 @@ export class ReclamationProvider {
     let date = reclamation.date;
     let lat = reclamation.lat;
     let long = reclamation.long;
-    let url = "http://192.168.1.90:8000/api/reclamation/new";
+    let url = "http://192.168.1.12:8000/api/reclamation/new";
     const body = new HttpParams()
       .set('token', this.token)
       .set('contenu', contenu)

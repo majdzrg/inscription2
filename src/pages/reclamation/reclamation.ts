@@ -1,9 +1,14 @@
 import { Component } from '@angular/core';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import { Geolocation } from '@ionic-native/geolocation';
-import { ModalController } from 'ionic-angular';
+import { ModalController, NavController } from 'ionic-angular';
 import { ReclamationInfoPage } from "../reclamation-info/reclamation-info";
 import { ReclamationFormPage } from "../reclamation-form/reclamation-form";
+import { ReclamationProvider } from '../../providers/reclamation/reclamation';
+import { Dialogs } from '@ionic-native/dialogs';
+import { HomePage } from '../home/home';
+import { AuthentificationProvider } from '../../providers/authentification/authentification';
+import { LoginPage } from '../login/login';
 
 /**
  * Generated class for the ReclamationPage page.
@@ -18,8 +23,43 @@ import { ReclamationFormPage } from "../reclamation-form/reclamation-form";
 })
 export class ReclamationPage {
   image;
-
-  constructor(private camera: Camera, private geolocation: Geolocation, public modalCtrl: ModalController) {
+  reclamation_list: Array<any> = [];
+  constructor(private camera: Camera, private geolocation: Geolocation, public modalCtrl: ModalController, private _reclamationService: ReclamationProvider, private _dialog: Dialogs, public navCtrl: NavController, private _auth:AuthentificationProvider) {
+    this._auth.getToken().then((token)=>{
+      if (token != null && token.length > 0 && token != undefined) {
+        this._reclamationService.getReclamationList(token)
+        .subscribe((data) => {
+          console.log(data); // for test only
+          if (data['status'] === true) {
+            this.reclamation_list = data['data'];
+          }
+          else {
+            // si pas des rec
+            this._dialog.alert('some thing went wrong' + data['msg'], 'error', 'oki').then((v) => {
+              console.log(v);
+            }).catch((e) => {
+              console.log(e);
+            })
+            this.navCtrl.setRoot(HomePage);
+          }
+        },
+          (err) => {
+            this._dialog.alert('some thing went wrong', 'error', 'oki').then((v) => {
+              console.log(v);
+            }).catch((e) => {
+              console.log(e);
+            })
+            this.navCtrl.setRoot(HomePage);
+          });
+      } else {
+        // no token : not connected
+        this.navCtrl.setRoot(LoginPage);
+      }
+    })
+    .catch((err)=>{
+      console.log(err);
+      this.navCtrl.setRoot(HomePage)
+    })
 
   }
   async pictureFromCamera() {
@@ -62,11 +102,11 @@ export class ReclamationPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad ReclamationPage');
   }
-  addnew(){
+  addnew() {
     let modal = this.modalCtrl.create(ReclamationFormPage);
     modal.present();
   }
-  showRec(id){
+  showRec(id) {
     let modal = this.modalCtrl.create(ReclamationInfoPage);
     modal.present();
   }

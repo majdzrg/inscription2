@@ -7,31 +7,11 @@
 
 <ion-content>
   <ion-list>
-    <ion-item >
-      <h2>subject</h2>
+    <ion-item *ngFor="let item of reclamation_list" >
+      <h2>Reclamation #{{item.id}}</h2>
       <h3>date : 18/04/2020</h3>
-      <p>I've had a pretty messed up day. If we just...</p>
-    </ion-item>
-  </ion-list>
-  <ion-list>
-    <ion-item>
-      <h2>subject</h2>
-      <h3>date : 18/04/2020</h3>
-      <p>I've had a pretty messed up day. If we just...</p>
-    </ion-item>
-  </ion-list>
-  <ion-list>
-    <ion-item>
-      <h2>subject</h2>
-      <h3>date : 18/04/2020</h3>
-      <p>I've had a pretty messed up day. If we just...</p>
-    </ion-item>
-  </ion-list>
-  <ion-list>
-    <ion-item>
-      <h2>subject</h2>
-      <h3>date : 18/04/2020</h3>
-      <p>I've had a pretty messed up day. If we just...</p>
+      <h5>Etat : {{item.etat}}</h5>
+      <p>{{ item.contenu }}</p>
     </ion-item>
   </ion-list>
 </ion-content>

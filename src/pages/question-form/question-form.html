@@ -8,6 +8,11 @@
 
   <ion-navbar>
     <ion-title>question-form</ion-title>
+    <ion-buttons left>
+      <button ion-button icon-only (click)="viewCtrl.dismiss()" class="my-style-for-modal">
+          <ion-icon name="arrow-back"></ion-icon>
+      </button>
+  </ion-buttons>
   </ion-navbar>
 
 </ion-header>
@@ -22,17 +27,12 @@
     </ion-select>
   </ion-item>
   <ion-item>
-    <ion-label floating>Sujet</ion-label>
-    <ion-input type="text" [(ngModel)]="question.sujet" name="sujet" required></ion-input>
-  </ion-item>
-
-  <ion-item>
     <ion-label floating>Date</ion-label>
     <ion-input type="text" [disabled]="true" value="{{ question.date | date:fullDate }}"></ion-input>
   </ion-item>
 
   <ion-item>
-    <ion-label floating>Contenu</ion-label>
+    <ion-label floating>Votre Question</ion-label>
     <ion-textarea type="text" [(ngModel)]="question.contenu" name="contenu" required></ion-textarea>
   </ion-item>
 

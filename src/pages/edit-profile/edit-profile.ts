@@ -29,7 +29,8 @@ export class EditProfilePage {
   private token;
   private password={
     new:"",
-    old:""
+    old:"",
+    conf:""
   }
   constructor(public viewCtrl:ViewController, public navCtrl: NavController, public navParams: NavParams, private _dialog: Dialogs, private _govService: GouvernoratProvider, private _comService: CommuneProvider, private _userService:UserServiceProvider, private _auth:AuthentificationProvider) {
     this.user = navParams.get('user');
@@ -98,8 +99,7 @@ export class EditProfilePage {
   }
   add_commune() {
     console.log("start commune add proce");
-    if (this.user.commune.length < 3)
-    {
+
       console.log("good space ");
       // check if commune existe already in user prefs
       if(this.user.commune.length > 0){
@@ -205,17 +205,7 @@ export class EditProfilePage {
           }
         });
       }
-    }
-    else {
-      console.log("only 3 commune are gven per user");
-      this._dialog.alert('you are succesfully authentified', 'success', 'ok')
-        .then(() => {
-          console.log("done");
-        })
-        .catch(() => {
-          console.log("dalogs not supported");
-        })
-    }
+
   }
   get_commune(obj) {
     this._comService.getCommuneList(obj)
@@ -278,6 +268,7 @@ export class EditProfilePage {
     })
   }
   save_Password(){
+    if (this.password.new === this.password.conf) {
     this._userService.updateSecurity(this.password,this.token).subscribe((data)=>{
       if(data['status']=== true){
         // done
@@ -305,6 +296,12 @@ export class EditProfilePage {
         console.log(err);
       });
     });
+  }
+else {
+  this._dialog.alert('bad password confirmation')
+    .then(() => console.log('Dialog dismissed'))
+    .catch(e => console.log('Error displaying dialog', e));
+}
   }
 
 }

@@ -18,8 +18,7 @@ import { QuestionProvider } from '../../providers/question/question';
 })
 export class QuestionFormPage {
   question ={
-    sujet: "",
-    contenu: "",
+    Question: "",
     date: Date.now(),
     commune:0,
   }
@@ -32,7 +31,7 @@ export class QuestionFormPage {
   }
 
   sendQes() {
-    if (this.question.contenu.length > 20 && this.question.sujet.length > 20 && this.question.commune != 0) {
+    if (this.question.Question.length > 20  && this.question.commune != 0) {
       // send to api
       this._questionService.sendQuestion(this.question).subscribe((data_back)=>{
         console.log(data_back);

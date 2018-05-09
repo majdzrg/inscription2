@@ -15,8 +15,8 @@ import { HomePage } from '../../pages/home/home';
 */
 @Injectable()
 export class SondageProvider {
-  public sondageAPI = "http://192.168.1.12:8000/api/commune/";
-  public participationAPI = "http://192.168.1.12:8000/api/commune/";
+  public sondageAPI = "http://192.168.1.94:8000/api/commune/";
+  public participationAPI = "http://192.168.1.94:8000/api/commune/";
   private _headers: HttpHeaders;
   constructor(public http: HttpClient, private _storage: Storage) {
     console.log('Hello SondageProvider Provider');

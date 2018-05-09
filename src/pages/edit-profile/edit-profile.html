@@ -56,6 +56,11 @@
         <ion-input name="n_password" required type="password" [(ngModel)]="password.new"></ion-input>
       </ion-item>
       <ion-item>
+      <ion-label>
+        <ion-icon name="contact"></ion-icon>confirm password</ion-label>
+      <ion-input name="n_password" required type="password" [(ngModel)]="password.conf"></ion-input>
+    </ion-item>
+      <ion-item>
         <button item-end type="submit" ion-button small color="primary" outline>chnage password</button>
       </ion-item>
     </form>

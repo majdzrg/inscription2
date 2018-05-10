@@ -1,8 +1,10 @@
 import { Component } from '@angular/core';
 import { Dialogs } from '@ionic-native/dialogs';
 import { UserServiceProvider } from '../../providers/user-service/user-service';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, ViewController } from 'ionic-angular';
 import { QuestionProvider } from '../../providers/question/question';
+import { HomePage } from '../home/home';
+import { AuthentificationProvider } from '../../providers/authentification/authentification';
 
 
 /**
@@ -17,13 +19,33 @@ import { QuestionProvider } from '../../providers/question/question';
   templateUrl: 'question-form.html',
 })
 export class QuestionFormPage {
-  question ={
-    Question: "",
+  question = {
+    contenu: "",
     date: Date.now(),
-    commune:0,
+    commune: 0,
   }
-
-  constructor(public navCtrl: NavController, public navParams: NavParams,private _dialog: Dialogs, private _userService:UserServiceProvider, private _questionService: QuestionProvider ) {
+  commune_list;
+  token;
+  constructor(public viewCtrl:ViewController , private _auth: AuthentificationProvider, public navCtrl: NavController, public navParams: NavParams, private _dialog: Dialogs, private _userService: UserServiceProvider, private _questionService: QuestionProvider) {
+    this._userService.getProfile().then((val) => {
+      let parsed = JSON.parse(val);
+      this.commune_list = parsed.commune;
+    })
+      .catch((err) => {
+        console.log(err);
+        this.navCtrl.setRoot(HomePage)
+      })
+    this._auth.getToken().then((val) => {
+      if (val != null && val != undefined && val.length > 0) {
+        this.token = val;
+      } else {
+        this.navCtrl.setRoot(HomePage);
+      }
+    })
+      .catch(err => {
+        console.log(err);
+        this.navCtrl.setRoot(HomePage);
+      })
   }
 
   ionViewDidLoad() {
@@ -31,18 +53,18 @@ export class QuestionFormPage {
   }
 
   sendQes() {
-    if (this.question.Question.length > 20  && this.question.commune != 0) {
+    if (this.question.contenu.length > 20 && this.question.commune != 0) {
       // send to api
-      this._questionService.sendQuestion(this.question).subscribe((data_back)=>{
+      this._questionService.sendQuestion(this.question, this.token).subscribe((data_back) => {
         console.log(data_back);
-        if (data_back['status']=== true) {
+        if (data_back['status'] === true) {
           // show done
           console.log("it's added");
 
         } else {
           console.log("some thing happen");
         }
-      },err=>{
+      }, err => {
         console.log(err);
         // show error
       })

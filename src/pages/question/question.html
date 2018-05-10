@@ -5,43 +5,19 @@
   Ionic pages and navigation.
 -->
 <ion-header>
-
   <ion-navbar>
     <ion-title>question</ion-title>
   </ion-navbar>
-
 </ion-header>
-
-
-<ion-content >
-    <ion-list>
-  <ion-item (click)="showQes(id)">
-    <h2>subject</h2>
-    <h3>date : 18/04/2020</h3>
-    <p>I've had a pretty messed up day. If we just...</p>
-  </ion-item>
-</ion-list>
-<ion-list>
-  <ion-item>
-    <h2>subject</h2>
-    <h3>date : 18/04/2020</h3>
-    <p>I've had a pretty messed up day. If we just...</p>
-  </ion-item>
-</ion-list>
-<ion-list>
-  <ion-item>
-    <h2>subject</h2>
-    <h3>date : 18/04/2020</h3>
-    <p>I've had a pretty messed up day. If we just...</p>
-  </ion-item>
-</ion-list>
-<ion-list>
-  <ion-item>
-    <h2>subject</h2>
-    <h3>date : 18/04/2020</h3>
-    <p>I've had a pretty messed up day. If we just...</p>
-  </ion-item>
-</ion-list>
+<ion-content>
+  <ion-list>
+    <ion-item (click)="showQes(id)" *ngFor="let item of question_list">
+      <h2>Question #{{item.id}}</h2>
+      <h3>date : {{ item.createdat.timestamp | date:fullDate }}</h3>
+      <h5>Etat : {{item.reponse}}</h5>
+      <p>{{item.question}}</p>
+    </ion-item>
+  </ion-list>
 </ion-content>
 <ion-footer>
   <ion-grid>

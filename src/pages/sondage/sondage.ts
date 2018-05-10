@@ -1,6 +1,6 @@
 import { MoreMenuPage } from '../more-menu/more-menu';
 import { Component } from '@angular/core';
-import { PopoverController, NavController, NavParams, ModalController } from 'ionic-angular';
+import { PopoverController, NavController, NavParams, ModalController,LoadingController } from 'ionic-angular';
 import { SondageOpenPage } from "../sondage-open/sondage-open";
 import { Dialogs } from '@ionic-native/dialogs';
 import { AuthentificationProvider } from '../../providers/authentification/authentification';
@@ -27,15 +27,20 @@ export class SondagePage {
   private sondageActive: Array<any> = [];
   private sondageArchive: Array<any> = [];
   private communesId: Array<number> = [];
-  constructor(public navCtrl: NavController, public navParams: NavParams, private popoverCtrl: PopoverController, public modalCtrl: ModalController, private dialogs: Dialogs, private _auth: AuthentificationProvider, private _sondageService: SondageProvider, private _userService: UserServiceProvider, private _storage: Storage) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private popoverCtrl: PopoverController, public modalCtrl: ModalController, private dialogs: Dialogs, private _auth: AuthentificationProvider, private _sondageService: SondageProvider, private _userService: UserServiceProvider, private _storage: Storage,public loadingCtrl: LoadingController) {
+    let loading = this.loadingCtrl.create({
+      content: 'Please wait...'
+    });
+    loading.present();
     this.sondageActive = []
     this.sondageArchive = []
 
     // fill the communesId -> if connected get all his communes id else get default commune id else back to chose commune
     this._userService.getProfile().then((vali) => {
+      loading.dismiss();
       const val = JSON.parse(vali);
       if (val != null && val != undefined) {
-        // we have profile so get all communes if there is else send to profile 
+        // we have profile so get all communes if there is else send to profile
         if (val.commune.length === 0) {
           console.log("no commune for user");
           this.navCtrl.push(ProfilePage);
@@ -63,7 +68,7 @@ export class SondagePage {
           });
       }
     }).catch((err) => {
-      // got err show msg and send back to home 
+      // got err show msg and send back to home
       console.log(err);
       this.navCtrl.setRoot(HomePage);
     });

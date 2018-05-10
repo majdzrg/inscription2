@@ -27,14 +27,14 @@ export class ReclamationProvider {
   }
 
   getReclamationList(token:string){
-    let url = "http://localhost:8000/api/reclamation/?token=" + token;
+    let url = "http://192.168.1.94:8000/api/reclamation/?token=" + token;
     console.log(url);
     return this.http.get(url, { headers: this._headers })
 
   }
 
   getReclamationInfo(id: string, token: String){
-    let url = "http://localhost:8000/api/reclamation/id?token=" + token;
+    let url = "http://192.168.1.94:8000/api/reclamation/id?token=" + token;
     console.log(url);
     return this.http.get(url, { headers: this._headers })
 
@@ -48,7 +48,7 @@ export class ReclamationProvider {
     let date = reclamation.date;
     let lat = reclamation.lat;
     let long = reclamation.long;
-    let url = "http://localhost:8000/api/reclamation/new";
+    let url = "http://192.168.1.94:8000/api/reclamation/new";
     const body = new HttpParams()
       .set('token', this.token)
       .set('contenu', contenu)
@@ -59,7 +59,7 @@ export class ReclamationProvider {
     return this.http.post(url, body.toString(), { headers: this._headers });
   }
   public Delete_Reclamation(token) {
-    let url = "http://localhost:8000/api/reclamation/id/";
+    let url = "http://192.168.1.94:8000/api/reclamation/id/";
     //this._headers.set("token",token);
     this._headers = this._headers.append('token', token);
     let headerAbc = new HttpHeaders({ 'token': token });

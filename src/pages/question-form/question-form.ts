@@ -60,13 +60,16 @@ export class QuestionFormPage {
         if (data_back['status'] === true) {
           // show done
           console.log("it's added");
-
+this._dialog.alert("Question bien Ajoouté .","Success","ok")
+this.navCtrl.push(HomePage);
         } else {
           console.log("some thing happen");
+    this._dialog.alert(data_back["msg"],"error","try again");
         }
       }, err => {
         console.log(err);
         // show error
+        this._dialog.alert("We cant reach our server , check your internet connexion","Server not visible","try later")
       })
     } else {
       this._dialog.alert('there is a missing required field check again please', 'missing argument', 'try again')

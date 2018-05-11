@@ -7,9 +7,9 @@
 
 <ion-content>
   <ion-list>
-    <ion-item *ngFor="let item of reclamation_list" >
+    <ion-item *ngFor="let item of reclamation_list" (click)="showRec(item.id)">
       <h2>Reclamation #{{item.id}}</h2>
-      <h3>date : 18/04/2020</h3>
+      <h3>date : 18 May 2018</h3>
       <h5>Etat : {{item.etat}}</h5>
       <p>{{ item.contenu }}</p>
     </ion-item>

@@ -34,7 +34,7 @@ export class ReclamationProvider {
   }
 
   getReclamationInfo(id: string, token: String){
-    let url = "http://localhost:8000/api/reclamation/id?token=" + token;
+    let url = "http://localhost:8000/api/reclamation/"+id+"?token=" + token;
     console.log(url);
     return this.http.get(url, { headers: this._headers })
 
@@ -58,8 +58,8 @@ export class ReclamationProvider {
       .set('commune',reclamation.commune)
     return this.http.post(url, body.toString(), { headers: this._headers });
   }
-  public Delete_Reclamation(token) {
-    let url = "http://localhost:8000/api/reclamation/id/";
+  public Delete_Reclamation(id,token) {
+    let url = "http://localhost:8000/api/reclamation/"+id;
     //this._headers.set("token",token);
     this._headers = this._headers.append('token', token);
     let headerAbc = new HttpHeaders({ 'token': token });

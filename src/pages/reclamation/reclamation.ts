@@ -23,15 +23,19 @@ import { LoginPage } from '../login/login';
 })
 export class ReclamationPage {
   image;
+  token;
   reclamation_list: Array<any> = [];
   constructor(private camera: Camera, private geolocation: Geolocation, public modalCtrl: ModalController, private _reclamationService: ReclamationProvider, private _dialog: Dialogs, public navCtrl: NavController, private _auth:AuthentificationProvider) {
     this._auth.getToken().then((token)=>{
       if (token != null && token.length > 0 && token != undefined) {
+        this.token = token;
         this._reclamationService.getReclamationList(token)
         .subscribe((data) => {
           console.log(data); // for test only
           if (data['status'] === true) {
-            this.reclamation_list = data['data'];
+            if (data['data'].length > 0){
+              this.reclamation_list = data['data'];
+            }
           }
           else {
             // si pas des rec
@@ -107,7 +111,7 @@ export class ReclamationPage {
     modal.present();
   }
   showRec(id) {
-    let modal = this.modalCtrl.create(ReclamationInfoPage);
+    let modal = this.modalCtrl.create(ReclamationInfoPage,{'id':id,'token':this.token});
     modal.present();
   }
 

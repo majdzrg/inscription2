@@ -6,6 +6,7 @@ import { QuestionProvider } from '../../providers/question/question';
 import { AuthentificationProvider } from '../../providers/authentification/authentification';
 import { HomePage } from '../home/home';
 import { Dialogs } from '@ionic-native/dialogs';
+import { QuestionInfoPage } from '../question-info/question-info';
 
 /**
  * Generated class for the QuestionPage page.
@@ -20,9 +21,11 @@ import { Dialogs } from '@ionic-native/dialogs';
 })
 export class QuestionPage {
   question_list ;
+  token_tmp;
   constructor(public _dialog : Dialogs,public navCtrl: NavController, public navParams: NavParams, public modalCtrl: ModalController , public viewCtrl:ViewController, private _questionService:QuestionProvider, private _auth:AuthentificationProvider) {
     this._auth.getToken().then((val)=>{
       if(val != null && val != undefined && val.length > 0){
+        this.token_tmp = val;
         this._questionService.getQuestionList(val)
         .subscribe((data)=>{
           console.log(data);
@@ -49,6 +52,10 @@ export class QuestionPage {
   }
   addnewQ(){
     let modal = this.modalCtrl.create(QuestionFormPage);
+    modal.present();
+  }
+  showQes(idquestion:string){
+    let modal = this.modalCtrl.create(QuestionInfoPage,{"idquestion":idquestion,"token":this.token_tmp});
     modal.present();
   }
 }

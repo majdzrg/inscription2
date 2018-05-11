@@ -37,6 +37,7 @@ import { ReclamationProvider } from '../providers/reclamation/reclamation';
 import {QuestionPage} from '../pages/question/question';
 import {QuestionFormPage} from '../pages/question-form/question-form';
 import { QuestionProvider } from '../providers/question/question';
+import { QuestionInfoPage } from '../pages/question-info/question-info';
 
 @NgModule({
   declarations: [
@@ -60,7 +61,8 @@ import { QuestionProvider } from '../providers/question/question';
     ReclamationFormPage,
     ReclamationInfoPage,
     QuestionPage,
-    QuestionFormPage
+    QuestionFormPage,
+    QuestionInfoPage
   ],
   imports: [
     BrowserModule,
@@ -90,7 +92,8 @@ import { QuestionProvider } from '../providers/question/question';
     ReclamationFormPage,
     ReclamationInfoPage,
     QuestionPage,
-    QuestionFormPage
+    QuestionFormPage,
+    QuestionInfoPage
 
   ],
   providers: [

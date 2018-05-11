@@ -19,23 +19,21 @@ export class QuestionProvider {
     this._headers.set('Accept-Charset', 'utf-8');
   }
   getQuestionList(token:string){
-    let url = "http://192.168.1.94:8000/api/question/?token=" + token;
+    let url = "http://localhost:8000/api/question/?token=" + token;
     console.log(url);
     return this.http.get(url, { headers: this._headers })
 }
 getQuestionInfo(id: string, token: String){
-  let url = "http://192.168.1.94:8000/api/question/id?token=" + token;
+  let url = "http://localhost:8000/api/question/"+id+"?token=" + token;
   console.log(url);
   return this.http.get(url, { headers: this._headers })
-
-
 }
   sendQuestion(question,token) {
     let sujet = question.sujet;
     let contenu = question.contenu;
     let date = question.date;
 
-    let url = "http://192.168.1.94:8000/api/question/new";
+    let url = "http://localhost:8000/api/question/new";
     const body = new HttpParams()
       .set('token', token)
       .set('question', contenu)
@@ -43,8 +41,8 @@ getQuestionInfo(id: string, token: String){
 
     return this.http.post(url, body.toString(), { headers: this._headers });
   }
-  public Delete_Question(token) {
-    let url = "http://192.168.1.94:8000/api/question/id/";
+  public Delete_Question(token,id) {
+    let url = "http://localhost:8000/api/question/"+id;
     //this._headers.set("token",token);
     this._headers = this._headers.append('token', token);
     let headerAbc = new HttpHeaders({ 'token': token });

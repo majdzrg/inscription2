@@ -11,9 +11,9 @@
 </ion-header>
 <ion-content>
   <ion-list>
-    <ion-item (click)="showQes(id)" *ngFor="let item of question_list">
+    <ion-item  *ngFor="let item of question_list" (click)="showQes(item.id)">
       <h2>Question #{{item.id}}</h2>
-      <h3>date : {{ item.createdat.timestamp | date:fullDate }}</h3>
+      <h3>date : {{ item.createdat.timestamp*1000 | date:fullDate }}</h3>
       <h5>Etat : {{item.reponse}}</h5>
       <p>{{item.question}}</p>
     </ion-item>

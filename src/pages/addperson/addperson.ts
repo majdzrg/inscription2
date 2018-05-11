@@ -49,7 +49,7 @@ export class AddpersonPage {
                 console.log('Dialog dismissed');
               })
               .catch(e => console.log('Error displaying dialog', e));
-            this.navCtrl.push(LoginPage);
+            this.navCtrl.setRoot(LoginPage);
           } else {
             this._dialog.alert(data['msg'])
               .then(() => console.log('Dialog dismissed'))

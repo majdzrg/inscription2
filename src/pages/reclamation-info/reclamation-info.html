@@ -7,6 +7,11 @@
 <ion-header>
   <ion-navbar>
     <ion-title>Reclamation info</ion-title>
+    <ion-buttons left>
+      <button ion-button icon-only (click)="viewCtrl.dismiss()" class="my-style-for-modal">
+          <ion-icon name="arrow-back"></ion-icon>
+      </button>
+  </ion-buttons>
   </ion-navbar>
 </ion-header>
 <ion-content>
@@ -15,12 +20,12 @@
           <ion-label fixed>Reclamation</ion-label>
           <ion-input type="text" [disabled]="true" name="sujet" value="#{{ reclamation.id }}"></ion-input>
         </ion-item>
-      
+
         <ion-item>
           <ion-label fixed>Date</ion-label>
           <ion-input type="text" [disabled]="true" value="28 May 2018"></ion-input>
         </ion-item>
-      
+
         <ion-item>
           <h2 fixed>Contenu</h2>
           <p text-wrap>{{ reclamation.contenu }}</p>

@@ -16,9 +16,9 @@ import { HomePage } from '../../pages/home/home';
 @Injectable()
 export class ProjectsProvider {
  HEAD
-  public communeAPI = "http://localhost:8000/api/commune/";
-  public commentaireAPI ="http://localhost:8000/api/commune/";
-  public voteAPI ="http://localhost:8000/api/commune/";
+  public communeAPI = "http://192.168.1.94:8000/api/commune/";
+  public commentaireAPI ="http://192.168.1.94:8000/api/commune/";
+  public voteAPI ="http://192.168.1.94:8000/api/commune/";
   private _headers: HttpHeaders;
   constructor(public http: HttpClient, private _storage: Storage) {
     console.log('Hello ProjectsProvider Provider');
@@ -64,6 +64,15 @@ export class ProjectsProvider {
       let body = new HttpParams()
       .set("token",token);
       return this.http.post(urlToLike,body,{headers:this._headers});
+    }
+
+    // get if pic existe
+
+    /**
+     * isPicThere
+     */
+    public isPicThere(url:string) {
+      return this.http.get(url,{headers:this._headers});
     }
 
 

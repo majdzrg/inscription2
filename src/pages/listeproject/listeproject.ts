@@ -24,6 +24,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 export class ListeprojectPage {
   private isConnected: boolean = false;
   project_list :Array<any>=[];
+  fallbackpic = "../../assets/imgs/in-app/fallback.jpg";
   constructor(public navCtrl: NavController, public navParams: NavParams, public modalCtrl: ModalController, private _userService: UserServiceProvider, private _storage: Storage, private _projectService: ProjectsProvider, private _auth: AuthentificationProvider, protected sanitizer: DomSanitizer) {
     this._auth.isAuthenticated();
     //this.getprojectsList();
@@ -120,10 +121,16 @@ export class ListeprojectPage {
           let tmp = data["data"]
           console.log(tmp);
           for (let i = 0; i < tmp.length; i++) {
-            let ispic = './assets/imgs/in-app/default_proj.jpg';
+            let ispic = this.fallbackpic;
             if (tmp[i].image != null && tmp[i].image.length > 0 && !tmp[i].image.endsWith("imageProjet/"))
             {
-              ispic = tmp[i].image;
+              // check if not 404
+              this._projectService.isPicThere(tmp[i].image).subscribe(data=>{
+                ispic = tmp[i].image;
+              },err=>{
+                ispic = this.fallbackpic;
+              });
+
             }
             this.project_list.push({
               id: tmp[i].id,

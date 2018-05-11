@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { AuthentificationProvider } from '../../providers/authentification/authentification';
 import { Dialogs } from '@ionic-native/dialogs';
 import { LoadingController } from 'ionic-angular';
+import { LoginPage } from '../login/login';
 /**
  * Generated class for the AddpersonPage page.
  *
@@ -46,9 +47,9 @@ export class AddpersonPage {
             this._dialog.alert('you are succesfully registred , you are able to connect right now . ','User added','connect now')
               .then(() => {
                 console.log('Dialog dismissed');
-                this.navCtrl.pop();
               })
               .catch(e => console.log('Error displaying dialog', e));
+            this.navCtrl.push(LoginPage);
           } else {
             this._dialog.alert(data['msg'])
               .then(() => console.log('Dialog dismissed'))

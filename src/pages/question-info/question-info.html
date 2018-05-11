@@ -34,7 +34,7 @@
     <p>{{question.reponse}}</p>
   </ion-item>
   <ion-item>
-    <button ion-button color="danger" [disabled]="question.reponse != 'En traitement'" block clear (click)="deleteQuest(question.id)">Delete Question</button>
+    <button ion-button color="danger" [disabled]="question.reponse != 'En traitement'" block outline (click)="deleteQuest(question.id)">Delete Question</button>
   </ion-item>
 </ion-list>
 </ion-content>

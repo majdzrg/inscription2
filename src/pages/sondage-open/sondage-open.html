@@ -35,11 +35,11 @@
           <ion-list radio-group [(ngModel)]="vote">
             <ion-item>
               <ion-label>{{sondage.positive}}</ion-label>
-              <ion-radio value="1"></ion-radio>
+              <ion-radio value="true"></ion-radio>
             </ion-item>
             <ion-item>
               <ion-label>{{sondage.negative}}</ion-label>
-              <ion-radio value="0"></ion-radio>
+              <ion-radio value="false"></ion-radio>
             </ion-item>
           </ion-list>
           <button ion-button block outline color="primary" (click)="applyVote()">Confirmer votre avis </button>

@@ -1,3 +1,4 @@
+import { DomSanitizer } from '@angular/platform-browser';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angular';
 import { Dialogs } from '@ionic-native/dialogs';
@@ -18,40 +19,12 @@ import { HomePage } from '../home/home';
 })
 export class ProjectPage {
   project_info;
-  project_recation = [{
-    reaction_id: 1,
-    user_id: 1,
-    comment: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-    reaction: '1',
-    date: '2018/12/12'
-  },
-  {
-    reaction_id: 2,
-    user_id: 15,
-    comment: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-    reaction: '0',
-    date: '2018/12/12'
-  },
-  {
-    reaction_id: 3,
-    user_id: 5,
-    comment: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-    reaction: '',
-    date: '2018/12/12'
-  },
-  {
-    reaction_id: 4,
-    user_id: 40,
-    comment: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-    reaction: '1',
-    date: '2018/12/12'
-  }
-  ]
+  project_recation = []
   projId: string;
   communeId: string;
   token: string;
   projet;
-  constructor(public viewCtrl: ViewController, public navCtrl: NavController, public navParams: NavParams, private dialogs: Dialogs, private _projectService: ProjectsProvider, private _auth: AuthentificationProvider) {
+  constructor(protected sanitizer:DomSanitizer,public viewCtrl: ViewController, public navCtrl: NavController, public navParams: NavParams, private dialogs: Dialogs, private _projectService: ProjectsProvider, private _auth: AuthentificationProvider) {
     this._auth.getToken().then((val) => {
       if (val.length > 0) {
         this.token = val;
@@ -66,6 +39,7 @@ export class ProjectPage {
     this.communeId = navParams.get('communeId');
     this.projet = navParams.get("projData");
     this.project_info = this.projet;
+    this.project_info.img = this.project_info.img;
     this.getCommentList();
   }
 
@@ -86,6 +60,7 @@ export class ProjectPage {
                   .catch((er) => {
                     console.log(er);
                   })
+                  this.project_info.comments++;
               }
               else {
 
@@ -139,6 +114,8 @@ export class ProjectPage {
           .catch((err)=>{
             console.log(err);
           })
+          // inc
+          this.project_info.likes++;
         }
         else{
           console.log(data);
@@ -163,11 +140,13 @@ export class ProjectPage {
     console.log("You selected button number " + results.buttonIndex + " and entered " + results.input1);
   }
   getCommentList() {
-    this._projectService.ProjectCommentaire(this.communeId, this.projId).subscribe((data) => {
+    this._projectService.ProjectCommentaire(this.communeId, this.projId,this.token).subscribe((data) => {
       console.log(data);
+      if(data["status"] === true){
+        this.project_recation = data['data'];
+      }
     }, err => {
       console.log(err);
-
     });
   }
   getVoteList() {

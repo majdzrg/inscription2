@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ToastController,ViewController } from 'ionic-angular';
 import { SondageProvider } from '../../providers/sondage/sondage';
+import { AuthentificationProvider } from '../../providers/authentification/authentification';
+import { Dialogs } from '@ionic-native/dialogs';
 
 
 /**
@@ -16,10 +18,11 @@ import { SondageProvider } from '../../providers/sondage/sondage';
   templateUrl: 'sondage-open.html',
 })
 export class SondageOpenPage {
-  private vote = '' ;
-  private id_sondage ; 
+  private vote ;
+  private id_sondage ;
   private id_commune ;
   private stat = true;
+  private token;
   private sondage = {
     id:1,
     title:'Journée Espaces verts',
@@ -32,10 +35,23 @@ export class SondageOpenPage {
     negativeStat:3, // total negative vote
     isVoted:false // if the user voted show result , else show button to vote if active
   }
-  constructor(public viewCtrl: ViewController,public navCtrl: NavController, public navParams: NavParams, public toastCtrl: ToastController, private _sondageService:SondageProvider) {
+  constructor(private _dialog: Dialogs,private _auth:AuthentificationProvider,public viewCtrl: ViewController,public navCtrl: NavController, public navParams: NavParams, public toastCtrl: ToastController, private _sondageService:SondageProvider) {
     this.id_commune = this.navParams.get('communeId');
     this.id_sondage = this.navParams.get('sondageId');
     this.stat = this.navParams.get('stat');
+    this._auth.getToken().then((val)=>{
+      if(val != undefined && val != null ){
+        this.token = val ;
+      }
+      else{
+        console.log("empty token");
+        this.viewCtrl.dismiss();
+      }
+
+    })
+    .catch((err)=>{
+      this.viewCtrl.dismiss();
+    })
     this.sondage.active = this.stat;
     this.getSondage()
   }
@@ -54,7 +70,19 @@ export class SondageOpenPage {
       // send vote
       // change is voted to true
       // call the api again to get recent result
-      this.sondage.isVoted = true;
+      this._sondageService.SondageParticipation(this.token,this.vote,this.id_commune,this.id_sondage)
+      .subscribe(data=>{
+        console.log(data);
+        if(data['status'] === true){
+          this.sondage.isVoted = true;
+          this._dialog.alert("participation acceptee","Success","ok");
+        }
+        else{
+          this._dialog.alert(data['msg'],"error","ok");
+        }
+      },err=>{
+        this._dialog.alert("we got some trouble to reach the server","error","ok");
+      })
     }
   }
   getSondage(){
@@ -68,6 +96,7 @@ export class SondageOpenPage {
           this.sondage.positiveStat = Number.parseInt(tmp_sndg.pour);
           this.sondage.negativeStat = Number.parseInt(tmp_sndg.contre);
           this.sondage.date = tmp_sndg.fin.timestamp;
+          this.sondage.isVoted = tmp_sndg.estparticipe;
         }
         else{
           console.log("delted");

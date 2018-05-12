@@ -24,7 +24,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 export class ListeprojectPage {
   private isConnected: boolean = false;
   project_list :Array<any>=[];
-  fallbackpic = "../../assets/imgs/in-app/fallback.jpg";
+  fallbackpic = "./assets/imgs/in-app/fallback.jpg";
   constructor(public navCtrl: NavController, public navParams: NavParams, public modalCtrl: ModalController, private _userService: UserServiceProvider, private _storage: Storage, private _projectService: ProjectsProvider, private _auth: AuthentificationProvider, protected sanitizer: DomSanitizer) {
     this._auth.isAuthenticated();
     //this.getprojectsList();

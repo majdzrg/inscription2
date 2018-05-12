@@ -15,10 +15,10 @@ import { HomePage } from '../../pages/home/home';
 */
 @Injectable()
 export class ProjectsProvider {
- HEAD
-  public communeAPI = "http://192.168.1.94:8000/api/commune/";
-  public commentaireAPI ="http://192.168.1.94:8000/api/commune/";
-  public voteAPI ="http://192.168.1.94:8000/api/commune/";
+  HEAD
+  public communeAPI = "http://192.168.1.88:8000/api/commune/";
+  public commentaireAPI = "http://192.168.1.88:8000/api/commune/";
+  public voteAPI = "http://192.168.1.88:8000/api/commune/";
   private _headers: HttpHeaders;
   constructor(public http: HttpClient, private _storage: Storage) {
     console.log('Hello ProjectsProvider Provider');
@@ -26,54 +26,55 @@ export class ProjectsProvider {
     this._headers.set('Accept-Charset', 'utf-8');
   }
   public ProjectListe(id_commune: string) {
-    const listUrl= this.communeAPI+id_commune+"/projets/";
+    const listUrl = this.communeAPI + id_commune + "/projets/";
     console.log(listUrl)
     return this.http.get(listUrl);
   }
-    public ProjectCommentaire(id_commune: string,id_projet: string) {
-      console.log(id_commune+"   "+id_projet);
+  public ProjectCommentaire(id_commune: string, id_projet: string,token:string) {
+    console.log(id_commune + "   " + id_projet);
+    const listUrl = this.commentaireAPI + id_commune + "/projets/" + id_projet + "/commentaires/";
+    let spchead = this._headers;
+    spchead.set('token',token);
+    let httppar = new HttpParams;
+    httppar.set('token',token);
+    return this.http.get(listUrl, { headers: spchead,params:httppar});
+  }
+  public ProjectVote(id_commune: string, id_projet: string) {
+    console.log(id_commune + "   " + id_projet);
+    const listUrl = this.voteAPI + id_commune + "/projets/" + id_projet + "/votes/";
+    return this.http.get(listUrl, { headers: this._headers });
+  }
 
-        const listUrl= this.commentaireAPI+id_commune+"/projets/"+id_projet+"/commentaires/";
-        return this.http.get(listUrl, { headers: this._headers });
+  /**
+   * commentProject
+   */
+  public commentProject(token: string, id_proj: string, id_commune: string, commentaire: string) {
+    let body = new HttpParams()
+      .set("token", token)
+      .set("contenu", commentaire);
+    let send_url = this.commentaireAPI + id_commune + "/projets/" + id_proj + "/commentaires/new";
+    return this.http.post(send_url, body, { headers: this._headers });
+  }
 
+  /**
+   * voteProject
+   */
 
-    }
-    public ProjectVote(id_commune: string,id_projet: string) {
-      console.log(id_commune+"   "+id_projet);
-        const listUrl= this.voteAPI+id_commune+"/projets/"+id_projet+"/votes/";
-       return this.http.get(listUrl, { headers: this._headers });
-    }
+  public voteProject(token: string, id_project: string, id_commune: string) {
+    let urlToLike = this.voteAPI + id_commune + "/projets/" + id_project + "/votes/new";
+    let body = new HttpParams()
+      .set("token", token);
+    return this.http.post(urlToLike, body, { headers: this._headers });
+  }
 
-    /**
-     * commentProject
-     */
-    public commentProject(token:string,id_proj:string,id_commune:string,commentaire:string) {
-      let body = new HttpParams()
-      .set("token",token)
-      .set("contenu",commentaire);
-      let send_url = this.commentaireAPI+id_commune+"/projets/"+id_proj+"/commentaires/new";
-      return this.http.post(send_url,body,{headers:this._headers});
-    }
+  // get if pic existe
 
-    /**
-     * voteProject
-     */
-
-    public voteProject(token:string,id_project:string,id_commune:string) {
-      let urlToLike = this.voteAPI+id_commune+"/projets/"+id_project+"/votes/new";
-      let body = new HttpParams()
-      .set("token",token);
-      return this.http.post(urlToLike,body,{headers:this._headers});
-    }
-
-    // get if pic existe
-
-    /**
-     * isPicThere
-     */
-    public isPicThere(url:string) {
-      return this.http.get(url,{headers:this._headers});
-    }
+  /**
+   * isPicThere
+   */
+  public isPicThere(url: string) {
+    return this.http.get(url, { headers: this._headers });
+  }
 
 
 }

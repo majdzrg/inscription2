@@ -75,6 +75,12 @@ export class SondageOpenPage {
         console.log(data);
         if(data['status'] === true){
           this.sondage.isVoted = true;
+          if(this.vote === false){
+            this.sondage.negativeStat++;
+          }
+          else{
+            this.sondage.positiveStat++;
+          }
           this._dialog.alert("participation acceptee","Success","ok");
         }
         else{
@@ -91,6 +97,7 @@ export class SondageOpenPage {
       .subscribe(data=>{
         if(data["status"]=== true){
           let tmp_sndg = data['data'];
+          console.log(tmp_sndg);
           this.sondage.dscrp = tmp_sndg.description;
           this.sondage.id = tmp_sndg.id;
           this.sondage.positiveStat = Number.parseInt(tmp_sndg.pour);

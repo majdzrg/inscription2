@@ -24,7 +24,7 @@
       <ion-col align-self-stretch align-items-center>
         <h3 ion-text color="light" text-capitalize>Sondage #{{sondage.id}}</h3>
         <p text-wrap>{{sondage.dscrp}}</p>
-        <small>{{ sondage.date | date:shortDate }}</small>
+        <small>{{ sondage.date*1000 | date:shortDate }}</small>
       </ion-col>
     </ion-row>
     <ion-row flex-wrap: wrap class="ion-row-bottom" align-items-center>

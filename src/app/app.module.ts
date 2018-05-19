@@ -38,6 +38,7 @@ import {QuestionPage} from '../pages/question/question';
 import {QuestionFormPage} from '../pages/question-form/question-form';
 import { QuestionProvider } from '../providers/question/question';
 import { QuestionInfoPage } from '../pages/question-info/question-info';
+import { EmailComposer } from '@ionic-native/email-composer';
 
 @NgModule({
   declarations: [
@@ -110,7 +111,8 @@ import { QuestionInfoPage } from '../pages/question-info/question-info';
     Camera,
     Geolocation,
     ReclamationProvider,
-    QuestionProvider
+    QuestionProvider,
+    EmailComposer
   ]
 })
 export class AppModule { }

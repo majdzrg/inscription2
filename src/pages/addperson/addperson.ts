@@ -44,12 +44,12 @@ export class AddpersonPage {
           this.loader.dismiss();
           if (data['ok']== true) {
             console.log("registred");
+            this.navCtrl.setRoot(LoginPage);
             this._dialog.alert('you are succesfully registred , you are able to connect right now . ','User added','connect now')
               .then(() => {
                 console.log('Dialog dismissed');
               })
-              .catch(e => console.log('Error displaying dialog', e));
-            this.navCtrl.setRoot(LoginPage);
+              .catch(e => console.log('Error displaying dialog', e));   
           } else {
             this._dialog.alert(data['msg'])
               .then(() => console.log('Dialog dismissed'))

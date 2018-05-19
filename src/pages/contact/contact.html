@@ -6,18 +6,22 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
-  <form #form1="ngForm" >
-    <ion-list>
-
-  <ion-item>
-    <ion-label>Sujet</ion-label>
-    <ion-input type="text"  name="Sujet" required></ion-input>
-  </ion-item>
-  <ion-item>
-    <ion-label floating>Reclamez-IcI </ion-label>
-    <ion-textarea placeholer="text" rows="5"  name="reclamation" required></ion-textarea>
-  </ion-item>
-</ion-list>
-<button ion-button block [disabled]="!form1.form.valid" type="submit">Envoyer</button>
-</form>
+<ion-content>
+  <ion-list>
+    <ion-item>
+      <ion-label>Email</ion-label>
+      <ion-input type="email" name="email" readonly [(ngModel)]="contact.email" required></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Sujet</ion-label>
+      <ion-input type="text" name="Sujet" [(ngModel)]="contact.subject" required></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>Contenu</ion-label>
+      <ion-textarea placeholer="text" rows="5" [(ngModel)]="contact.body" name="body" required></ion-textarea>
+    </ion-item>
+    <ion-item>
+      <button ion-button block outline color="dark">Envoyer</button>
+    </ion-item>
+  </ion-list>
+</ion-content>

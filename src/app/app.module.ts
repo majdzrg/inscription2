@@ -39,6 +39,8 @@ import {QuestionFormPage} from '../pages/question-form/question-form';
 import { QuestionProvider } from '../providers/question/question';
 import { QuestionInfoPage } from '../pages/question-info/question-info';
 import { EmailComposer } from '@ionic-native/email-composer';
+import { NotifcenterPage } from '../pages/notifcenter/notifcenter';
+import { NotifProvider } from '../providers/notif/notif';
 
 @NgModule({
   declarations: [
@@ -63,7 +65,8 @@ import { EmailComposer } from '@ionic-native/email-composer';
     ReclamationInfoPage,
     QuestionPage,
     QuestionFormPage,
-    QuestionInfoPage
+    QuestionInfoPage,
+    NotifcenterPage
   ],
   imports: [
     BrowserModule,
@@ -94,7 +97,9 @@ import { EmailComposer } from '@ionic-native/email-composer';
     ReclamationInfoPage,
     QuestionPage,
     QuestionFormPage,
-    QuestionInfoPage
+    QuestionInfoPage,
+    NotifcenterPage
+    
 
   ],
   providers: [
@@ -112,7 +117,8 @@ import { EmailComposer } from '@ionic-native/email-composer';
     Geolocation,
     ReclamationProvider,
     QuestionProvider,
-    EmailComposer
+    EmailComposer,
+    NotifProvider
   ]
 })
 export class AppModule { }

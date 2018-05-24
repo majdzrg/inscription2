@@ -10,6 +10,10 @@ import { UserServiceProvider } from '../../providers/user-service/user-service';
 import {ContactPage} from '../contact/contact';
 import {InformationPage} from '../information/information';
 import {QuestionPage} from '../question/question';
+import { NotifcenterPage } from '../notifcenter/notifcenter';
+import { NotifProvider } from '../../providers/notif/notif';
+import { Dialogs } from '@ionic-native/dialogs';
+import { AuthentificationProvider } from '../../providers/authentification/authentification';
 
 @Component({
   selector: 'page-home',
@@ -19,16 +23,36 @@ export class HomePage {
   items: any
   itemsNames = ['commune', 'cytoi', 'contact', 'about']
   isCommuneexiste:boolean;
+  notifs = [];
 
-  constructor(public navCtrl: NavController, private popoverCtrl: PopoverController,private _userService:UserServiceProvider ) {
+  constructor(public navCtrl: NavController,private _notifs:NotifProvider, private popoverCtrl: PopoverController,private _userService:UserServiceProvider,private _dialog:Dialogs,private _auth:AuthentificationProvider ) {
     //this.items = {'project':false , 'cytoi':false, 'contact':false , 'about':false};
     this.items = [false,false,false,false]
     // this.isCommuneexiste = this._userService.isCommuneSeted();
     // optimise commune chose access
+    this._auth.getToken()
+    .then((data)=>{
+      if(data && data!=undefined && data.length > 0){
+        this.notifsBuilder();
+      }
+    })
+    .catch((error)=>{
+      console.log(error);
+    })
+    
   }
   // show up the top menu
   presentPopover(myEvent) {
     let popover = this.popoverCtrl.create(MoreMenuPage);
+    popover.present({
+      ev: myEvent
+    });
+  }
+  notifopen(myEvent) {
+    let popover = this.popoverCtrl.create(NotifcenterPage, {'notif':this.notifs}, { cssClass: 'notif-popover'});
+    popover.onDidDismiss(data => {
+      this.notifsBuilder();
+    });
     popover.present({
       ev: myEvent
     });
@@ -72,6 +96,19 @@ export class HomePage {
       default:
         break;
     }
+  }
+  notifsBuilder(){
+    this._notifs.getNotifs()
+    .subscribe(data=>{
+      if(data['status']===true){
+        this.notifs = data['data'];
+      }
+      else{
+        this._dialog.alert(data['msg']);
+      }
+    },err=>{
+      this._dialog.alert("we cant have access to server");
+    })
   }
 
 

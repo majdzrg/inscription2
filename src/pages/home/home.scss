@@ -81,3 +81,10 @@ padding: 16px !important;
   padding-right: 16px !important;
   color: rgba(255, 255, 255, 0.75) !important;
 }
+.notif-popover .popover-content {
+  max-width: 90%;
+}
+$popover-md-width: 80%;
+$popover-ios-width: 80%;
+$popover-wp-width: 80%;
+

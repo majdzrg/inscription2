@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angul
 import { Dialogs } from '@ionic-native/dialogs';
 import { ReclamationProvider } from '../../providers/reclamation/reclamation';
 import { HomePage } from '../home/home';
+import { DomSanitizer } from '@angular/platform-browser';
 
 /**
  * Generated class for the ReclamationInfoPage page.
@@ -20,11 +21,11 @@ export class ReclamationInfoPage {
   reclamation = {
     id: "chargement",
     contenu: "chargement",
-    image: '',
+    image: null,
     createdat: "chargement",
   }
   token;
-  constructor(public viewCtrl:ViewController,private _reclamatioService:ReclamationProvider,private _dialog:Dialogs,public navCtrl: NavController, public navParams: NavParams) {
+  constructor(protected sanitizer: DomSanitizer,public viewCtrl:ViewController,private _reclamatioService:ReclamationProvider,private _dialog:Dialogs,public navCtrl: NavController, public navParams: NavParams) {
     let id = this.navParams.get("id");
     let token = this.navParams.get("token");
     this.token = token;
@@ -34,6 +35,8 @@ export class ReclamationInfoPage {
         console.log(data);
         if (data["status"] === true) {
           this.reclamation = data["data"];
+          this.reclamation.image = this.sanitizer.bypassSecurityTrustResourceUrl("data:image/jpeg;base64,"+this.reclamation.image);
+          console.log(this.reclamation);  
         }
         else {
           this._dialog.alert(data['msg'], "error", "ok");

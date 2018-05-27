@@ -6,6 +6,7 @@ import { Geolocation } from '@ionic-native/geolocation';
 import { UserServiceProvider } from '../../providers/user-service/user-service';
 import { HomePage } from '../home/home';
 import { ReclamationProvider } from '../../providers/reclamation/reclamation';
+import { AuthentificationProvider } from '../../providers/authentification/authentification';
 
 /**
  * Generated class for the ReclamationFormPage page.
@@ -44,7 +45,8 @@ export class ReclamationFormPage {
   timeout: 5000,
   maximumAge: 0
 };
-  constructor(public viewCtrl:ViewController,public navCtrl: NavController, public navParams: NavParams, private _dialog: Dialogs, private camera: Camera, private geolocation: Geolocation, private _userService:UserServiceProvider, private _reclamatioService: ReclamationProvider ) {
+token;
+  constructor(private _authService:AuthentificationProvider ,public viewCtrl:ViewController,public navCtrl: NavController, public navParams: NavParams, private _dialog: Dialogs, private camera: Camera, private geolocation: Geolocation, private _userService:UserServiceProvider, private _reclamatioService: ReclamationProvider ) {
     this.geolocation.getCurrentPosition(this.Geooptions).then((resp) => {
       console.log(JSON.stringify(resp));
       if(resp.coords){
@@ -74,6 +76,12 @@ export class ReclamationFormPage {
       console.log(err);
       this.navCtrl.setRoot(HomePage)
     })
+    this._authService.getToken().then((val) => {
+      console.log(val);
+      this.token = val;
+    }).catch((err) => {
+      console.log(err);
+    })
   }
 
   ionViewDidLoad() {
@@ -82,7 +90,7 @@ export class ReclamationFormPage {
   sendRec() {
     if (this.reclamation.contenu.length > 20 && this.reclamation.sujet.length > 20 && this.reclamation.image.length > 0 && this.reclamation.commune != 0) {
       // send to api
-      this._reclamatioService.sendReclamation(this.reclamation).subscribe((data_back)=>{
+      this._reclamatioService.sendReclamation(this.reclamation,this.token).subscribe((data_back)=>{
         console.log(JSON.stringify(data_back));
         if (data_back['status'] === true) {
           // show done
@@ -139,7 +147,7 @@ export class ReclamationFormPage {
       const result = await this.camera.getPicture(options);
 
       //Append this to the dom
-      this.reclamation.image = 'data:image/jpeg:base64, + ${result}';
+      this.reclamation.image = result;
     }
     catch (e) {
       console.error(e);
@@ -158,7 +166,9 @@ export class ReclamationFormPage {
       //take photo and store result in result
       const result = await this.camera.getPicture(options);
       //Append this to the dom
-      this.reclamation.image = 'data:image/jpeg:base64, + ${result}';
+      this.reclamation.image = result;
+      console.log(result);
+      
     }
     catch (e) {
       console.error(e);

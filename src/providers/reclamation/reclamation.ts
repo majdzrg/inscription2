@@ -41,7 +41,7 @@ export class ReclamationProvider {
 
   }
 
-  sendReclamation(reclamation){
+  sendReclamation(reclamation,token){
     let sujet = reclamation.sujet;
     let contenu = reclamation.contenu;
     let image= reclamation.image;
@@ -49,14 +49,24 @@ export class ReclamationProvider {
     let lat = reclamation.lat;
     let long = reclamation.long;
     let url = "http://localhost:8000/api/reclamation/new";
+    const __headers = new HttpHeaders().set('Content-Type', 'application/json');
+    
     const body = new HttpParams()
-      .set('token', this.token)
+      .set('token', token)
       .set('contenu', contenu)
       .set('image', image)
       .set('lat', lat)
       .set('lng', long)
       .set('commune',reclamation.commune)
-    return this.http.post(url, body.toString(), { headers: this._headers });
+    const bodyV2 = {
+     token:token,
+     contenu : contenu,
+     image: image,
+     lat: lat,
+     lng: long,
+     commune: reclamation.commune,
+    }
+    return this.http.post(url, bodyV2, { headers: __headers });
   }
   public Delete_Reclamation(id,token) {
     let url = "http://localhost:8000/api/reclamation/"+id;

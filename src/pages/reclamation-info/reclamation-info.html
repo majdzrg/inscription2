@@ -34,8 +34,8 @@
           <h2 fixed>Etat</h2>
           <p text-wrap>{{ reclamation.etat }}</p>
         </ion-item>
-        <ion-item *ngIf="reclamation.image != null && reclamation.image.length > 0">
-          <img src="{{reclamation.image}}" alt="">
+        <ion-item>
+          <img [src]="reclamation.image" alt="">
         </ion-item>
           <ion-item>
             <button ion-button color="danger" [disabled]="reclamation.etat != 'En attente'" block outline (click)="deletRec(reclamation.id)">Delete Reclamation</button>

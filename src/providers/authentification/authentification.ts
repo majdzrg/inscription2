@@ -11,13 +11,15 @@ import { HomePage } from '../../pages/home/home';
   See https://angular.io/guide/dependency-injection for more info on providers
   and Angular DI.
 */
+
 @Injectable()
 export class AuthentificationProvider {
-  private registerAPI: string = "http://localhost:8000/api/register";
-  private loginAPI: string = "http://localhost:8000/api/login";
+  private registerAPI: string = "http://192.168.1.94:8000/api/register";
+  private loginAPI: string = "http://192.168.1.94:8000/api/login";
   private _headers: HttpHeaders;
   public isConnected = false;
   userAuthUpdated:EventEmitter<boolean> = new EventEmitter();
+
   constructor(public http: HttpClient, private _storage: Storage) {
     console.log('Hello AuthentificationProvider Provider');
     this._headers = new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded');
@@ -25,6 +27,7 @@ export class AuthentificationProvider {
     // call on construct run
     this.isAuthenticated();
   }
+
   public registerUser(nom: string, prenom: string, email: string, password: string) {
     const body = new HttpParams()
       .set('nom', nom)
@@ -33,6 +36,7 @@ export class AuthentificationProvider {
       .set('password', password)
     return this.http.post(this.registerAPI, body.toString(), { headers: this._headers });
   }
+
   public loginUser(email: string, password: string) {
     const body = new HttpParams()
       .set('email', email)

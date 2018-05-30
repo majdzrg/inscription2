@@ -29,12 +29,14 @@ export class AddpersonPage {
   }
   private loader;
   constructor(public navCtrl: NavController, public navParams: NavParams , private _auth : AuthentificationProvider ,private _dialog : Dialogs ,public loadingCtrl: LoadingController) {
+    console.log(this.navCtrl.getAllChildNavs());
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad AddpersonPage');
   }
   RegisterForm(){
+    let __nav = this.navCtrl;
     if (this.user.password === this.user.conf_password) {
       if (this.user.name.length > 3 && this.user.last_name.length > 2 && this.user.password.length >= 8) {
         // load here
@@ -42,9 +44,9 @@ export class AddpersonPage {
         this._auth.registerUser(this.user.name,this.user.last_name,this.user.email,this.user.password)
         .subscribe(data => {
           this.loader.dismiss();
-          if (data['ok']== true) {
+          if (data['status'] == true) {
             console.log("registred");
-            this.navCtrl.setRoot(LoginPage);
+            __nav.setRoot(LoginPage);
             this._dialog.alert('you are succesfully registred , you are able to connect right now . ','User added','connect now')
               .then(() => {
                 console.log('Dialog dismissed');

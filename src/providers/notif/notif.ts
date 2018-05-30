@@ -9,7 +9,7 @@ import { Injectable } from '@angular/core';
 */
 @Injectable()
 export class NotifProvider {
-  apiURL = "192.168.1.94:8000/api/notification";
+  apiURL = "localhost:8000/api/notification";
   token =''
   _headers: HttpHeaders;
   constructor(public http: HttpClient) {

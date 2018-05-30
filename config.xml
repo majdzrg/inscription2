@@ -88,10 +88,10 @@
         <variable name="GEOLOCATION_USAGE_DESCRIPTION" value="To locate you" />
     </plugin>
     <allow-navigation href="http://192.168.1.2:8100" />
-    <allow-navigation href="http://192.168.1.94:8100" />
-    <allow-navigation href="http://192.168.1.94:8101" />
-    <plugin name="cordova-plugin-email-composer" spec="^0.8.15" />
+    <allow-navigation href="http://localhost:8100" />
+    <allow-navigation href="http://localhost:8101" />
     <engine name="ios" spec="4.5.4" />
     <engine name="android" spec="7.0.0" />
     <engine name="browser" spec="5.0.3" />
+    <plugin name="cordova-plugin-email-composer" spec="^0.8.15" />
 </widget>

@@ -23,17 +23,17 @@ export class ContactPage {
       })
       .catch((err) => {
         console.log(err);
-        this._dialog.alert("you have to connect first to ba able to contact developers", "error", "ok");
+        this._dialog.alert("you have to connect first to be able to contact developers", "error", "ok");
         this.navCtrl.setRoot(HomePage);
       })
   }
   sendContact() {
     if (this.contact.body.length >= 30 && this.contact.subject.length >= 20) {
-      // ok send 
+      // ok send
       this.emailComposer.isAvailable().then((available: boolean) => {
         if (available) {
           let email = {
-            to: 'amirs-m-s@live.com',
+            to: 'majdzrg@gmail.com',
             cc: this.contact.email,
             //bcc: ['john@doe.com', 'jane@doe.com'],
             subject: this.contact.subject,

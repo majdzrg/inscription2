@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, LoadingController } from 'ionic-angular';
 import { ProjectPage } from '../project/project';
 import { ModalController } from 'ionic-angular';
 import { UserServiceProvider } from '../../providers/user-service/user-service';
@@ -25,7 +25,7 @@ export class ListeprojectPage {
   private isConnected: boolean = false;
   project_list :Array<any>=[];
   fallbackpic = "./assets/imgs/in-app/fallback.jpg";
-  constructor(public navCtrl: NavController, public navParams: NavParams, public modalCtrl: ModalController, private _userService: UserServiceProvider, private _storage: Storage, private _projectService: ProjectsProvider, private _auth: AuthentificationProvider, protected sanitizer: DomSanitizer) {
+  constructor(public loadingCtrl: LoadingController,public navCtrl: NavController, public navParams: NavParams, public modalCtrl: ModalController, private _userService: UserServiceProvider, private _storage: Storage, private _projectService: ProjectsProvider, private _auth: AuthentificationProvider, protected sanitizer: DomSanitizer) {
     this._auth.isAuthenticated();
     //this.getprojectsList();
   }
@@ -70,6 +70,10 @@ export class ListeprojectPage {
     if (this.isConnected === true) {
       //
       // get all commune if user connected
+      let loading = this.loadingCtrl.create({
+        content: 'Please wait...'
+      });
+      loading.present();
       let communes_id = [];
       this._userService.getProfile().then((val) => {
         if (val.length > 0 && val != "Aucune commune") {
@@ -80,6 +84,7 @@ export class ListeprojectPage {
             communes_id.push(element.id);
             this.addInList(element.id);
           });
+          loading.dismiss();
           console.log(communes_id);
         }
         else {

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ViewController, LoadingController } from 'ionic-angular';
 import { Dialogs } from '@ionic-native/dialogs';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import { Geolocation } from '@ionic-native/geolocation';
@@ -46,7 +46,7 @@ export class ReclamationFormPage {
   maximumAge: 0
 };
 token;
-  constructor(private _authService:AuthentificationProvider ,public viewCtrl:ViewController,public navCtrl: NavController, public navParams: NavParams, private _dialog: Dialogs, private camera: Camera, private geolocation: Geolocation, private _userService:UserServiceProvider, private _reclamatioService: ReclamationProvider ) {
+  constructor(public loadingCtrl: LoadingController,private _authService:AuthentificationProvider ,public viewCtrl:ViewController,public navCtrl: NavController, public navParams: NavParams, private _dialog: Dialogs, private camera: Camera, private geolocation: Geolocation, private _userService:UserServiceProvider, private _reclamatioService: ReclamationProvider ) {
     this.geolocation.getCurrentPosition(this.Geooptions).then((resp) => {
       console.log(JSON.stringify(resp));
       if(resp.coords){
@@ -88,9 +88,15 @@ token;
     console.log('ionViewDidLoad ReclamationFormPage');
   }
   sendRec() {
+
     if (this.reclamation.contenu.length > 20 && this.reclamation.sujet.length > 20 && this.reclamation.image.length > 0 && this.reclamation.commune != 0) {
+      let loading = this.loadingCtrl.create({
+        content: 'Please wait...'
+      });
+      loading.present();
       // send to api
       this._reclamatioService.sendReclamation(this.reclamation,this.token).subscribe((data_back)=>{
+        loading.dismiss();
         console.log(JSON.stringify(data_back));
         if (data_back['status'] === true) {
           // show done
@@ -114,6 +120,7 @@ token;
           })
         }
       },err=>{
+        loading.dismiss();
         console.log(JSON.stringify(err));
         // show error
         this._dialog.alert('We cant reach our server , check your internet connexion','Server not visible','ok')
@@ -168,7 +175,7 @@ token;
       //Append this to the dom
       this.reclamation.image = result;
       console.log(result);
-      
+
     }
     catch (e) {
       console.error(e);

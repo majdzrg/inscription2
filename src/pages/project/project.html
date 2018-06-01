@@ -34,7 +34,7 @@
       </button>
           </ion-col>
           <ion-col>
-            <button ion-button icon-left clear small>
+            <button ion-button icon-left clear small [disabled]="token == null ||token.length ==0">
         <ion-icon name="text"></ion-icon>
         <div (click)="showComment()"> {{project_info.comments}} Comments</div>
       </button>

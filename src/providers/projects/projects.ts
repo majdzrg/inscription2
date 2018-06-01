@@ -16,9 +16,9 @@ import { HomePage } from '../../pages/home/home';
 @Injectable()
 export class ProjectsProvider {
   HEAD
-  public communeAPI = "http://localhost:8000/api/commune/";
-  public commentaireAPI = "http://localhost:8000/api/commune/";
-  public voteAPI = "http://localhost:8000/api/commune/";
+  public communeAPI = "http://192.168.1.94:8000/api/commune/";
+  public commentaireAPI = "http://192.168.1.94:8000/api/commune/";
+  public voteAPI = "http://192.168.1.94:8000/api/commune/";
   private _headers: HttpHeaders;
   constructor(public http: HttpClient, private _storage: Storage) {
     console.log('Hello ProjectsProvider Provider');
@@ -63,6 +63,7 @@ export class ProjectsProvider {
    */
 
   public voteProject(token: string, id_project: string, id_commune: string) {
+
     let urlToLike = this.voteAPI + id_commune + "/projets/" + id_project + "/votes/new";
     let body = new HttpParams()
       .set("token", token);

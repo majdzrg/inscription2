@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Dialogs } from '@ionic-native/dialogs';
 import { UserServiceProvider } from '../../providers/user-service/user-service';
-import { NavController, NavParams, ViewController } from 'ionic-angular';
+import { NavController, NavParams, ViewController, LoadingController } from 'ionic-angular';
 import { QuestionProvider } from '../../providers/question/question';
 import { HomePage } from '../home/home';
 import { AuthentificationProvider } from '../../providers/authentification/authentification';
@@ -26,7 +26,7 @@ export class QuestionFormPage {
   }
   commune_list;
   token;
-  constructor(public viewCtrl:ViewController , private _auth: AuthentificationProvider, public navCtrl: NavController, public navParams: NavParams, private _dialog: Dialogs, private _userService: UserServiceProvider, private _questionService: QuestionProvider) {
+  constructor(public loadingCtrl: LoadingController,public viewCtrl:ViewController , private _auth: AuthentificationProvider, public navCtrl: NavController, public navParams: NavParams, private _dialog: Dialogs, private _userService: UserServiceProvider, private _questionService: QuestionProvider) {
     this._userService.getProfile().then((val) => {
       let parsed = JSON.parse(val);
       this.commune_list = parsed.commune;
@@ -54,8 +54,13 @@ export class QuestionFormPage {
 
   sendQes() {
     if (this.question.contenu.length > 20 && this.question.commune != 0) {
+      let loading = this.loadingCtrl.create({
+        content: 'Please wait...'
+      });
+      loading.present();
       // send to api
       this._questionService.sendQuestion(this.question, this.token).subscribe((data_back) => {
+        loading.dismiss();
         console.log(data_back);
         if (data_back['status'] === true) {
           // show done
@@ -67,6 +72,7 @@ this.navCtrl.push(HomePage);
     this._dialog.alert(data_back["msg"],"error","try again");
         }
       }, err => {
+        loading.dismiss();
         console.log(err);
         // show error
         this._dialog.alert("We cant reach our server , check your internet connexion","Server not visible","try later")

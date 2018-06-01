@@ -1,5 +1,6 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { AuthentificationProvider } from '../authentification/authentification';
 
 /*
   Generated class for the NotifProvider provider.
@@ -9,13 +10,22 @@ import { Injectable } from '@angular/core';
 */
 @Injectable()
 export class NotifProvider {
-  apiURL = "localhost:8000/api/notification";
+  apiURL = "http://192.168.1.94:8000/api/notification";
   token =''
   _headers: HttpHeaders;
-  constructor(public http: HttpClient) {
+  constructor(public http: HttpClient,private _auth:AuthentificationProvider) {
     console.log('Hello NotifProvider Provider');
     this._headers = new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded');
     this._headers.set('Accept-Charset', 'utf-8');
+    this._auth.getToken()
+    .then((data)=>{
+      if(data && data!=undefined && data.length > 0){
+        this.token = data
+      }
+    })
+    .catch((error)=>{
+      console.log(error);
+    })
   }
   getNotifs(){
     let url = this.apiURL+'?token='+this.token;

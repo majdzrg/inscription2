@@ -39,7 +39,6 @@ export class HomePage {
     .catch((error)=>{
       console.log(error);
     })
-    
   }
   // show up the top menu
   presentPopover(myEvent) {
@@ -100,6 +99,7 @@ export class HomePage {
   notifsBuilder(){
     this._notifs.getNotifs()
     .subscribe(data=>{
+      console.log(data);
       if(data['status']===true){
         this.notifs = data['data'];
       }
@@ -107,6 +107,8 @@ export class HomePage {
         this._dialog.alert(data['msg']);
       }
     },err=>{
+      console.log(err);
+
       this._dialog.alert("we cant have access to server");
     })
   }

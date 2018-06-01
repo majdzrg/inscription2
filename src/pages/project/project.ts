@@ -29,9 +29,9 @@ export class ProjectPage {
       if (val.length > 0) {
         this.token = val;
       }
-      else {
-        this.navCtrl.setRoot(HomePage);
-      }
+      // else {
+      //   this.navCtrl.setRoot(HomePage);
+      // }
     }).catch((err) => {
       this.navCtrl.setRoot(HomePage);
     });
@@ -106,6 +106,9 @@ export class ProjectPage {
           }
     } */
     vote(){
+      if (this.token===undefined||this.token===null||this.token.length===0) {
+        return false
+      }
       this._projectService.voteProject(this.token,this.projId,this.communeId).subscribe((data)=>{
         if(data['status']=== true){
           this.dialogs.alert("Your like is registred","Done like","Done").then((val)=>{

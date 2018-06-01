@@ -4,7 +4,7 @@
       Home
     </ion-title>
     <ion-buttons end>
-      <button ion-button icon-only (click)="notifopen($event)">
+      <button ion-button icon-only [disabled]="!tokenuse" (click)="notifopen($event)">
         <ion-icon name="notifications"></ion-icon>
       </button>
     </ion-buttons>
@@ -56,17 +56,18 @@
     <ion-row flex-wrap: nowrap class="bg-commune" align-items-center (click)="chnageItem('0')">
       <ion-col align-self-stretch class="cell-1">
         <!-- <button ion-button block color="light" clear >commune</button> -->
-        <h5 ion-text color="light" text-capitalize><ion-icon name="briefcase" margin-right="4px"></ion-icon> Commune</h5>
+        <h5 ion-text color="light" text-capitalize>
+          <ion-icon name="briefcase" margin-right="4px"></ion-icon> Commune</h5>
         <p class="brief" text-nowrap *ngIf="items[0]==false">small description about section </p>
         <div class="wrapper" [ngClass]="{'close': items[0]==false}">
-          <button  ion-button color="light" clear icon-left (click)="redirect('projets')">
+          <button ion-button color="light" clear icon-left (click)="redirect('projets')">
             <ion-icon name="construct"></ion-icon>
             Projets
           </button>
           <br>
-          <button ion-button color="light" clear icon-left (click)="redirect('sondage')"  >
+          <button ion-button color="light" clear icon-left (click)="redirect('sondage')">
             <ion-icon name="stats" margin-right></ion-icon>
-              sondage
+            sondage
           </button>
         </div>
       </ion-col>
@@ -74,7 +75,8 @@
     <ion-row flex-wrap: nowrap class="bg-cytoi" (click)="chnageItem('1')">
       <ion-col align-self-stretch class="cell-2">
         <!-- <button ion-button block clear>citoyen</button> -->
-        <h5 ion-text color="light" text-capitalize><ion-icon name="people" margin-right="4px"></ion-icon> citoyen</h5>
+        <h5 ion-text color="light" text-capitalize>
+          <ion-icon name="people" margin-right="4px"></ion-icon> citoyen</h5>
         <p class="brief" text-nowrap *ngIf="items[1]==false">small description about section </p>
         <div class="wrapper" [ngClass]="{'close': items[1]==false}">
           <button ion-button color="light" clear icon-left (click)="redirect('reclamation')">
@@ -83,22 +85,23 @@
           </button>
           <br>
           <button ion-button color="light" clear icon-left (click)="redirect('question')">
-            <ion-icon name="stats" margin-right></ion-icon >
-              Question
+            <ion-icon name="stats" margin-right></ion-icon>
+            Question
           </button>
         </div>
       </ion-col>
     </ion-row>
-<ion-row flex-wrap: nowrap class="bg-contact" (click)="redirect('contact')">
+    <ion-row flex-wrap: nowrap class="bg-contact" (click)="redirect('contact')">
       <ion-col align-self-stretch class="cell-3">
         <!-- <button ion-button block clear>contact</button> -->
-        <h5 ion-text color="light" text-capitalize><ion-icon name="mail" margin-right="4px"></ion-icon> contact</h5>
+        <h5 ion-text color="light" text-capitalize>
+          <ion-icon name="mail" margin-right="4px"></ion-icon> contact</h5>
         <p class="brief" text-nowrap *ngIf="items[2]==false">small description about section </p>
         <div class="wrapper" [ngClass]="{'close': items[2]==false}">
           <br>
-          <button ion-button color="light" clear icon-left (click)="redirect('contact')" >
+          <button ion-button color="light" clear icon-left (click)="redirect('contact')">
             <ion-icon name="stats" margin-right></ion-icon>
-        Contacter l'administrateur
+            Contacter l'administrateur
           </button>
 
         </div>
@@ -107,12 +110,13 @@
     <ion-row flex-wrap: nowrap class="bg-about" (click)="redirect('information')">
       <ion-col align-self-stretch class="cell-4">
         <!-- <button ion-button block clear>a propos</button> -->
-        <h5 ion-text color="light" text-capitalize><ion-icon name="information-circle" margin-right="4px"></ion-icon> a propos</h5>
+        <h5 ion-text color="light" text-capitalize>
+          <ion-icon name="information-circle" margin-right="4px"></ion-icon> a propos</h5>
         <p class="brief" text-nowrap *ngIf="items[3]==false">small description about section </p>
         <div class="wrapper" [ngClass]="{'close': items[3]==false}">
           <button ion-button color="light" clear icon-left (click)="redirect('information')">
             <ion-icon name="construct"></ion-icon>
-              Information sur l'application
+            Information sur l'application
           </button>
 
         </div>

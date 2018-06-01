@@ -22,7 +22,7 @@ export class ContactPage {
         this.contact.email = profile.email;
       })
       .catch((err) => {
-        console.log(err);
+        
         this._dialog.alert("you have to connect first to be able to contact developers", "error", "ok");
         this.navCtrl.setRoot(HomePage);
       })

@@ -7,9 +7,7 @@
 <ion-content>
   <ion-list *ngIf="all_notif.length > 0; else elseTemplate">
     <ion-item *ngFor="let item of all_notif; let i=index" (click)="vueNotif(i)" text-wrap>
-      
         {{item.contenu}}
-      
     </ion-item>
     <button detail-none no-lines ion-item (click)="vueAll()" text-wrap>
       <ion-icon name="checkmark-circle-outline" item-start></ion-icon>
@@ -17,6 +15,8 @@
     </button>
   </ion-list>
   <ng-template #elseTemplate>
-    You Don't have any notification :D
+    <div padding>
+      You Don't have any notification :D
+    </div>
   </ng-template>
 </ion-content>

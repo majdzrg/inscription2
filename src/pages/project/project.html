@@ -9,9 +9,9 @@
     <ion-title>project</ion-title>
     <ion-buttons left>
       <button ion-button icon-only (click)="viewCtrl.dismiss()" class="my-style-for-modal">
-          <ion-icon name="arrow-back"></ion-icon>
+        <ion-icon name="arrow-back"></ion-icon>
       </button>
-  </ion-buttons>
+    </ion-buttons>
   </ion-navbar>
 </ion-header>
 <ion-content>
@@ -28,16 +28,16 @@
         </ion-card-content>
         <ion-row>
           <ion-col>
-            <button ion-button icon-left clear small>
-        <ion-icon name="thumbs-up"></ion-icon>
-        <div (click)="vote()"> {{project_info.likes}} Likes</div>
-      </button>
+            <button ion-button icon-left clear small [disabled]="token == null ||token.length ==0">
+              <ion-icon name="thumbs-up"></ion-icon>
+              <div (click)="vote()"> {{project_info.likes}} Likes</div>
+            </button>
           </ion-col>
           <ion-col>
             <button ion-button icon-left clear small [disabled]="token == null ||token.length ==0">
-        <ion-icon name="text"></ion-icon>
-        <div (click)="showComment()"> {{project_info.comments}} Comments</div>
-      </button>
+              <ion-icon name="text"></ion-icon>
+              <div (click)="showComment()"> {{project_info.comments}} Comments</div>
+            </button>
           </ion-col>
           <ion-col center text-center>
             <ion-note>

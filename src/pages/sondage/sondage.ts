@@ -27,6 +27,7 @@ export class SondagePage {
   private sondageActive: Array<any> = [];
   private sondageArchive: Array<any> = [];
   private communesId: Array<number> = [];
+  private mode="ON";
   constructor(public navCtrl: NavController, public navParams: NavParams, private popoverCtrl: PopoverController, public modalCtrl: ModalController, private dialogs: Dialogs, private _auth: AuthentificationProvider, private _sondageService: SondageProvider, private _userService: UserServiceProvider, private _storage: Storage,public loadingCtrl: LoadingController) {
     let loading = this.loadingCtrl.create({
       content: 'Please wait...'
@@ -38,8 +39,11 @@ export class SondagePage {
     // fill the communesId -> if connected get all his communes id else get default commune id else back to chose commune
     this._userService.getProfile().then((vali) => {
       loading.dismiss();
-      const val = JSON.parse(vali);
-      if (val != null && val != undefined) {
+      //const val = JSON.parse(vali);
+      console.log("we are here");
+      
+      if (vali != null && vali != undefined) {
+        const val = JSON.parse(vali);
         // we have profile so get all communes if there is else send to profile
         if (val.commune.length === 0) {
           console.log("no commune for user");
@@ -51,6 +55,7 @@ export class SondagePage {
         }
       }
       else {
+        this.mode = "OFF"
         // we don't have profile so get the default id_Commune
         this._storage.get('id_commune').then((val) => {
           if (val != null && val.length > 0) {
@@ -69,7 +74,7 @@ export class SondagePage {
       }
     }).catch((err) => {
       // got err show msg and send back to home
-      console.log(err);
+      //console.log(err);
       this.navCtrl.setRoot(HomePage);
     });
   }
@@ -83,6 +88,10 @@ export class SondagePage {
     });
   }
   openSondage(id,id_commune,stat) {
+    if(this.mode == "OFF"){
+      this.dialogs.alert("Only Connected user are able to access there");
+      return false
+    }
     let projModal = this.modalCtrl.create(SondageOpenPage, { sondageId: id, communeId: id_commune, stat: stat });
     projModal.present();
   }
@@ -90,8 +99,16 @@ export class SondagePage {
   getSondageListes() {
     if (this.communesId.length > 0) {
       this.communesId.forEach(element => {
+        let searchId = 0;
+        if(this.mode === "OFF")
+        {
+          searchId = element;
+        }
+        else{
+          searchId = element['id'];
+        }
         console.log("get for commune -> " + element);
-        this._sondageService.getSondageList(element['id']).subscribe((data) => {
+        this._sondageService.getSondageList(searchId+"").subscribe((data) => {
           console.log(data);
           if (data['status'] === true) {
             // here w go

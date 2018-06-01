@@ -15,8 +15,8 @@ import { HomePage } from '../../pages/home/home';
 */
 @Injectable()
 export class SondageProvider {
-  public sondageAPI = "http://192.168.1.94:8000/api/commune/";
-  public participationAPI = "http://192.168.1.94:8000/api/commune/";
+  public sondageAPI = "http://localhost:8000/api/commune/";
+  public participationAPI = "http://localhost:8000/api/commune/";
   private _headers: HttpHeaders;
   private token ;
   constructor(public http: HttpClient, private _storage: Storage) {
@@ -26,7 +26,7 @@ export class SondageProvider {
     // token adding to header should be in Httpinterceptor -> 1*
     let token = "";
     this._storage.get("token").then((data) => {
-      if (data.length != 0) {
+      if (data != null && data.length != 0) {
         token = data;
         this.token = token ;
       }

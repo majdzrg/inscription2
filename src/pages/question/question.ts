@@ -40,6 +40,10 @@ export class QuestionPage {
           this.navCtrl.setRoot(HomePage);
         })
       }
+      else{
+        this._dialog.alert("Question can be only accessable when you loged in");
+        this.navCtrl.setRoot(HomePage)
+      }
     })
     .catch((e)=>{
       console.log(e);

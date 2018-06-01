@@ -24,6 +24,7 @@ export class HomePage {
   itemsNames = ['commune', 'cytoi', 'contact', 'about']
   isCommuneexiste:boolean;
   notifs = [];
+  tokenuse ;
 
   constructor(public navCtrl: NavController,private _notifs:NotifProvider, private popoverCtrl: PopoverController,private _userService:UserServiceProvider,private _dialog:Dialogs,private _auth:AuthentificationProvider ) {
     //this.items = {'project':false , 'cytoi':false, 'contact':false , 'about':false};
@@ -33,6 +34,7 @@ export class HomePage {
     this._auth.getToken()
     .then((data)=>{
       if(data && data!=undefined && data.length > 0){
+        this.tokenuse = data;
         this.notifsBuilder();
       }
     })
@@ -97,7 +99,7 @@ export class HomePage {
     }
   }
   notifsBuilder(){
-    this._notifs.getNotifs()
+    this._notifs.getNotifs(this.tokenuse)
     .subscribe(data=>{
       console.log(data);
       if(data['status']===true){

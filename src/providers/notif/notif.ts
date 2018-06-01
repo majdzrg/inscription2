@@ -10,7 +10,7 @@ import { AuthentificationProvider } from '../authentification/authentification';
 */
 @Injectable()
 export class NotifProvider {
-  apiURL = "http://192.168.1.94:8000/api/notification";
+  apiURL = "http://localhost:8000/api/notification";
   token =''
   _headers: HttpHeaders;
   constructor(public http: HttpClient,private _auth:AuthentificationProvider) {
@@ -27,8 +27,8 @@ export class NotifProvider {
       console.log(error);
     })
   }
-  getNotifs(){
-    let url = this.apiURL+'?token='+this.token;
+  getNotifs(token){
+    let url = this.apiURL+'?token='+token;
     return this.http.get(url,{headers:this._headers});
   }
   vueNotif(id:string){

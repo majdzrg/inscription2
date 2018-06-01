@@ -33,7 +33,9 @@ export class ProjectPage {
       //   this.navCtrl.setRoot(HomePage);
       // }
     }).catch((err) => {
-      this.navCtrl.setRoot(HomePage);
+      console.log("cant get token we are in guest mode and disable all feautre");
+      
+      // this.navCtrl.setRoot(HomePage);
     });
     this.projId = navParams.get("projId");
     this.communeId = navParams.get('communeId');

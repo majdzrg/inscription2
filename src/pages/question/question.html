@@ -11,7 +11,7 @@
 </ion-header>
 <ion-content>
   <ion-list>
-    <ion-item  *ngFor="let item of question_list" (click)="showQes(item.id)">
+    <ion-item *ngFor="let item of question_list" (click)="showQes(item.id)">
       <h2>Question #{{item.id}}</h2>
       <h3>date : {{ item.createdat.timestamp*1000 | date:fullDate }}</h3>
       <h5>Etat : {{item.reponse}}</h5>
@@ -22,7 +22,8 @@
 <ion-footer>
   <ion-grid>
     <ion-row align-items-center justify-content-center>
-      <button ion-button icon-only (click)="addnewQ()" round color="dark" outline>
+      <button ion-button icon-only (click)="addnewQ()" round color="dark" outline [disabled]="token_tmp == null || token_tmp == undefined || token_tmp.length == 0">
+
         <ion-icon name="add"></ion-icon>
       </button>
     </ion-row>

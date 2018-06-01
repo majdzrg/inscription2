@@ -57,7 +57,8 @@ export class ReclamationPage {
           });
       } else {
         // no token : not connected
-        this.navCtrl.setRoot(LoginPage);
+        this._dialog.alert("to access to reaclamation you have to connect first");
+        this.navCtrl.setRoot(HomePage);
       }
     })
     .catch((err)=>{

@@ -47,7 +47,6 @@ export class SondageOpenPage {
         console.log("empty token");
         this.viewCtrl.dismiss();
       }
-
     })
     .catch((err)=>{
       this.viewCtrl.dismiss();
